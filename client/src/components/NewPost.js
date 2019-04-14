@@ -19,11 +19,8 @@ const NewPost = () => {
   const [body, setBody] = useState("");
 
   return (
-    <Mutation mutation={CREATE_POST}>
+    <Mutation mutation={CREATE_POST} onCompleted={() => setBody("")}>
       {(submit, { data, loading, error }) => {
-        if (data) {
-          setBody("");
-        }
         return (
           <Card className="mb-4">
             <Card.Body>

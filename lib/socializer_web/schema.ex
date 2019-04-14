@@ -22,4 +22,8 @@ defmodule SocializerWeb.Schema do
     import_fields(:post_mutations)
     import_fields(:user_mutations)
   end
+
+  subscription do
+    import_fields(:post_subscriptions)
+  end
 end

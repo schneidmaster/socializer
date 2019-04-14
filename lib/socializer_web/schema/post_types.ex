@@ -35,4 +35,18 @@ defmodule SocializerWeb.Schema.PostTypes do
       resolve(&Resolvers.PostResolver.create/3)
     end
   end
+
+  object :post_subscriptions do
+    field :post_created, :post do
+      config(fn _, _ ->
+        {:ok, topic: "posts"}
+      end)
+
+      trigger(:create_post,
+        topic: fn _ ->
+          "posts"
+        end
+      )
+    end
+  end
 end

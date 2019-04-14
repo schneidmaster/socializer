@@ -1,7 +1,8 @@
 defmodule SocializerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :socializer
+  use Absinthe.Phoenix.Endpoint
 
-  socket "/socket", SocializerWeb.UserSocket,
+  socket "/socket", SocializerWeb.AbsintheSocket,
     websocket: true,
     longpoll: true
 

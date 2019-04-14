@@ -2,7 +2,7 @@ defmodule Socializer.Conversation do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Socializer.{Message, User}
+  alias Socializer.{Repo, Message, User}
 
   schema "conversations" do
     field :title, :string
