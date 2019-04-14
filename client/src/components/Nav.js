@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { Link, withRouter } from "react-router-dom";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import renderIf from "render-if";
 import AuthContext from "util/authContext";
 
 const GET_USER_INFO = gql`
@@ -13,61 +14,58 @@ const GET_USER_INFO = gql`
   }
 `;
 
-const AppNav = ({ history }) => {
+const AppNav = () => {
   const { token, setAuth } = useContext(AuthContext);
 
-  if (token) {
-    return (
-      <Query query={GET_USER_INFO}>
-        {({ client, loading, error, data }) => {
-          if (error && error.graphQLErrors[0].message === "Unauthenticated") {
-            setAuth(null);
-          }
-
-          return (
-            <Navbar bg="primary" variant="dark" className="mb-4">
-              <Link to="/app" className="navbar-brand">
-                Socializer
-              </Link>
-
-              <Navbar.Toggle />
-              <Navbar.Collapse className="justify-content-end">
-                <Nav>
-                  <NavDropdown
-                    title={loading ? "User" : data.currentUser.name}
-                    id="profile-dropdown"
-                  >
-                    <NavDropdown.Item onClick={() => setAuth(null)}>
-                      Log out
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-              </Navbar.Collapse>
-            </Navbar>
-          );
-        }}
-      </Query>
-    );
-  } else {
-    return (
-      <Navbar bg="primary" variant="dark" className="mb-4">
-        <Link to="/" className="navbar-brand">
+  return (
+    <Navbar bg="primary" variant="dark" className="mb-4">
+      <Container>
+        <Link to="/app" className="navbar-brand">
           Socializer
         </Link>
+
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav>
-            <Link to="/login" className="nav-link" role="button">
-              Log in
-            </Link>
-            <Link to="/signup" className="nav-link" role="button">
-              Sign up
-            </Link>
+            {renderIf(token)(
+              <Query query={GET_USER_INFO}>
+                {({ client, loading, error, data }) => {
+                  if (
+                    error &&
+                    error.graphQLErrors[0].message === "Unauthenticated"
+                  ) {
+                    setAuth(null);
+                  }
+
+                  return (
+                    <NavDropdown
+                      title={loading ? "User" : data.currentUser.name}
+                      id="profile-dropdown"
+                    >
+                      <NavDropdown.Item onClick={() => setAuth(null)}>
+                        Log out
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  );
+                }}
+              </Query>,
+            )}
+
+            {renderIf(!token)(
+              <Fragment>
+                <Link to="/login" className="nav-link" role="button">
+                  Log in
+                </Link>
+                <Link to="/signup" className="nav-link" role="button">
+                  Sign up
+                </Link>
+              </Fragment>,
+            )}
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
-    );
-  }
+      </Container>
+    </Navbar>
+  );
 };
 
-export default withRouter(AppNav);
+export default AppNav;
