@@ -3,7 +3,7 @@ import { ApolloProvider } from "react-apollo";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import { Nav } from "components";
-import { Home, Login, Signup } from "pages";
+import { Home, Login, Post, Signup } from "pages";
 import { createClient } from "util/apollo";
 import AuthContext from "util/authContext";
 
@@ -30,6 +30,7 @@ const App = () => {
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/posts/:id" component={Post} />
             <Route component={Home} />
           </Switch>
         </BrowserRouter>

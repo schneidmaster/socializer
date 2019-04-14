@@ -24,6 +24,7 @@ defmodule SocializerWeb.Schema do
   end
 
   subscription do
+    import_fields(:comment_subscriptions)
     import_fields(:post_subscriptions)
   end
 end

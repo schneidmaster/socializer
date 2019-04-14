@@ -1,6 +1,7 @@
 defmodule SocializerWeb.Schema.PostTypes do
   use Absinthe.Schema.Notation
   use Absinthe.Ecto, repo: Socializer.Repo
+  import Ecto.Query
 
   alias SocializerWeb.Resolvers
 
@@ -11,7 +12,14 @@ defmodule SocializerWeb.Schema.PostTypes do
     field :inserted_at, :naive_datetime
 
     field :user, :user, resolve: assoc(:user)
-    field :comments, list_of(:comment), resolve: assoc(:comments)
+
+    field :comments, list_of(:comment) do
+      resolve(
+        assoc(:comments, fn comments_query, _args, _context ->
+          comments_query |> order_by(desc: :inserted_at)
+        end)
+      )
+    end
   end
 
   object :post_queries do

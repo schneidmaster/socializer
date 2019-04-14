@@ -2,7 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Container } from "react-bootstrap";
-import { ErrorMessage, Loading, Posts } from "components";
+import { ErrorMessage, Feed, Loading } from "components";
 
 const GET_POSTS = gql`
   {
@@ -40,9 +40,10 @@ const Home = () => {
           if (loading) return <Loading />;
           if (error) return <ErrorMessage message={error.message} />;
           return (
-            <Posts
-              posts={data.posts}
-              subscribeToNewPosts={() =>
+            <Feed
+              feedType="post"
+              items={data.posts}
+              subscribeToNew={() =>
                 subscribeToMore({
                   document: POSTS_SUBSCRIPTION,
                   updateQuery: (prev, { subscriptionData }) => {

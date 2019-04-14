@@ -6,17 +6,23 @@ import { Link } from "react-router-dom";
 import renderIf from "render-if";
 import AuthContext from "util/authContext";
 
-const CREATE_POST = gql`
-  mutation CreatePost($body: String!) {
-    createPost(body: $body) {
-      id
-    }
-  }
-`;
-
-const NewPost = () => {
+const NewItem = ({ feedType, params }) => {
   const { token } = useContext(AuthContext);
   const [body, setBody] = useState("");
+
+  const capFeedType =
+    feedType.charAt(0).toUpperCase() + feedType.slice(1).toLowerCase();
+  const CREATE_POST = gql`
+    mutation Create${capFeedType}($body: String!${
+    feedType === "comment" ? ", $postId: String!" : ""
+  }) {
+      create${capFeedType}(body: $body${
+    feedType === "comment" ? ", postId: $postId" : ""
+  }) {
+        id
+      }
+    }
+  `;
 
   return (
     <Mutation mutation={CREATE_POST} onCompleted={() => setBody("")}>
@@ -28,7 +34,7 @@ const NewPost = () => {
                 <Form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    submit({ variables: { body } });
+                    submit({ variables: { body, ...params } });
                   }}
                 >
                   <Form.Group>
@@ -48,7 +54,7 @@ const NewPost = () => {
               )}
               {renderIf(!token)(
                 <div className="text-muted h7">
-                  <Link to="/login">Log in</Link> to submit a post.
+                  <Link to="/login">Log in</Link> to submit a {feedType}.
                 </div>,
               )}
             </Card.Body>
@@ -59,4 +65,4 @@ const NewPost = () => {
   );
 };
 
-export default NewPost;
+export default NewItem;
