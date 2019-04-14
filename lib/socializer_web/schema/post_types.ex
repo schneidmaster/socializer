@@ -8,6 +8,7 @@ defmodule SocializerWeb.Schema.PostTypes do
   object :post do
     field :id, :id
     field :body, :string
+    field :inserted_at, :naive_datetime
 
     field :user, :user, resolve: assoc(:user)
     field :comments, list_of(:comment), resolve: assoc(:comments)

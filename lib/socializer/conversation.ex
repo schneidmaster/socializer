@@ -13,6 +13,10 @@ defmodule Socializer.Conversation do
     timestamps()
   end
 
+  def find(id) do
+    Repo.get(__MODULE__, id)
+  end
+
   def changeset(attrs) do
     %__MODULE__{}
     |> changeset(attrs)
