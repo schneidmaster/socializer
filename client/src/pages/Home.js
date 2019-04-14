@@ -13,6 +13,7 @@ const GET_POSTS = gql`
       user {
         id
         name
+        gravatarMd5
       }
     }
   }
@@ -27,6 +28,7 @@ const POSTS_SUBSCRIPTION = gql`
       user {
         id
         name
+        gravatarMd5
       }
     }
   }

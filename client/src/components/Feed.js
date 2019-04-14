@@ -9,7 +9,7 @@ const Feed = ({ feedType, items, createParams, subscribeToNew }) => {
 
   return (
     <Row>
-      <Col xs={8}>
+      <Col xs={12} md={8}>
         <NewItem feedType={feedType} params={createParams} />
         {items.map((item) => (
           <FeedItem key={item.id} item={item} feedType={feedType} />

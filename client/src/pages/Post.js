@@ -12,6 +12,7 @@ const GET_POST = gql`
       user {
         id
         name
+        gravatarMd5
       }
       comments {
         id
@@ -20,6 +21,7 @@ const GET_POST = gql`
         user {
           id
           name
+          gravatarMd5
         }
       }
     }
@@ -35,6 +37,7 @@ const COMMENTS_SUBSCRIPTION = gql`
       user {
         id
         name
+        gravatarMd5
       }
     }
   }
@@ -50,7 +53,7 @@ const Post = ({ match: { params } }) => {
           return (
             <Fragment>
               <Row>
-                <Col xs={8}>
+                <Col xs={12} md={8}>
                   <FeedItem item={data.post} />
                   <hr />
                   <h5>Comments</h5>

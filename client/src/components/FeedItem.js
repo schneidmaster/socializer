@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Gravatar from "react-gravatar";
 import Timeago from "react-timeago";
 import renderIf from "render-if";
 
@@ -8,7 +9,16 @@ const FeedItem = ({ feedType, item }) => {
   return (
     <Card className="mb-4">
       <Card.Header className="d-flex justify-content-between align-items-center">
-        <div className="h6 mb-0">{item.user.name}</div>
+        <div className="d-flex align-items-center">
+          <Gravatar
+            md5={item.user.gravatarMd5}
+            className="rounded-circle"
+            size={30}
+          />
+          <div className="ml-2">
+            <div className="h6 mb-0">{item.user.name}</div>
+          </div>
+        </div>
         <div className="text-muted h7">
           <Timeago date={`${item.insertedAt}Z`} />
         </div>

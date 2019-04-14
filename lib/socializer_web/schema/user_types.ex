@@ -11,6 +11,12 @@ defmodule SocializerWeb.Schema.UserTypes do
     field :email, :string
     field :token, :string
 
+    field :gravatar_md5, :string do
+      resolve(fn user, _, _ ->
+        {:ok, :crypto.hash(:md5, user.email) |> Base.encode16(case: :lower)}
+      end)
+    end
+
     field :conversations, list_of(:conversation), resolve: assoc(:conversations)
     field :posts, list_of(:post), resolve: assoc(:posts)
   end
