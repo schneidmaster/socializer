@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "standard",
+    "standard-react",
+    "prettier/standard",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "babel-eslint",
+  "plugins": ["react-hooks"],
+  "rules": {
+    "camelcase": ["off"],
+    "import/first": ["off"],
+    "react/jsx-indent": ["off"],
+    "react/jsx-no-bind": ["off"],
+    "react/no-did-update-set-state": ["off"],
+    "react/no-unused-prop-types": ["off"],
+    "react/prop-types": ["off"]
+  }
+}

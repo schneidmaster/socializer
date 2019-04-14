@@ -5,6 +5,10 @@ defmodule SocializerWeb.Resolvers.UserResolver do
     {:ok, current_user}
   end
 
+  def current_user(_parent, _args, _resolutions) do
+    {:error, "Unauthenticated"}
+  end
+
   def signup(_parent, args, _resolution) do
     args
     |> User.create()
