@@ -22,6 +22,10 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :socializer, Socializer.Guardian,
+  issuer: "socializer",
+  secret_key: "3TrEVHPaCT1PIToFKDBh4Lh4jLwwM75BjpwjueKQw66CtaHVhpqC0pS0U9gmpk5Z"
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

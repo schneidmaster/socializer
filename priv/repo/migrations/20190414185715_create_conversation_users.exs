@@ -11,5 +11,6 @@ defmodule Socializer.Repo.Migrations.CreateConversationUsers do
 
     create index(:conversation_users, [:conversation_id])
     create index(:conversation_users, [:user_id])
+    create unique_index(:conversation_users, [:conversation_id, :user_id])
   end
 end

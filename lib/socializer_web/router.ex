@@ -2,10 +2,15 @@ defmodule SocializerWeb.Router do
   use SocializerWeb, :router
 
   pipeline :api do
+    plug SocializerWeb.Context
     plug :accepts, ["json"]
   end
 
-  scope "/api", SocializerWeb do
+  scope "/" do
     pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: SocializerWeb.Schema
+
+    forward "/", Absinthe.Plug, schema: SocializerWeb.Schema
   end
 end

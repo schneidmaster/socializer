@@ -2,7 +2,7 @@ defmodule Socializer.Message do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Socializer.{Conversation, User}
+  alias Socializer.{Repo, Conversation, ConversationUser, User}
 
   schema "messages" do
     field :body, :string
@@ -13,9 +13,35 @@ defmodule Socializer.Message do
     timestamps()
   end
 
+  def create(attrs) do
+    attrs
+    |> changeset()
+    |> Repo.insert()
+  end
+
+  def changeset(attrs) do
+    %__MODULE__{}
+    |> changeset(attrs)
+  end
+
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:conversation_id, :user_id, :body])
-    |> validate_required([:conversation_id, :user_id, :body])
+    |> cast(attrs, [:body, :conversation_id, :user_id])
+    |> validate_required([:body, :conversation_id, :user_id])
+    |> validate_user_in_conversation(:user_id)
+    |> foreign_key_constraint(:conversation_id)
+    |> foreign_key_constraint(:user_id)
+  end
+
+  def validate_user_in_conversation(changeset, field, options \\ []) do
+    validate_change(changeset, field, fn _, user_id ->
+      case ConversationUser.find_by(%{
+             conversation_id: changeset.changes[:conversation_id],
+             user_id: user_id
+           }) do
+        nil -> [{field, options[:message] || "is not in conversation"}]
+        _ -> []
+      end
+    end)
   end
 end

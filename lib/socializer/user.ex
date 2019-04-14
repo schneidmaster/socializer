@@ -2,12 +2,17 @@ defmodule Socializer.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Socializer.{Repo, Conversation, Post}
+
   schema "users" do
     field :email, :string
     field :name, :string
     field :password, :string, virtual: true
     field :password_hash, :string
     field :token, :string, virtual: true
+
+    many_to_many :conversations, Conversation, join_through: "conversation_users"
+    has_many :posts, Post
 
     timestamps()
   end
