@@ -9,7 +9,7 @@ const ErrorMessage = ({ message }) => {
         <Card.Body>
           <Card.Title>Error</Card.Title>
           <Card.Text>Something went wrong, sorry about that.</Card.Text>
-          <Link to="/app">
+          <Link to="/">
             <Button variant="primary">Go home</Button>
           </Link>
         </Card.Body>

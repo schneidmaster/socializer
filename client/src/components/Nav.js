@@ -20,9 +20,20 @@ const AppNav = () => {
   return (
     <Navbar bg="primary" variant="dark" className="mb-4">
       <Container>
-        <Link to="/app" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
           Socializer
         </Link>
+
+        {renderIf(token)(
+          <Nav>
+            <Link to="/" className="nav-link" role="button">
+              Feed
+            </Link>
+            <Link to="/chat" className="nav-link" role="button">
+              Chat
+            </Link>
+          </Nav>,
+        )}
 
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
