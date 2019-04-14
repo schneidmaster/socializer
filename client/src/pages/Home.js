@@ -3,8 +3,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import Timeago from "react-timeago";
-import { ErrorMessage, Loading } from "components";
-// import { Link } from "react-router-dom";
+import { ErrorMessage, Loading, NewPost } from "components";
 
 const GET_POSTS = gql`
   {
@@ -30,12 +29,13 @@ const Home = () => {
           return (
             <Row>
               <Col xs={8}>
+                <NewPost />
                 {data.posts.map((post) => (
                   <Card key={post.id} className="mb-4">
                     <Card.Header className="d-flex justify-content-between">
                       <div className="h5">{post.user.name}</div>
                       <div className="text-muted h7">
-                        <Timeago date={post.insertedAt} />
+                        <Timeago date={`${post.insertedAt}Z`} />
                       </div>
                     </Card.Header>
                     <Card.Body>

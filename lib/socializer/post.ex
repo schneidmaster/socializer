@@ -15,7 +15,7 @@ defmodule Socializer.Post do
   end
 
   def all do
-    Repo.all(from p in __MODULE__, order_by: p.inserted_at)
+    Repo.all(from p in __MODULE__, order_by: [desc: p.inserted_at])
   end
 
   def find(id) do
