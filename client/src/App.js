@@ -1,14 +1,12 @@
-import React, { useRef, useState } from "react";
-import { ApolloProvider } from "react-apollo";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, { useState } from "react";
+import { withApollo } from "react-apollo";
+import { Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import { Nav } from "components";
 import { Home, Login, Post, Signup } from "pages";
-import { createClient } from "util/apollo";
 import AuthContext from "util/authContext";
 
-const App = () => {
-  const client = useRef(createClient());
+const App = ({ client }) => {
   const [token, setToken] = useState(Cookies.get("token"));
 
   const setAuth = (token) => {
@@ -22,21 +20,17 @@ const App = () => {
   };
 
   return (
-    <ApolloProvider client={client.current}>
-      <AuthContext.Provider value={{ token, setAuth }}>
-        <BrowserRouter>
-          <Nav />
+    <AuthContext.Provider value={{ token, setAuth }}>
+      <Nav />
 
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/posts/:id" component={Post} />
-            <Route component={Home} />
-          </Switch>
-        </BrowserRouter>
-      </AuthContext.Provider>
-    </ApolloProvider>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/posts/:id" component={Post} />
+        <Route component={Home} />
+      </Switch>
+    </AuthContext.Provider>
   );
 };
 
-export default App;
+export default withApollo(App);
