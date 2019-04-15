@@ -3,9 +3,8 @@ defmodule SocializerWeb.Resolvers.ConversationResolver do
   alias Ecto.Multi
   alias Socializer.{Repo, Conversation, ConversationUser, User}
 
-  def list(_parent, args, %{context: %{current_user: current_user}}) do
-    current_user = Repo.preload(current_user, :conversations)
-    {:ok, current_user.conversations}
+  def list(_parent, _args, %{context: %{current_user: current_user}}) do
+    {:ok, Conversation.all_for_user(current_user)}
   end
 
   def list(_parent, _args, _resolutions) do
