@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
+import React, { Fragment, useEffect } from "react";
 import { FeedItem, NewItem } from "components";
 
 const Feed = ({ feedType, items, createParams, subscribeToNew }) => {
@@ -8,14 +7,12 @@ const Feed = ({ feedType, items, createParams, subscribeToNew }) => {
   }, []);
 
   return (
-    <Row>
-      <Col xs={12} md={8}>
-        <NewItem feedType={feedType} params={createParams} />
-        {items.map((item) => (
-          <FeedItem key={item.id} item={item} feedType={feedType} />
-        ))}
-      </Col>
-    </Row>
+    <Fragment>
+      <NewItem feedType={feedType} params={createParams} />
+      {items.map((item) => (
+        <FeedItem key={item.id} item={item} feedType={feedType} />
+      ))}
+    </Fragment>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Col, Container, Row } from "react-bootstrap";
@@ -51,33 +51,34 @@ const Post = ({ match: { params } }) => {
           if (loading) return <Loading />;
           if (error) return <ErrorMessage message={error.message} />;
           return (
-            <Fragment>
-              <Row>
-                <Col xs={12} md={8}>
-                  <FeedItem item={data.post} />
-                  <hr />
-                  <h5>Comments</h5>
-                </Col>
-              </Row>
-              <Feed
-                feedType="comment"
-                items={data.post.comments}
-                createParams={{ postId: params.id }}
-                subscribeToNew={() =>
-                  subscribeToMore({
-                    document: COMMENTS_SUBSCRIPTION,
-                    variables: { postId: params.id },
-                    updateQuery: (prev, { subscriptionData }) => {
-                      if (!subscriptionData.data) return prev;
-                      const newComment = subscriptionData.data.commentCreated;
+            <Row>
+              <Col xs={12} md={8}>
+                <FeedItem item={data.post} />
+                <hr />
+                <h5>Comments</h5>
+                <Feed
+                  feedType="comment"
+                  items={data.post.comments}
+                  createParams={{ postId: params.id }}
+                  subscribeToNew={() =>
+                    subscribeToMore({
+                      document: COMMENTS_SUBSCRIPTION,
+                      variables: { postId: params.id },
+                      updateQuery: (prev, { subscriptionData }) => {
+                        if (!subscriptionData.data) return prev;
+                        const newComment = subscriptionData.data.commentCreated;
 
-                      prev.post.comments = [newComment, ...prev.post.comments];
-                      return prev;
-                    },
-                  })
-                }
-              />
-            </Fragment>
+                        prev.post.comments = [
+                          newComment,
+                          ...prev.post.comments,
+                        ];
+                        return prev;
+                      },
+                    })
+                  }
+                />
+              </Col>
+            </Row>
           );
         }}
       </Query>

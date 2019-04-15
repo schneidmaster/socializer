@@ -4,3 +4,4 @@ export { default as FeedItem } from "./FeedItem";
 export { default as Loading } from "./Loading";
 export { default as Nav } from "./Nav";
 export { default as NewItem } from "./NewItem";
+export { default as Posts } from "./Posts";
