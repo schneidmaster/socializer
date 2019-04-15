@@ -9,7 +9,7 @@ import { split } from "apollo-link";
 import { setContext } from "apollo-link-context";
 import Cookies from "js-cookie";
 
-export const createClient = ({ ssr, req, fetch } = {}) => {
+export const createClient = ({ ssr, req, fetch, tokenCookie } = {}) => {
   let link = createHttpLink({ uri: "http://localhost:4000", fetch });
 
   if (!ssr) {
@@ -25,8 +25,8 @@ export const createClient = ({ ssr, req, fetch } = {}) => {
   }
 
   const authLink = setContext((_, { headers }) => {
-    // Get the authentication token from local storage if it exists.
-    const token = Cookies.get("token");
+    // Get the authentication token from the cookie if it exists.
+    const token = tokenCookie || Cookies.get("token");
 
     // Return the headers to the context so httpLink can read them.
     return {

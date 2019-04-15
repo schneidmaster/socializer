@@ -44,7 +44,12 @@ export default (req, res) => {
       }
 
       // Create Apollo client
-      const client = createClient({ req, fetch, ssr: true });
+      const client = createClient({
+        req,
+        fetch,
+        ssr: true,
+        tokenCookie: req.cookies.token,
+      });
 
       const context = {};
       const modules = [];
@@ -53,7 +58,7 @@ export default (req, res) => {
         <Loadable.Capture report={(m) => modules.push(m)}>
           <ApolloProvider client={client}>
             <StaticRouter location={req.url} context={context}>
-              <App />
+              <App initialToken={req.cookies.token} />
             </StaticRouter>
           </ApolloProvider>
         </Loadable.Capture>

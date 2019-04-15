@@ -6,8 +6,8 @@ import { Nav } from "components";
 import { Home, Login, Post, Signup } from "pages";
 import AuthContext from "util/authContext";
 
-const App = ({ client }) => {
-  const [token, setToken] = useState(Cookies.get("token"));
+const App = ({ initialToken, client }) => {
+  const [token, setToken] = useState(initialToken || Cookies.get("token"));
 
   const setAuth = (token) => {
     if (token) {
