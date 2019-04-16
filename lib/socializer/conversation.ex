@@ -31,6 +31,18 @@ defmodule Socializer.Conversation do
     )
   end
 
+  def find_for_users(user_ids) do
+    query =
+      user_ids
+      |> Enum.reduce(__MODULE__, fn user_id, query ->
+        from c in query,
+          join: cu in ConversationUser,
+          where: cu.conversation_id == c.id and cu.user_id == ^user_id
+      end)
+
+    Repo.one(from q in query, limit: 1)
+  end
+
   def user_ids(conversation_id) when is_number(conversation_id) do
     Repo.all(
       from cu in ConversationUser,

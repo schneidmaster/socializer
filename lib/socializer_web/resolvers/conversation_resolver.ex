@@ -24,43 +24,49 @@ defmodule SocializerWeb.Resolvers.ConversationResolver do
       }) do
     user_ids = (args[:user_ids] ++ [current_user.id]) |> Enum.uniq()
 
-    title =
-      User
-      |> where([u], u.id in ^user_ids)
-      |> Repo.all()
-      |> Enum.map(fn user -> user.name end)
-      |> Enum.join(", ")
+    # Check if there is already a conversation involving all these
+    # users; if so, just return that.
+    if existing = Conversation.find_for_users(user_ids) do
+      {:ok, existing}
+    else
+      title =
+        User
+        |> where([u], u.id in ^user_ids)
+        |> Repo.all()
+        |> Enum.map(fn user -> user.name end)
+        |> Enum.join(", ")
 
-    multi =
-      Multi.new()
-      |> Multi.insert(
-        :conversation,
-        Conversation.changeset(%{title: title})
-      )
+      multi =
+        Multi.new()
+        |> Multi.insert(
+          :conversation,
+          Conversation.changeset(%{title: title})
+        )
 
-    user_ids
-    |> Enum.reduce(multi, fn user_id, multi ->
-      multi_key = String.to_atom("conversation_user_" <> to_string(user_id))
+      user_ids
+      |> Enum.reduce(multi, fn user_id, multi ->
+        multi_key = String.to_atom("conversation_user_" <> to_string(user_id))
 
-      multi
-      |> Multi.run(multi_key, fn repo,
-                                 %{
-                                   conversation: conversation
-                                 } ->
-        IO.inspect(%{conversation_id: conversation.id, user_id: user_id})
+        multi
+        |> Multi.run(multi_key, fn repo,
+                                   %{
+                                     conversation: conversation
+                                   } ->
+          IO.inspect(%{conversation_id: conversation.id, user_id: user_id})
 
-        %{conversation_id: conversation.id, user_id: user_id}
-        |> ConversationUser.changeset()
-        |> repo.insert()
+          %{conversation_id: conversation.id, user_id: user_id}
+          |> ConversationUser.changeset()
+          |> repo.insert()
+        end)
       end)
-    end)
-    |> Repo.transaction()
-    |> case do
-      {:ok, %{conversation: conversation}} ->
-        {:ok, conversation}
+      |> Repo.transaction()
+      |> case do
+        {:ok, %{conversation: conversation}} ->
+          {:ok, conversation}
 
-      {:error, _model, changeset, _completed} ->
-        {:error, extract_error_msg(changeset)}
+        {:error, _model, changeset, _completed} ->
+          {:error, extract_error_msg(changeset)}
+      end
     end
   end
 
