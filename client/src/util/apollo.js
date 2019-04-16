@@ -9,12 +9,22 @@ import { split } from "apollo-link";
 import { setContext } from "apollo-link-context";
 import Cookies from "js-cookie";
 
+const HTTP_URI =
+  process.env.NODE_ENV === "production"
+    ? "https://brisk-hospitable-indianelephant.gigalixirapp.com"
+    : "http://localhost:4000";
+
+const WS_URI =
+  process.env.NODE_ENV === "production"
+    ? "wss://brisk-hospitable-indianelephant.gigalixirapp.com/socket"
+    : "ws://localhost:4000/socket";
+
 export const createClient = ({ ssr, req, fetch, tokenCookie } = {}) => {
-  let link = createHttpLink({ uri: "http://localhost:4000", fetch });
+  let link = createHttpLink({ uri: HTTP_URI, fetch });
 
   if (!ssr) {
     const socketLink = createAbsintheSocketLink(
-      AbsintheSocket.create(new PhoenixSocket("ws://localhost:4000/socket")),
+      AbsintheSocket.create(new PhoenixSocket(WS_URI)),
     );
 
     link = split(

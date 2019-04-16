@@ -1,0 +1,11 @@
+{
+  "name": "socializer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "heroku-postbuild": "if [ \"$PROCFILE_ENV\" = \"heroku\" ]; then cd client && npm install -g yarn && yarn install && yarn build; fi"
+  },
+  "engines": {
+    "node": ">=8.11.2"
+  }
+}

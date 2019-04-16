@@ -2,9 +2,7 @@ defmodule SocializerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :socializer
   use Absinthe.Phoenix.Endpoint
 
-  socket "/socket", SocializerWeb.AbsintheSocket,
-    websocket: true,
-    longpoll: true
+  socket "/socket", SocializerWeb.AbsintheSocket
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

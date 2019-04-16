@@ -58,6 +58,17 @@ const ChatBar = () => {
   const { userId } = useContext(AuthContext);
   const { chatState, setChatState } = useContext(ChatContext);
 
+  if (!userId) {
+    return (
+      <div className={cx("p-2", classes.emptyState)}>
+        <h4>Chat</h4>
+        <p>
+          <Link to="/login">Log in</Link> to chat
+        </p>
+      </div>
+    );
+  }
+
   return (
     <Fragment>
       <h4 className="d-flex justify-content-between align-items-center">
