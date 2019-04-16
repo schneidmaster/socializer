@@ -4,11 +4,12 @@ import { Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import { Nav } from "components";
 import { Chat, Home, Login, Post, Signup } from "pages";
-import AuthContext from "util/authContext";
+import { AuthContext, ChatContext } from "util/context";
 
 const App = ({ initialToken, client }) => {
   const [token, setToken] = useState(initialToken || Cookies.get("token"));
   const [userId, setUserId] = useState(Cookies.get("userId"));
+  const [chatState, setChatState] = useState("default");
 
   const setAuth = (data) => {
     if (data) {
@@ -28,15 +29,17 @@ const App = ({ initialToken, client }) => {
 
   return (
     <AuthContext.Provider value={{ token, userId, setAuth }}>
-      <Nav />
+      <ChatContext.Provider value={{ chatState, setChatState }}>
+        <Nav />
 
-      <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/posts/:id" component={Post} />
-        <Route path="/chat/:id?" component={Chat} />
-        <Route component={Home} />
-      </Switch>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/posts/:id" component={Post} />
+          <Route path="/chat/:id?" component={Chat} />
+          <Route component={Home} />
+        </Switch>
+      </ChatContext.Provider>
     </AuthContext.Provider>
   );
 };

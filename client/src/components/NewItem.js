@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import { Button, Card, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import renderIf from "render-if";
-import AuthContext from "util/authContext";
+import { AuthContext } from "util/context";
 
 const NewItem = ({ feedType, params }) => {
   const { token } = useContext(AuthContext);

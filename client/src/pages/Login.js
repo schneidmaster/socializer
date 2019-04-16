@@ -4,7 +4,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import gql from "graphql-tag";
 import { Redirect } from "react-router-dom";
 import renderIf from "render-if";
-import AuthContext from "util/authContext";
+import { AuthContext } from "util/context";
 
 const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {

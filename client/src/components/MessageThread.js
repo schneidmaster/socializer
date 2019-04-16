@@ -2,7 +2,7 @@ import React, { useContext, useLayoutEffect, useRef } from "react";
 import cx from "classnames";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Gravatar from "react-gravatar";
-import AuthContext from "util/authContext";
+import { AuthContext } from "util/context";
 import classes from "./MessageThread.module.css";
 
 const MessageThread = ({ messages }) => {

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import produce from "immer";
 import { reverse, sortBy } from "lodash";
 import renderIf from "render-if";
 import { ErrorMessage, Loading, NewConversation, Subscriber } from "components";
-import AuthContext from "util/authContext";
+import { AuthContext, ChatContext } from "util/context";
 import classes from "./ChatBar.module.css";
 
 const GET_CONVERSATIONS = gql`
@@ -56,24 +56,26 @@ const CONVERSATIONS_UPDATE_SUBSCRIPTION = gql`
 
 const ChatBar = () => {
   const { userId } = useContext(AuthContext);
-  const [creating, setCreating] = useState(false);
+  const { chatState, setChatState } = useContext(ChatContext);
 
   return (
     <Fragment>
       <h4 className="d-flex justify-content-between align-items-center">
-        <span>{creating ? "New chat" : "Chat"}</span>
-        {renderIf(!creating)(
-          <Button size="sm" variant="primary" onClick={() => setCreating(true)}>
+        <span>{chatState === "creating" ? "New chat" : "Chat"}</span>
+        {renderIf(chatState === "default")(
+          <Button
+            size="sm"
+            variant="primary"
+            onClick={() => setChatState("creating")}
+          >
             New chat
           </Button>,
         )}
       </h4>
 
-      {renderIf(creating)(
-        <NewConversation onCancel={() => setCreating(false)} />,
-      )}
+      {renderIf(chatState === "creating")(<NewConversation />)}
 
-      {renderIf(!creating)(
+      {renderIf(chatState === "default")(
         <Query query={GET_CONVERSATIONS}>
           {({ client, loading, error, data, subscribeToMore }) => {
             if (loading) return <Loading />;

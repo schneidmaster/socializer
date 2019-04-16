@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import renderIf from "render-if";
-import AuthContext from "util/authContext";
+import { AuthContext } from "util/context";
 
 const GET_USER_INFO = gql`
   {
