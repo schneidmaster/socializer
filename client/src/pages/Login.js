@@ -9,6 +9,7 @@ import AuthContext from "util/authContext";
 const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
     authenticate(email: $email, password: $password) {
+      id
       token
     }
   }
@@ -29,9 +30,9 @@ const Login = () => {
       {(login, { data, loading, error }) => {
         if (data) {
           const {
-            authenticate: { token },
+            authenticate: { id, token },
           } = data;
-          setAuth(token);
+          setAuth({ id, token });
         }
 
         return (

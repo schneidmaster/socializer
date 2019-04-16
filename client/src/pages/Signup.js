@@ -10,6 +10,7 @@ import { errorHash } from "util/errors";
 const SIGNUP = gql`
   mutation Signup($name: String!, $email: String!, $password: String!) {
     signUp(name: $name, email: $email, password: $password) {
+      id
       token
     }
   }
@@ -43,9 +44,9 @@ const Signup = () => {
       {(signUp, { data, loading }) => {
         if (data) {
           const {
-            signUp: { token },
+            signUp: { id, token },
           } = data;
-          setAuth(token);
+          setAuth({ id, token });
         }
 
         return (

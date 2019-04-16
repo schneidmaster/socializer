@@ -2,7 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Col, Container, Row } from "react-bootstrap";
-import { ErrorMessage, Feed, FeedItem, Loading } from "components";
+import { ChatBar, ErrorMessage, Feed, FeedItem, Loading } from "components";
 
 const GET_POST = gql`
   query GetPost($id: String!) {
@@ -52,7 +52,11 @@ const Post = ({ match: { params } }) => {
           if (error) return <ErrorMessage message={error.message} />;
           return (
             <Row>
+              <Col xs={0} md={4}>
+                <ChatBar />
+              </Col>
               <Col xs={12} md={8}>
+                <h4>Discussion</h4>
                 <FeedItem item={data.post} />
                 <hr />
                 <h5>Comments</h5>

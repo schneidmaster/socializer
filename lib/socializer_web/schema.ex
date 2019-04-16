@@ -25,6 +25,8 @@ defmodule SocializerWeb.Schema do
 
   subscription do
     import_fields(:comment_subscriptions)
+    import_fields(:conversation_subscriptions)
+    import_fields(:message_subscriptions)
     import_fields(:post_subscriptions)
   end
 end

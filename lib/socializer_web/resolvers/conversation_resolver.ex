@@ -11,6 +11,14 @@ defmodule SocializerWeb.Resolvers.ConversationResolver do
     {:error, "Unauthenticated"}
   end
 
+  def show(_parent, args, %{context: %{current_user: current_user}}) do
+    {:ok, Conversation.find_for_user(args.id, current_user)}
+  end
+
+  def show(_parent, _args, _resolutions) do
+    {:error, "Unauthenticated"}
+  end
+
   def create(_parent, args, %{
         context: %{current_user: current_user}
       }) do

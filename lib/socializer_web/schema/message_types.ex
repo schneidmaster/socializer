@@ -30,4 +30,20 @@ defmodule SocializerWeb.Schema.MessageTypes do
       resolve(&Resolvers.MessageResolver.create/3)
     end
   end
+
+  object :message_subscriptions do
+    field :message_created, :message do
+      arg(:conversation_id, non_null(:id))
+
+      config(fn args, _ ->
+        {:ok, topic: args.conversation_id}
+      end)
+
+      trigger(:create_message,
+        topic: fn message ->
+          message.conversation_id
+        end
+      )
+    end
+  end
 end

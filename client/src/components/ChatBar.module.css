@@ -1,0 +1,29 @@
+.chat {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.chat:hover {
+  text-decoration: none;
+  color: #007bff;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.chat:not(:last-child) {
+  border-bottom: none;
+}
+
+.chatAvatars {
+  flex-basis: 60px;
+}
+
+.chatAvatarWrapper {
+  width: 8px;
+  overflow: visible;
+}
+
+.chatTitle {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

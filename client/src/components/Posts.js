@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { ErrorMessage, Feed, Loading } from "components";
@@ -35,31 +35,34 @@ const POSTS_SUBSCRIPTION = gql`
 
 const Posts = () => {
   return (
-    <Query query={GET_POSTS}>
-      {({ client, loading, error, data, subscribeToMore }) => {
-        if (loading) return <Loading />;
-        if (error) return <ErrorMessage message={error.message} />;
-        return (
-          <Feed
-            feedType="post"
-            items={data.posts}
-            subscribeToNew={() =>
-              subscribeToMore({
-                document: POSTS_SUBSCRIPTION,
-                updateQuery: (prev, { subscriptionData }) => {
-                  if (!subscriptionData.data) return prev;
-                  const newPost = subscriptionData.data.postCreated;
+    <Fragment>
+      <h4>Feed</h4>
+      <Query query={GET_POSTS}>
+        {({ client, loading, error, data, subscribeToMore }) => {
+          if (loading) return <Loading />;
+          if (error) return <ErrorMessage message={error.message} />;
+          return (
+            <Feed
+              feedType="post"
+              items={data.posts}
+              subscribeToNew={() =>
+                subscribeToMore({
+                  document: POSTS_SUBSCRIPTION,
+                  updateQuery: (prev, { subscriptionData }) => {
+                    if (!subscriptionData.data) return prev;
+                    const newPost = subscriptionData.data.postCreated;
 
-                  return Object.assign({}, prev, {
-                    posts: [newPost, ...prev.posts],
-                  });
-                },
-              })
-            }
-          />
-        );
-      }}
-    </Query>
+                    return Object.assign({}, prev, {
+                      posts: [newPost, ...prev.posts],
+                    });
+                  },
+                })
+              }
+            />
+          );
+        }}
+      </Query>
+    </Fragment>
   );
 };
 

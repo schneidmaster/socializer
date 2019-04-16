@@ -23,6 +23,22 @@ defmodule Socializer.Conversation do
     )
   end
 
+  def find_for_user(id, user) do
+    Repo.one(
+      from c in __MODULE__,
+        join: cu in ConversationUser,
+        where: c.id == ^id and cu.conversation_id == c.id and cu.user_id == ^user.id
+    )
+  end
+
+  def user_ids(conversation) do
+    Repo.all(
+      from cu in ConversationUser,
+        where: cu.conversation_id == ^conversation.id,
+        select: cu.user_id
+    )
+  end
+
   def find(id) do
     Repo.get(__MODULE__, id)
   end
