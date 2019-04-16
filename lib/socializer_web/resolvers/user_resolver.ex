@@ -1,6 +1,14 @@
 defmodule SocializerWeb.Resolvers.UserResolver do
   alias Socializer.{Guardian, User}
 
+  def search_users(_parent, args, %{context: %{current_user: current_user}}) do
+    {:ok, User.search(args[:search_term], current_user)}
+  end
+
+  def search_users(_parent, _args, _resolutions) do
+    {:error, "Unauthenticated"}
+  end
+
   def current_user(_parent, _args, %{context: %{current_user: current_user}}) do
     {:ok, current_user}
   end

@@ -47,6 +47,8 @@ defmodule SocializerWeb.Resolvers.ConversationResolver do
                                  %{
                                    conversation: conversation
                                  } ->
+        IO.inspect(%{conversation_id: conversation.id, user_id: user_id})
+
         %{conversation_id: conversation.id, user_id: user_id}
         |> ConversationUser.changeset()
         |> repo.insert()

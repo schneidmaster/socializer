@@ -22,6 +22,13 @@ defmodule SocializerWeb.Schema.UserTypes do
   end
 
   object :user_queries do
+    @desc "Search users"
+    field :search_users, list_of(:user) do
+      arg(:search_term, non_null(:string))
+
+      resolve(&Resolvers.UserResolver.search_users/3)
+    end
+
     @desc "Get current user"
     field :current_user, :user do
       resolve(&Resolvers.UserResolver.current_user/3)

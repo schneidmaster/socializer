@@ -1,6 +1,7 @@
 defmodule Socializer.User do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
 
   alias Socializer.{Repo, Conversation, Post}
 
@@ -15,6 +16,14 @@ defmodule Socializer.User do
     has_many :posts, Post
 
     timestamps()
+  end
+
+  def search(search_term, current_user) do
+    Repo.all(
+      from u in __MODULE__,
+        where: ilike(u.name, ^("%" <> search_term <> "%")) and u.id != ^current_user.id,
+        limit: 25
+    )
   end
 
   def find(id) do

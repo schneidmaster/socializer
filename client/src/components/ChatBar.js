@@ -72,54 +72,59 @@ const ChatBar = () => {
           </Button>,
         )}
       </h4>
+      <Query query={GET_CONVERSATIONS}>
+        {({ client, loading, error, data, subscribeToMore }) => {
+          if (loading) return <Loading />;
+          if (error) return <ErrorMessage message={error.message} />;
+          const conversations = reverse(
+            sortBy(data.conversations, "updatedAt"),
+          );
+          return (
+            <Subscriber
+              subscribeToNew={() => {
+                subscribeToMore({
+                  document: CONVERSATIONS_SUBSCRIPTION,
+                  variables: { userId },
+                  updateQuery: (prev, { subscriptionData }) => {
+                    if (!subscriptionData.data) return prev;
+                    const newConversation =
+                      subscriptionData.data.conversationCreated;
+                    if (
+                      prev.conversations.find(
+                        (c) => c.id === newConversation.id,
+                      )
+                    )
+                      return prev;
+                    return produce(prev, (next) => {
+                      next.conversations.unshift(newConversation);
+                    });
+                  },
+                });
+                subscribeToMore({
+                  document: CONVERSATIONS_UPDATE_SUBSCRIPTION,
+                  variables: {
+                    userId,
+                  },
+                  updateQuery: (prev, { subscriptionData }) => {
+                    if (!subscriptionData.data) return prev;
+                    const updatedConversation =
+                      subscriptionData.data.conversationUpdated;
+                    return produce(prev, (next) => {
+                      const match = prev.conversations.findIndex(
+                        (c) => c.id === updatedConversation.id,
+                      );
+                      if (match !== -1) {
+                        next.conversations[match] = updatedConversation;
+                      }
+                    });
+                  },
+                });
+              }}
+            >
+              {renderIf(chatState === "creating")(<NewConversation />)}
 
-      {renderIf(chatState === "creating")(<NewConversation />)}
-
-      {renderIf(chatState === "default")(
-        <Query query={GET_CONVERSATIONS}>
-          {({ client, loading, error, data, subscribeToMore }) => {
-            if (loading) return <Loading />;
-            if (error) return <ErrorMessage message={error.message} />;
-            const conversations = reverse(
-              sortBy(data.conversations, "updatedAt"),
-            );
-            return (
-              <Subscriber
-                subscribeToNew={() => {
-                  subscribeToMore({
-                    document: CONVERSATIONS_SUBSCRIPTION,
-                    variables: { userId },
-                    updateQuery: (prev, { subscriptionData }) => {
-                      if (!subscriptionData.data) return prev;
-                      const newConversation =
-                        subscriptionData.data.conversationCreated;
-                      return produce(prev, (next) => {
-                        next.conversations.unshift(newConversation);
-                      });
-                    },
-                  });
-                  subscribeToMore({
-                    document: CONVERSATIONS_UPDATE_SUBSCRIPTION,
-                    variables: {
-                      userId,
-                    },
-                    updateQuery: (prev, { subscriptionData }) => {
-                      if (!subscriptionData.data) return prev;
-                      const updatedConversation =
-                        subscriptionData.data.conversationUpdated;
-                      return produce(prev, (next) => {
-                        const match = prev.conversations.findIndex(
-                          (c) => c.id === updatedConversation.id,
-                        );
-                        if (match !== -1) {
-                          next.conversations[match] = updatedConversation;
-                        }
-                      });
-                    },
-                  });
-                }}
-              >
-                {conversations.map((conversation) => (
+              {renderIf(chatState === "default")(
+                conversations.map((conversation) => (
                   <Link
                     key={conversation.id}
                     to={`/chat/${conversation.id}`}
@@ -151,12 +156,13 @@ const ChatBar = () => {
                       {conversation.title}
                     </div>
                   </Link>
-                ))}
-              </Subscriber>
-            );
-          }}
-        </Query>,
-      )}
+                )),
+              )}
+            </Subscriber>
+          );
+        }}
+      </Query>
+      ,
     </Fragment>
   );
 };
