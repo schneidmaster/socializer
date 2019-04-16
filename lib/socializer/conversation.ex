@@ -31,6 +31,14 @@ defmodule Socializer.Conversation do
     )
   end
 
+  def user_ids(conversation_id) when is_number(conversation_id) do
+    Repo.all(
+      from cu in ConversationUser,
+        where: cu.conversation_id == ^conversation_id,
+        select: cu.user_id
+    )
+  end
+
   def user_ids(conversation) do
     Repo.all(
       from cu in ConversationUser,
@@ -50,7 +58,7 @@ defmodule Socializer.Conversation do
 
   def changeset(conversation, attrs) do
     conversation
-    |> cast(attrs, [:title])
+    |> cast(attrs, [:title, :updated_at])
     |> validate_required([:title])
   end
 end

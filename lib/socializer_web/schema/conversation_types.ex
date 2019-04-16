@@ -9,6 +9,7 @@ defmodule SocializerWeb.Schema.ConversationTypes do
   object :conversation do
     field :id, :id
     field :title, :string
+    field :updated_at, :naive_datetime
 
     field :messages, list_of(:message), resolve: assoc(:messages)
     field :users, list_of(:user), resolve: assoc(:users)
@@ -50,6 +51,24 @@ defmodule SocializerWeb.Schema.ConversationTypes do
           Conversation.user_ids(conversation)
         end
       )
+    end
+
+    field :conversation_updated, :conversation do
+      arg(:user_id, non_null(:id))
+
+      config(fn args, _ ->
+        {:ok, topic: args.user_id}
+      end)
+
+      trigger(:create_message,
+        topic: fn message ->
+          Conversation.user_ids(message.conversation_id)
+        end
+      )
+
+      resolve(fn message, _, _ ->
+        {:ok, Conversation.find(message.conversation_id)}
+      end)
     end
   end
 end

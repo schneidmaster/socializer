@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <Container>
       <Row>
-        <Col xs={0} md={4}>
+        <Col md={4} className="d-none d-md-block">
           <ChatBar />
         </Col>
         <Col xs={12} md={8}>

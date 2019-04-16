@@ -1,4 +1,5 @@
 defmodule SocializerWeb.Resolvers.MessageResolver do
+  alias Ecto.Multi
   alias Socializer.{Repo, Conversation, Message}
 
   def list(_parent, args, _resolutions) do
@@ -13,15 +14,28 @@ defmodule SocializerWeb.Resolvers.MessageResolver do
   def create(_parent, args, %{
         context: %{current_user: current_user}
       }) do
-    args
-    |> Map.put(:user_id, current_user.id)
-    |> Message.create()
-    |> case do
-      {:ok, message} ->
-        {:ok, message}
+    case Conversation.find_for_user(args[:conversation_id], current_user) do
+      nil ->
+        {:error, "Unauthenticated"}
 
-      {:error, changeset} ->
-        {:error, extract_error_msg(changeset)}
+      conversation ->
+        Multi.new()
+        |> Multi.insert(
+          :message,
+          Message.changeset(args |> Map.put(:user_id, current_user.id))
+        )
+        |> Multi.update(
+          :conversation,
+          Conversation.changeset(conversation, %{updated_at: DateTime.utc_now()})
+        )
+        |> Repo.transaction()
+        |> case do
+          {:ok, %{message: message}} ->
+            {:ok, message}
+
+          {:error, _model, changeset, _completed} ->
+            {:error, extract_error_msg(changeset)}
+        end
     end
   end
 
