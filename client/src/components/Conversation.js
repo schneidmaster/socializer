@@ -1,11 +1,10 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
-import { Button, Card, Form } from "react-bootstrap";
-import Gravatar from "react-gravatar";
+import { Card, Form } from "react-bootstrap";
 import cx from "classnames";
-import { ErrorMessage, Loading, Subscriber } from "components";
-import AuthContext from "util/authContext";
+import produce from "immer";
+import { ErrorMessage, Loading, MessageThread, Subscriber } from "components";
 import classes from "./Conversation.module.css";
 
 const GET_CONVERSATION = gql`
@@ -53,7 +52,6 @@ const Conversation = ({
     params: { id },
   },
 }) => {
-  const { userId } = useContext(AuthContext);
   const [body, setBody] = useState("");
 
   return (
@@ -71,77 +69,53 @@ const Conversation = ({
                   updateQuery: (prev, { subscriptionData }) => {
                     if (!subscriptionData.data) return prev;
                     const newMessage = subscriptionData.data.messageCreated;
-                    prev.conversation.messages.push(newMessage);
-                    return prev;
+                    return produce(prev, (next) => {
+                      next.conversation.messages.push(newMessage);
+                    });
                   },
                 })
               }
             >
-              <h5>{data.conversation.title}</h5>
-              <hr />
-              {data.conversation.messages.map((message, idx) => (
-                <div
-                  key={message.id}
-                  className={cx("d-flex", {
-                    [classes.chatSelf]: message.user.id === String(userId),
-                    [classes.chatOthers]: message.user.id !== String(userId),
-                  })}
+              <div className={cx("d-flex", classes.chatLayout)}>
+                <h5>{data.conversation.title}</h5>
+                <hr />
+                <MessageThread messages={data.conversation.messages} />
+
+                <Mutation
+                  mutation={CREATE_MESSAGE}
+                  onCompleted={() => setBody("")}
                 >
-                  <div
-                    className={cx("d-flex", "mb-1", classes.chatBubbleWrapper)}
-                  >
-                    {idx === 0 ||
-                    data.conversation.messages[idx - 1].user.id !==
-                      message.user.id ? (
-                      <Gravatar
-                        md5={message.user.gravatarMd5}
-                        className="rounded-circle mt-1"
-                        size={30}
-                      />
-                    ) : (
-                      <div className={classes.avatarSpacer} />
-                    )}
-                    <div className={cx("p-2", classes.chatBubble)}>
-                      {message.body}
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  {(submit, { data, loading, error }) => {
+                    return (
+                      <Card className="mt-2">
+                        <Card.Body>
+                          <Form
+                            onSubmit={(e) => {
+                              e.preventDefault();
+                              submit({
+                                variables: { body, conversationId: id },
+                              });
+                            }}
+                          >
+                            <Form.Group>
+                              <Form.Control
+                                rows="3"
+                                placeholder="What's on your mind?"
+                                value={body}
+                                onChange={(e) => setBody(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Form>
+                        </Card.Body>
+                      </Card>
+                    );
+                  }}
+                </Mutation>
+              </div>
             </Subscriber>
           );
         }}
       </Query>
-
-      <Mutation mutation={CREATE_MESSAGE} onCompleted={() => setBody("")}>
-        {(submit, { data, loading, error }) => {
-          return (
-            <Card className="mt-2">
-              <Card.Body>
-                <Form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    submit({ variables: { body, conversationId: id } });
-                  }}
-                >
-                  <Form.Group>
-                    <Form.Control
-                      as="textarea"
-                      rows="3"
-                      placeholder="What's on your mind?"
-                      value={body}
-                      onChange={(e) => setBody(e.target.value)}
-                    />
-                  </Form.Group>
-
-                  <Button variant="primary" type="submit" disabled={loading}>
-                    {loading ? "Submitting..." : "Submit"}
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          );
-        }}
-      </Mutation>
     </Fragment>
   );
 };

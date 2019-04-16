@@ -1,0 +1,36 @@
+.chatMessages {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.chatSelf {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.chatSelf .chatBubbleWrapper {
+  flex-direction: row-reverse;
+}
+
+.chatSelf .chatBubble {
+  margin-right: 0.25rem;
+  background-color: #007bff;
+  color: white;
+}
+
+.chatOthers {
+  align-items: flex-start;
+}
+
+.chatOthers .chatBubble {
+  margin-left: 0.25rem;
+  background-color: #f1f0f0;
+}
+
+.chatBubble {
+  border-radius: 5px;
+}
+
+.avatarSpacer {
+  width: 30px;
+}

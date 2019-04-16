@@ -2,6 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Col, Container, Row } from "react-bootstrap";
+import produce from "immer";
 import { ChatBar, ErrorMessage, Feed, FeedItem, Loading } from "components";
 
 const GET_POST = gql`
@@ -72,11 +73,9 @@ const Post = ({ match: { params } }) => {
                         if (!subscriptionData.data) return prev;
                         const newComment = subscriptionData.data.commentCreated;
 
-                        prev.post.comments = [
-                          newComment,
-                          ...prev.post.comments,
-                        ];
-                        return prev;
+                        return produce(prev, (next) => {
+                          next.post.comments.unshift(newComment);
+                        });
                       },
                     })
                   }

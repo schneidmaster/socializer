@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import Gravatar from "react-gravatar";
 import cx from "classnames";
+import produce from "immer";
 import { ErrorMessage, Loading, Subscriber } from "components";
 import AuthContext from "util/authContext";
 import classes from "./ChatBar.module.css";
@@ -54,9 +55,8 @@ const ChatBar = () => {
                     if (!subscriptionData.data) return prev;
                     const newConversation =
                       subscriptionData.data.conversationCreated;
-
-                    return Object.assign({}, prev, {
-                      conversations: [newConversation, ...prev.conversations],
+                    return produce(prev, (next) => {
+                      next.conversations.unshift(newConversation);
                     });
                   },
                 })

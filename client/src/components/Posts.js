@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import produce from "immer";
 import { ErrorMessage, Feed, Loading } from "components";
 
 const GET_POSTS = gql`
@@ -52,8 +53,8 @@ const Posts = () => {
                     if (!subscriptionData.data) return prev;
                     const newPost = subscriptionData.data.postCreated;
 
-                    return Object.assign({}, prev, {
-                      posts: [newPost, ...prev.posts],
+                    return produce(prev, (next) => {
+                      next.posts.unshift(newPost);
                     });
                   },
                 })
