@@ -32,8 +32,10 @@ defmodule SocializerWeb.Resolvers.CommentResolver do
   defp extract_error_msg(changeset) do
     changeset.errors
     |> Enum.map(fn {field, {error, _details}} ->
-      String.capitalize(to_string(field)) <> " " <> error
+      [
+        field: field,
+        message: String.capitalize(error)
+      ]
     end)
-    |> Enum.join("; ")
   end
 end

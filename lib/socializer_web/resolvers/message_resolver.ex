@@ -2,13 +2,20 @@ defmodule SocializerWeb.Resolvers.MessageResolver do
   alias Ecto.Multi
   alias Socializer.{Repo, Conversation, Message}
 
-  def list(_parent, args, _resolutions) do
-    conversation =
-      args[:conversation_id]
-      |> Conversation.find()
-      |> Repo.preload(:messages)
+  def list(_parent, args, %{
+        context: %{current_user: current_user}
+      }) do
+    case Conversation.find_for_user(args[:conversation_id], current_user) do
+      nil ->
+        {:error, "Not found"}
 
-    {:ok, conversation.messages}
+      conversation ->
+        {:ok, conversation |> Repo.preload(:messages) |> Map.get(:messages)}
+    end
+  end
+
+  def list(_parent, _args, _resolutions) do
+    {:error, "Unauthenticated"}
   end
 
   def create(_parent, args, %{
@@ -16,7 +23,7 @@ defmodule SocializerWeb.Resolvers.MessageResolver do
       }) do
     case Conversation.find_for_user(args[:conversation_id], current_user) do
       nil ->
-        {:error, "Unauthenticated"}
+        {:error, "Not found"}
 
       conversation ->
         Multi.new()
@@ -46,8 +53,10 @@ defmodule SocializerWeb.Resolvers.MessageResolver do
   defp extract_error_msg(changeset) do
     changeset.errors
     |> Enum.map(fn {field, {error, _details}} ->
-      String.capitalize(to_string(field)) <> " " <> error
+      [
+        field: field,
+        message: String.capitalize(error)
+      ]
     end)
-    |> Enum.join("; ")
   end
 end

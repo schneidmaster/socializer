@@ -48,7 +48,7 @@ defmodule SocializerWeb.PostResolverTest do
           context: %{current_user: user}
         })
 
-      assert error == "Body can't be blank"
+      assert error == [[field: :body, message: "Can't be blank"]]
     end
 
     it "returns error for unauthenticated user" do

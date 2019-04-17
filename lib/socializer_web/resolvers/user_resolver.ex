@@ -30,14 +30,17 @@ defmodule SocializerWeb.Resolvers.UserResolver do
   end
 
   def authenticate(_parent, args, _resolution) do
-    user = User.find_by(email: String.downcase(args[:email]))
+    error = {:error, [[field: :email, message: "Invalid email or password"]]}
 
-    cond do
-      user && Bcrypt.check_pass(user, args[:password]) ->
-        {:ok, user_with_token(user)}
+    case User.find_by(email: String.downcase(args[:email])) do
+      nil ->
+        error
 
-      true ->
-        {:error, [[field: :email, message: "Invalid email or password"]]}
+      user ->
+        case Bcrypt.check_pass(user, args[:password]) do
+          {:error, _} -> error
+          {:ok, user} -> {:ok, user_with_token(user)}
+        end
     end
   end
 
