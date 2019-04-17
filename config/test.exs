@@ -13,5 +13,5 @@ config :logger, level: :warn
 config :socializer, Socializer.Repo,
   database: "socializer_test",
   hostname: "localhost",
-  username: "circleci",
+  username: System.get_env("POSTGRES_USER") || System.get_env("USER"),
   pool: Ecto.Adapters.SQL.Sandbox

@@ -2,15 +2,15 @@ version: 2
 jobs:
   build:
     parallelism: 1
-    docker: # run the steps with Docker
+    docker:
       - image: circleci/elixir:1.8.0-node
         environment:
           MIX_ENV: test
           PGHOST: 127.0.0.1
-      - image: circleci/postgres:10.1-alpine # database image
+          POSTGRES_USER: circleci
+      - image: circleci/postgres:10.1-alpine
         environment:
           POSTGRES_USER: circleci
-          POSTGRES_PASSWORD:
 
     working_directory: ~/socializer
 
