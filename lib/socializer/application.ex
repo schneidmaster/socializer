@@ -13,7 +13,9 @@ defmodule Socializer.Application do
       # Start the endpoint when the application starts
       SocializerWeb.Endpoint,
       # Start Absinthe subscriptions
-      {Absinthe.Subscription, [SocializerWeb.Endpoint]}
+      {Absinthe.Subscription, [SocializerWeb.Endpoint]},
+      # Run scheduled tasks
+      Socializer.Scheduler
       # Starts a worker by calling: Socializer.Worker.start_link(arg)
       # {Socializer.Worker, arg},
     ]

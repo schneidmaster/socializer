@@ -27,6 +27,11 @@ config :socializer, Socializer.Repo,
   ssl: true,
   pool_size: 2
 
+config :socializer, Socializer.Scheduler,
+  jobs: [
+    {"@daily", {Socializer.Repo, :reset_database, []}}
+  ]
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
