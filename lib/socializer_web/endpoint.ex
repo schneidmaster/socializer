@@ -2,7 +2,15 @@ defmodule SocializerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :socializer
   use Absinthe.Phoenix.Endpoint
 
-  socket "/socket", SocializerWeb.AbsintheSocket
+  origin =
+    case Mix.env() do
+      :prod -> ["https://socializer-demo.herokuapp.com"]
+      _ -> false
+    end
+
+  socket "/socket", SocializerWeb.AbsintheSocket,
+    websocket: [check_origin: origin],
+    longpoll: true
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
