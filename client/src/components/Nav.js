@@ -46,6 +46,7 @@ const AppNav = () => {
                     error.graphQLErrors[0].message === "Unauthenticated"
                   ) {
                     setAuth(null);
+                    return null;
                   }
 
                   return (
