@@ -89,8 +89,12 @@ jobs:
           command: mkdir -p /tmp/test-results/exunit
 
       - run:
-          name: Run tests
+          name: Run ExUnit tests
           command: mix test
+
+      - run:
+          name: Run jest tests
+          command: cd client && yarn test:ci
 
       - store_test_results:
           path: /tmp/test-results

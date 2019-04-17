@@ -9,6 +9,16 @@
     "prettier/standard",
     "plugin:prettier/recommended"
   ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ],
   "parser": "babel-eslint",
   "plugins": ["react-hooks"],
   "rules": {

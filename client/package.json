@@ -58,15 +58,18 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "^1.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "prettier": "^1.17.0"
+    "jest-junit": "^6.3.0",
+    "prettier": "^1.17.0",
+    "react-testing-library": "^6.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write './*.js' '**/*.js'",
     "lint": "eslint '**/*.js'",
+    "test": "react-scripts test --env=jsdom",
+    "test:ci": "JEST_JUNIT_OUTPUT=/tmp/test-results/jest/results.xml react-scripts test --env=jsdom --coverage --runInBand --reporters=\"jest-junit\"",
     "serve": "NODE_PATH=src node ./server/index.js"
   },
   "engines": {
