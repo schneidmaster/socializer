@@ -11,8 +11,7 @@ config :logger, level: :warn
 
 # Configure your database
 config :socializer, Socializer.Repo,
-  username: "postgres",
-  password: "postgres",
   database: "socializer_test",
   hostname: "localhost",
+  username: "circleci",
   pool: Ecto.Adapters.SQL.Sandbox

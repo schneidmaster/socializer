@@ -50,7 +50,11 @@ defmodule Socializer.MixProject do
       {:absinthe_plug, "~> 1.4"},
       {:poison, "~> 2.1.0"},
       {:quantum, "~> 2.3"},
-      {:timex, "~> 3.0"}
+      {:timex, "~> 3.0"},
+      {:ex_machina, "~> 2.3", only: :test},
+      {:ex_spec, "~> 2.0", only: :test},
+      {:faker, "~> 0.7", only: :test},
+      {:junit_formatter, "~> 3.0", only: [:test]}
     ]
   end
 

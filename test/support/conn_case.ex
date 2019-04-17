@@ -19,7 +19,9 @@ defmodule SocializerWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
+      use ExSpec
       alias SocializerWeb.Router.Helpers, as: Routes
+      import Socializer.Factory
 
       # The default endpoint for testing
       @endpoint SocializerWeb.Endpoint
