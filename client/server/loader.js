@@ -35,7 +35,7 @@ export default (req, res) => {
   fs.readFile(
     path.resolve(__dirname, "../build/index.html"),
     "utf8",
-    (err, htmlData) => {
+    async (err, htmlData) => {
       // If there's an error... serve up something nasty
       if (err) {
         console.error("Read error", err);
@@ -64,51 +64,57 @@ export default (req, res) => {
         </Loadable.Capture>
       );
 
-      getDataFromTree(ServerApp).then(() => {
-        const content = renderToString(ServerApp);
+      try {
+        await getDataFromTree(ServerApp);
+      } catch (e) {
+        // Suppress -- the component will handle showing
+        // an error message, so we still want to render it
+        // rather than crashing.
+      }
 
-        if (context.url) {
-          // If context has a url property, then we need to handle a redirection in Redux Router
-          res.writeHead(302, {
-            Location: context.url,
-          });
+      const content = renderToString(ServerApp);
 
-          res.end();
-        } else {
-          // Otherwise, we carry on...
+      if (context.url) {
+        // If context has a url property, then we need to handle a redirection in Redux Router
+        res.writeHead(302, {
+          Location: context.url,
+        });
 
-          // Let's give ourself a function to load all our page-specific JS assets for code splitting
-          const extractAssets = (assets, chunks) =>
-            Object.keys(assets)
-              .filter((asset) => chunks.indexOf(asset.replace(".js", "")) > -1)
-              .map((k) => assets[k]);
+        res.end();
+      } else {
+        // Otherwise, we carry on...
 
-          // Let's format those assets into pretty <script> tags
-          const extraChunks = extractAssets(manifest, modules).map(
-            (c) =>
-              `<script type="text/javascript" src="/${c.replace(
-                /^\//,
-                "",
-              )}"></script>`,
-          );
+        // Let's give ourself a function to load all our page-specific JS assets for code splitting
+        const extractAssets = (assets, chunks) =>
+          Object.keys(assets)
+            .filter((asset) => chunks.indexOf(asset.replace(".js", "")) > -1)
+            .map((k) => assets[k]);
 
-          // We need to tell Helmet to compute the right meta tags, title, and such
-          const helmet = Helmet.renderStatic();
+        // Let's format those assets into pretty <script> tags
+        const extraChunks = extractAssets(manifest, modules).map(
+          (c) =>
+            `<script type="text/javascript" src="/${c.replace(
+              /^\//,
+              "",
+            )}"></script>`,
+        );
 
-          // Pass all this nonsense into our HTML formatting function above
-          const html = injectHTML(htmlData, {
-            html: helmet.htmlAttributes.toString(),
-            title: helmet.title.toString(),
-            meta: helmet.meta.toString(),
-            body: content,
-            scripts: extraChunks,
-            state: JSON.stringify(client.extract()).replace(/</g, "\\u003c"),
-          });
+        // We need to tell Helmet to compute the right meta tags, title, and such
+        const helmet = Helmet.renderStatic();
 
-          // We have all the final HTML, let's send it to the user already!
-          res.send(html);
-        }
-      });
+        // Pass all this nonsense into our HTML formatting function above
+        const html = injectHTML(htmlData, {
+          html: helmet.htmlAttributes.toString(),
+          title: helmet.title.toString(),
+          meta: helmet.meta.toString(),
+          body: content,
+          scripts: extraChunks,
+          state: JSON.stringify(client.extract()).replace(/</g, "\\u003c"),
+        });
+
+        // We have all the final HTML, let's send it to the user already!
+        res.send(html);
+      }
     },
   );
 };
