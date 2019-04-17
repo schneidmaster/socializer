@@ -6,7 +6,10 @@ defmodule SocializerWeb.Resolvers.PostResolver do
   end
 
   def show(_parent, args, _resolutions) do
-    {:ok, Post.find(args[:id])}
+    case Post.find(args[:id]) do
+      nil -> {:error, "Not found"}
+      post -> {:ok, post}
+    end
   end
 
   def create(_parent, args, %{

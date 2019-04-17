@@ -20,6 +20,11 @@ defmodule SocializerWeb.PostResolverTest do
       {:ok, found} = PostResolver.show(nil, %{id: post.id}, nil)
       assert found.id == post.id
     end
+
+    it "returns not found when post does not exist" do
+      {:error, error} = PostResolver.show(nil, %{id: 1}, nil)
+      assert error == "Not found"
+    end
   end
 
   describe "#create" do

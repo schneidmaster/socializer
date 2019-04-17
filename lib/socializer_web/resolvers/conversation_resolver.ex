@@ -12,7 +12,10 @@ defmodule SocializerWeb.Resolvers.ConversationResolver do
   end
 
   def show(_parent, args, %{context: %{current_user: current_user}}) do
-    {:ok, Conversation.find_for_user(args.id, current_user)}
+    case Conversation.find_for_user(args.id, current_user) do
+      nil -> {:error, "Not found"}
+      conversation -> {:ok, conversation}
+    end
   end
 
   def show(_parent, _args, _resolutions) do
