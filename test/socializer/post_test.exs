@@ -9,8 +9,8 @@ defmodule Socializer.PostTest do
       post_b = insert(:post)
       results = Post.all()
       assert length(results) == 2
-      assert List.first(results).id == post_a.id
-      assert List.last(results).id == post_b.id
+      assert List.first(results).id == post_b.id
+      assert List.last(results).id == post_a.id
     end
   end
 

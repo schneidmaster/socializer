@@ -16,7 +16,7 @@ defmodule SocializerWeb.Schema.PostTypes do
     field :comments, list_of(:comment) do
       resolve(
         assoc(:comments, fn comments_query, _args, _context ->
-          comments_query |> order_by(desc: :inserted_at)
+          comments_query |> order_by(desc: :id)
         end)
       )
     end
