@@ -21,7 +21,7 @@ jobs:
           command: mix local.hex --force && mix local.rebar --force
 
       - restore_cache:
-          keys: # list of cache keys, in decreasing specificity
+          keys:
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
             - v1-mix-cache
@@ -31,9 +31,19 @@ jobs:
             - v1-build-cache-{{ .Branch }}
             - v1-build-cache
 
+      - restore_cache:
+          key: v1-yarn-cache
+
+      - restore_cache:
+          key: v1-node-modules-cache-{{ checksum "client/yarn.lock" }}
+
       - run:
-          name: Install and compile dependencies
+          name: Install and compile Elixir dependencies
           command: mix do deps.get, compile
+
+      - run:
+          name: Install npm dependencies
+          command: cd client && yarn install
 
       - save_cache:
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
@@ -44,6 +54,7 @@ jobs:
       - save_cache:
           key: v1-mix-cache
           paths: "deps"
+
       - save_cache:
           key: v1-build-cache-{{ .Branch }}
           paths: "_build"
@@ -51,17 +62,31 @@ jobs:
           key: v1-build-cache
           paths: "_build"
 
+      - save_cache:
+          key: v1-yarn-cache
+          paths:
+            - ~/.cache/yarn
+
+      - save_cache:
+          key: v1-node-modules-cache-{{ checksum "client/yarn.lock" }}
+          paths:
+            - client/node_modules
+
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
-          name: Create dir for test results
-          command: mkdir -p /tmp/test-results/exunit
+          name: Check Elixir formatting
+          command: mix format --check-formatted
 
       - run:
-          name: Check formatting
-          command: mix format --check-formatted
+          name: Check JS formatting
+          command: cd client && yarn lint
+
+      - run:
+          name: Create dir for test results
+          command: mkdir -p /tmp/test-results/exunit
 
       - run:
           name: Run tests
