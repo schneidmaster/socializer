@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeedItem renders correctly for comment 1`] = `
+<div
+  class="mb-4 card"
+>
+  <div
+    class="d-flex justify-content-between align-items-center card-header"
+  >
+    <div
+      class="d-flex align-items-center"
+    >
+      <img
+        alt="Gravatar for undefined"
+        class="react-gravatar rounded-circle"
+        height="30"
+        src="//www.gravatar.com/avatar/abcdefg?d=retro&r=g&s=30"
+        srcset="//www.gravatar.com/avatar/abcdefg?d=retro&r=g&s=60 2x"
+        width="30"
+      />
+      <div
+        class="ml-2"
+      >
+        <div
+          class="h6 mb-0"
+        >
+          John Smith
+        </div>
+      </div>
+    </div>
+    <div
+      class="text-muted h7"
+    >
+      <time
+        datetime="2019-04-17T16:00:00.000Z"
+        title="2019-04-17T16:00:00Z"
+      >
+        8 hours ago
+      </time>
+    </div>
+  </div>
+  <div
+    class="card-body"
+  >
+    <p
+      class="card-text"
+    >
+      Some thoughts
+    </p>
+  </div>
+</div>
+`;
+
+exports[`FeedItem renders correctly for post 1`] = `
+<div
+  class="mb-4 card"
+>
+  <div
+    class="d-flex justify-content-between align-items-center card-header"
+  >
+    <div
+      class="d-flex align-items-center"
+    >
+      <img
+        alt="Gravatar for undefined"
+        class="react-gravatar rounded-circle"
+        height="30"
+        src="//www.gravatar.com/avatar/abcdefg?d=retro&r=g&s=30"
+        srcset="//www.gravatar.com/avatar/abcdefg?d=retro&r=g&s=60 2x"
+        width="30"
+      />
+      <div
+        class="ml-2"
+      >
+        <div
+          class="h6 mb-0"
+        >
+          John Smith
+        </div>
+      </div>
+    </div>
+    <div
+      class="text-muted h7"
+    >
+      <time
+        datetime="2019-04-17T16:00:00.000Z"
+        title="2019-04-17T16:00:00Z"
+      >
+        8 hours ago
+      </time>
+    </div>
+  </div>
+  <div
+    class="card-body"
+  >
+    <p
+      class="card-text"
+    >
+      Some thoughts
+    </p>
+  </div>
+  <div
+    class="d-flex card-footer"
+  >
+    <a
+      class="ml-auto"
+      href="/posts/123"
+    >
+      Discussion ≫
+    </a>
+  </div>
+</div>
+`;

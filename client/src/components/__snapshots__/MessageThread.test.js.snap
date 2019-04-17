@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageThread renders correctly 1`] = `
+<div>
+  <div
+    class="chatMessages"
+  >
+    <div
+      class="d-flex chatSelf"
+    >
+      <div
+        class="d-flex mb-1 chatBubbleWrapper"
+      >
+        <img
+          alt="Gravatar for undefined"
+          class="react-gravatar rounded-circle mt-1"
+          height="30"
+          src="//www.gravatar.com/avatar/abcdefg?d=retro&r=g&s=30"
+          srcset="//www.gravatar.com/avatar/abcdefg?d=retro&r=g&s=60 2x"
+          width="30"
+        />
+        <div
+          class="p-2 chatBubble"
+        >
+          Some thoughts
+        </div>
+      </div>
+    </div>
+    <div
+      class="d-flex chatOthers"
+    >
+      <div
+        class="d-flex mb-1 chatBubbleWrapper"
+      >
+        <img
+          alt="Gravatar for undefined"
+          class="react-gravatar rounded-circle mt-1"
+          height="30"
+          src="//www.gravatar.com/avatar/defghi?d=retro&r=g&s=30"
+          srcset="//www.gravatar.com/avatar/defghi?d=retro&r=g&s=60 2x"
+          width="30"
+        />
+        <div
+          class="p-2 chatBubble"
+        >
+          Other thoughts
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

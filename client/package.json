@@ -60,17 +60,18 @@
     "eslint-plugin-standard": "^4.0.0",
     "jest-junit": "^6.3.0",
     "prettier": "^1.17.0",
-    "react-testing-library": "^6.1.2"
+    "react-testing-library": "^6.1.2",
+    "timekeeper": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject",
+    "serve": "NODE_PATH=src node ./server/index.js",
     "format": "prettier --write './*.js' '**/*.js'",
     "lint": "eslint '**/*.js'",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --no-watch",
     "test:ci": "JEST_JUNIT_OUTPUT=/tmp/test-results/jest/results.xml react-scripts test --env=jsdom --coverage --runInBand --reporters=\"jest-junit\"",
-    "serve": "NODE_PATH=src node ./server/index.js"
+    "test:watch": "react-scripts test --env=jsdom"
   },
   "engines": {
     "node": ">=8.11.2"
