@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Mutation } from "react-apollo";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import Helmet from "react-helmet";
 import gql from "graphql-tag";
 import { Redirect } from "react-router-dom";
 import renderIf from "render-if";
@@ -37,100 +38,106 @@ const Signup = () => {
   }
 
   return (
-    <Mutation
-      mutation={SIGNUP}
-      onError={(error) => setErrors(errorHash(error))}
-    >
-      {(signUp, { data, loading }) => {
-        if (data) {
-          const {
-            signUp: { id, token },
-          } = data;
-          setAuth({ id, token });
-        }
+    <Fragment>
+      <Helmet>
+        <title>Socializer | Sign up</title>
+        <meta property="og:title" content="Socializer | Sign up" />
+      </Helmet>
+      <Mutation
+        mutation={SIGNUP}
+        onError={(error) => setErrors(errorHash(error))}
+      >
+        {(signUp, { data, loading }) => {
+          if (data) {
+            const {
+              signUp: { id, token },
+            } = data;
+            setAuth({ id, token });
+          }
 
-        return (
-          <Container>
-            <Row>
-              <Col md={6} xs={12}>
-                <Form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    signUp({
-                      variables: {
-                        name,
-                        email,
-                        password,
-                      },
-                    });
-                  }}
-                >
-                  <Form.Group controlId="formName">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                      placeholder="Joe Smith"
-                      value={name}
-                      onChange={(e) => {
-                        setName(e.target.value);
-                        clearError("name");
-                      }}
-                      isInvalid={Boolean(errors.name)}
-                    />
-                    {renderIf(errors.name)(
-                      <Form.Control.Feedback type="invalid">
-                        {errors.name}
-                      </Form.Control.Feedback>,
-                    )}
-                  </Form.Group>
+          return (
+            <Container>
+              <Row>
+                <Col md={6} xs={12}>
+                  <Form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      signUp({
+                        variables: {
+                          name,
+                          email,
+                          password,
+                        },
+                      });
+                    }}
+                  >
+                    <Form.Group controlId="formName">
+                      <Form.Label>Name</Form.Label>
+                      <Form.Control
+                        placeholder="Joe Smith"
+                        value={name}
+                        onChange={(e) => {
+                          setName(e.target.value);
+                          clearError("name");
+                        }}
+                        isInvalid={Boolean(errors.name)}
+                      />
+                      {renderIf(errors.name)(
+                        <Form.Control.Feedback type="invalid">
+                          {errors.name}
+                        </Form.Control.Feedback>,
+                      )}
+                    </Form.Group>
 
-                  <Form.Group controlId="formEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="you@gmail.com"
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        clearError("email");
-                      }}
-                      isInvalid={Boolean(errors.email)}
-                    />
-                    {renderIf(errors.email)(
-                      <Form.Control.Feedback type="invalid">
-                        {errors.email}
-                      </Form.Control.Feedback>,
-                    )}
-                  </Form.Group>
+                    <Form.Group controlId="formEmail">
+                      <Form.Label>Email address</Form.Label>
+                      <Form.Control
+                        type="email"
+                        placeholder="you@gmail.com"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                          clearError("email");
+                        }}
+                        isInvalid={Boolean(errors.email)}
+                      />
+                      {renderIf(errors.email)(
+                        <Form.Control.Feedback type="invalid">
+                          {errors.email}
+                        </Form.Control.Feedback>,
+                      )}
+                    </Form.Group>
 
-                  <Form.Group controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                        clearError("password");
-                      }}
-                      isInvalid={Boolean(errors.password)}
-                    />
-                    {renderIf(errors.password)(
-                      <Form.Control.Feedback type="invalid">
-                        {errors.password}
-                      </Form.Control.Feedback>,
-                    )}
-                  </Form.Group>
+                    <Form.Group controlId="formPassword">
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                          clearError("password");
+                        }}
+                        isInvalid={Boolean(errors.password)}
+                      />
+                      {renderIf(errors.password)(
+                        <Form.Control.Feedback type="invalid">
+                          {errors.password}
+                        </Form.Control.Feedback>,
+                      )}
+                    </Form.Group>
 
-                  <Button variant="primary" type="submit" disabled={loading}>
-                    {loading ? "Signing up..." : "Sign up"}
-                  </Button>
-                </Form>
-              </Col>
-            </Row>
-          </Container>
-        );
-      }}
-    </Mutation>
+                    <Button variant="primary" type="submit" disabled={loading}>
+                      {loading ? "Signing up..." : "Sign up"}
+                    </Button>
+                  </Form>
+                </Col>
+              </Row>
+            </Container>
+          );
+        }}
+      </Mutation>
+    </Fragment>
   );
 };
 
