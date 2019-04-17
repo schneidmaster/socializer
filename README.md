@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/schneidmaster/socializer.svg?style=shield&circle-token=89ee7e9edcdafc99972d5811ed11176827ae3e3d)](https://circleci.com/gh/schneidmaster/socializer)
+
 # Socializer
 
 Socializer is a basic social media web application to demonstrate Elixir + Phoenix + GraphQL + React + Apollo.
