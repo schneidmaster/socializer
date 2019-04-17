@@ -16,8 +16,9 @@ jobs:
 
     steps:
       - checkout
-      - run: mix local.hex --force
-      - run: mix local.rebar --force
+      - run:
+          name: Set up hex and rebar
+          command: mix local.hex --force && mix local.rebar --force
 
       - restore_cache:
           keys: # list of cache keys, in decreasing specificity
@@ -30,7 +31,9 @@ jobs:
             - v1-build-cache-{{ .Branch }}
             - v1-build-cache
 
-      - run: mix do deps.get, compile
+      - run:
+          name: Install and compile dependencies
+          command: mix do deps.get, compile
 
       - save_cache:
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
@@ -52,11 +55,17 @@ jobs:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - run: mkdir -p /tmp/test-results/exunit
+      - run:
+          name: Create dir for test results
+          command: mkdir -p /tmp/test-results/exunit
 
-      - run: mix format --check-formatted
+      - run:
+          name: Check formatting
+          command: mix format --check-formatted
 
-      - run: mix test
+      - run:
+          name: Run tests
+          command: mix test
 
       - store_test_results:
           path: /tmp/test-results
