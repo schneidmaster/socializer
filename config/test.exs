@@ -15,3 +15,7 @@ config :socializer, Socializer.Repo,
   hostname: "localhost",
   username: System.get_env("POSTGRES_USER") || System.get_env("USER"),
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :junit_formatter,
+  report_dir: "/tmp/test-results/exunit",
+  report_file: "results.xml"
