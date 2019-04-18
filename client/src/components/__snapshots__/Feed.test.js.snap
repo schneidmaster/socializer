@@ -37,7 +37,7 @@ exports[`Feed renders correctly for comment 1`] = `
           datetime="2019-04-17T16:00:00.000Z"
           title="2019-04-17T16:00:00Z"
         >
-          6 hours ago
+          8 hours ago
         </time>
       </div>
     </div>
@@ -101,7 +101,7 @@ exports[`Feed renders correctly for post 1`] = `
           datetime="2019-04-17T16:00:00.000Z"
           title="2019-04-17T16:00:00Z"
         >
-          6 hours ago
+          8 hours ago
         </time>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { render } from "react-testing-library";
 import { MemoryRouter } from "react-router-dom";
+import tk from "timekeeper";
 import Feed from "./Feed";
 
 jest.mock("components/NewItem", () => () => "NewItemMock");
@@ -17,6 +18,14 @@ describe("Feed", () => {
       },
     },
   ];
+
+  beforeEach(() => {
+    tk.freeze("2019-04-18");
+  });
+
+  afterEach(() => {
+    tk.reset();
+  });
 
   it("renders correctly for post", () => {
     const subscribeToNew = jest.fn();
