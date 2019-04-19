@@ -2,10 +2,9 @@ import React, { Fragment, useState } from "react";
 import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { Card, Form } from "react-bootstrap";
-import cx from "classnames";
 import produce from "immer";
 import { ErrorMessage, Loading, MessageThread, Subscriber } from "components";
-import classes from "./Conversation.module.css";
+import "./Conversation.css";
 
 const GET_CONVERSATION = gql`
   query GetConversation($id: String!) {
@@ -76,7 +75,7 @@ const Conversation = ({
                 })
               }
             >
-              <div className={cx("d-flex", classes.chatLayout)}>
+              <div className="d-flex chat-layout">
                 <h5>{data.conversation.title}</h5>
                 <hr />
                 <MessageThread messages={data.conversation.messages} />

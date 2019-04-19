@@ -3,13 +3,13 @@
 exports[`MessageThread renders correctly 1`] = `
 <div>
   <div
-    class="chatMessages"
+    class="chat-messages"
   >
     <div
-      class="d-flex chatSelf"
+      class="d-flex chat-self"
     >
       <div
-        class="d-flex mb-1 chatBubbleWrapper"
+        class="d-flex mb-1 chat-bubble-wrapper"
       >
         <img
           alt="Gravatar for undefined"
@@ -20,17 +20,17 @@ exports[`MessageThread renders correctly 1`] = `
           width="30"
         />
         <div
-          class="p-2 chatBubble"
+          class="p-2 chat-bubble"
         >
           Some thoughts
         </div>
       </div>
     </div>
     <div
-      class="d-flex chatOthers"
+      class="d-flex chat-others"
     >
       <div
-        class="d-flex mb-1 chatBubbleWrapper"
+        class="d-flex mb-1 chat-bubble-wrapper"
       >
         <img
           alt="Gravatar for undefined"
@@ -41,7 +41,7 @@ exports[`MessageThread renders correctly 1`] = `
           width="30"
         />
         <div
-          class="p-2 chatBubble"
+          class="p-2 chat-bubble"
         >
           Other thoughts
         </div>

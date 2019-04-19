@@ -4,7 +4,7 @@ import Helmet from "react-helmet";
 import { Route, Switch } from "react-router-dom";
 import cx from "classnames";
 import { ChatBar, Conversation } from "components";
-import classes from "./Chat.module.css";
+import "./Chat.css";
 
 const ChatEmptyMessage = () => (
   <p>Select a conversation from the sidebar to begin chatting</p>
@@ -23,7 +23,7 @@ const Chat = ({
       </Helmet>
 
       <Container>
-        <Row className={classes.chatRow}>
+        <Row className="chat-row">
           <Col
             xs={id ? 0 : 12}
             md={4}
@@ -34,7 +34,7 @@ const Chat = ({
           <Col
             xs={id ? 12 : 0}
             md={8}
-            className={cx(classes.chatCol, { "d-none d-md-block": !id })}
+            className={cx("chat-col", { "d-none d-md-block": !id })}
           >
             <Switch>
               <Route path="/chat/:id" component={Conversation} />

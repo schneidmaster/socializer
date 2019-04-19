@@ -20,10 +20,10 @@ exports[`ChatBar renders correctly after created conversation 1`] = `
     href="/chat/2"
   >
     <div
-      class="d-flex chatAvatars"
+      class="d-flex chat-avatars"
     >
       <div
-        class="chatAvatarWrapper"
+        class="chat-avatar-wrapper"
       >
         <img
           alt="Gravatar for undefined"
@@ -36,7 +36,7 @@ exports[`ChatBar renders correctly after created conversation 1`] = `
       </div>
     </div>
     <div
-      class="chatTitle"
+      class="chat-title"
     >
       Jane Smith, Jeremy Peters
     </div>
@@ -46,10 +46,10 @@ exports[`ChatBar renders correctly after created conversation 1`] = `
     href="/chat/1"
   >
     <div
-      class="d-flex chatAvatars"
+      class="d-flex chat-avatars"
     >
       <div
-        class="chatAvatarWrapper"
+        class="chat-avatar-wrapper"
       >
         <img
           alt="Gravatar for undefined"
@@ -62,12 +62,11 @@ exports[`ChatBar renders correctly after created conversation 1`] = `
       </div>
     </div>
     <div
-      class="chatTitle"
+      class="chat-title"
     >
       Jane Smith, John Doe
     </div>
   </a>
-  ,
 </div>
 `;
 
@@ -91,10 +90,10 @@ exports[`ChatBar renders correctly for loaded state 1`] = `
     href="/chat/1"
   >
     <div
-      class="d-flex chatAvatars"
+      class="d-flex chat-avatars"
     >
       <div
-        class="chatAvatarWrapper"
+        class="chat-avatar-wrapper"
       >
         <img
           alt="Gravatar for undefined"
@@ -107,12 +106,11 @@ exports[`ChatBar renders correctly for loaded state 1`] = `
       </div>
     </div>
     <div
-      class="chatTitle"
+      class="chat-title"
     >
       Jane Smith, John Doe
     </div>
   </a>
-  ,
 </div>
 `;
 
@@ -145,7 +143,6 @@ exports[`ChatBar renders correctly for loading state 1`] = `
       </span>
     </div>
   </div>
-  ,
 </div>
 `;
 
@@ -172,14 +169,13 @@ exports[`ChatBar renders correctly for new chat state 1`] = `
       </span>
     </div>
   </div>
-  ,
 </div>
 `;
 
 exports[`ChatBar renders correctly when unauthenticated 1`] = `
 <div>
   <div
-    class="p-2 emptyState"
+    class="p-2 empty-state"
   >
     <h4>
       Chat

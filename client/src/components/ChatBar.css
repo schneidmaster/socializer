@@ -1,5 +1,5 @@
 .chat,
-.emptyState {
+.empty-state {
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -13,16 +13,16 @@
   border-bottom: none;
 }
 
-.chatAvatars {
+.chat-avatars {
   flex-basis: 60px;
 }
 
-.chatAvatarWrapper {
+.chat-avatar-wrapper {
   width: 8px;
   overflow: visible;
 }
 
-.chatTitle {
+.chat-title {
   flex: 1;
   white-space: nowrap;
   overflow: hidden;

@@ -1,36 +1,36 @@
-.chatMessages {
+.chat-messages {
   flex: 1;
   overflow-y: scroll;
 }
 
-.chatSelf {
+.chat-self {
   flex-direction: column;
   align-items: flex-end;
 }
 
-.chatSelf .chatBubbleWrapper {
+.chat-self .chat-bubble-wrapper {
   flex-direction: row-reverse;
 }
 
-.chatSelf .chatBubble {
+.chat-self .chat-bubble {
   margin-right: 0.25rem;
   background-color: #007bff;
   color: white;
 }
 
-.chatOthers {
+.chat-others {
   align-items: flex-start;
 }
 
-.chatOthers .chatBubble {
+.chat-others .chat-bubble {
   margin-left: 0.25rem;
   background-color: #f1f0f0;
 }
 
-.chatBubble {
+.chat-bubble {
   border-radius: 5px;
 }
 
-.avatarSpacer {
+.avatar-spacer {
   width: 30px;
 }

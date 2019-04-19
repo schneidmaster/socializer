@@ -1,7 +1,7 @@
-.chatRow {
+.chat-row {
   height: calc(100vh - 80px);
 }
 
-.chatCol {
+.chat-col {
   height: 100%;
 }

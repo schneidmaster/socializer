@@ -3,7 +3,7 @@ import cx from "classnames";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Gravatar from "react-gravatar";
 import { AuthContext } from "util/context";
-import classes from "./MessageThread.module.css";
+import "./MessageThread.css";
 
 const MessageThread = ({ messages }) => {
   const messageThread = useRef();
@@ -14,16 +14,16 @@ const MessageThread = ({ messages }) => {
   });
 
   return (
-    <div ref={messageThread} className={classes.chatMessages}>
+    <div ref={messageThread} className="chat-messages">
       {messages.map((message, idx) => (
         <div
           key={message.id}
           className={cx("d-flex", {
-            [classes.chatSelf]: message.user.id === String(userId),
-            [classes.chatOthers]: message.user.id !== String(userId),
+            "chat-self": message.user.id === String(userId),
+            "chat-others": message.user.id !== String(userId),
           })}
         >
-          <div className={cx("d-flex", "mb-1", classes.chatBubbleWrapper)}>
+          <div className="d-flex mb-1 chat-bubble-wrapper">
             {idx === 0 || messages[idx - 1].user.id !== message.user.id ? (
               <OverlayTrigger
                 placement="bottom"
@@ -40,9 +40,9 @@ const MessageThread = ({ messages }) => {
                 />
               </OverlayTrigger>
             ) : (
-              <div className={classes.avatarSpacer} />
+              <div className="avatar-spacer" />
             )}
-            <div className={cx("p-2", classes.chatBubble)}>{message.body}</div>
+            <div className="p-2 chat-bubble">{message.body}</div>
           </div>
         </div>
       ))}

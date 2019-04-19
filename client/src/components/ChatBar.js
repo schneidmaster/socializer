@@ -4,13 +4,12 @@ import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Gravatar from "react-gravatar";
-import cx from "classnames";
 import produce from "immer";
 import { reverse, sortBy } from "lodash";
 import renderIf from "render-if";
 import { ErrorMessage, Loading, NewConversation, Subscriber } from "components";
 import { AuthContext, ChatContext } from "util/context";
-import classes from "./ChatBar.module.css";
+import "./ChatBar.css";
 
 export const GET_CONVERSATIONS = gql`
   {
@@ -60,7 +59,7 @@ const ChatBar = () => {
 
   if (!userId) {
     return (
-      <div className={cx("p-2", classes.emptyState)}>
+      <div className="p-2 empty-state">
         <h4>Chat</h4>
         <p>
           <Link to="/login">Log in</Link> to chat
@@ -139,22 +138,14 @@ const ChatBar = () => {
                   <Link
                     key={conversation.id}
                     to={`/chat/${conversation.id}`}
-                    className={cx(
-                      "d-flex",
-                      "align-items-center",
-                      "p-2",
-                      classes.chat,
-                    )}
+                    className="d-flex align-items-center p-2 chat"
                   >
-                    <div className={cx("d-flex", classes.chatAvatars)}>
+                    <div className="d-flex chat-avatars">
                       {conversation.users
                         .filter((user) => user.id !== userId)
                         .slice(0, 3)
                         .map((user) => (
-                          <div
-                            key={user.id}
-                            className={classes.chatAvatarWrapper}
-                          >
+                          <div key={user.id} className="chat-avatar-wrapper">
                             <Gravatar
                               md5={user.gravatarMd5}
                               className="rounded-circle"
@@ -163,9 +154,7 @@ const ChatBar = () => {
                           </div>
                         ))}
                     </div>
-                    <div className={classes.chatTitle}>
-                      {conversation.title}
-                    </div>
+                    <div className="chat-title">{conversation.title}</div>
                   </Link>
                 )),
               )}

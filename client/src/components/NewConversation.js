@@ -4,10 +4,9 @@ import gql from "graphql-tag";
 import { Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import Select from "react-select";
-import cx from "classnames";
 import { ErrorMessage } from "components";
 import { ChatContext } from "util/context";
-import classes from "./NewConversation.module.css";
+import "./NewConversation.css";
 
 const SEARCH_USERS = gql`
   query SearchUsers($searchTerm: String!) {
@@ -33,7 +32,7 @@ const NewConversation = () => {
   const [users, setUsers] = useState([]);
 
   return (
-    <div className={cx(classes.newConversation, "p-2")}>
+    <div className={"new-conversation p-2"}>
       <Query query={SEARCH_USERS} variables={{ searchTerm }}>
         {({ client, loading, error, data, subscribeToMore }) => {
           if (error) return <ErrorMessage message={error.message} />;
