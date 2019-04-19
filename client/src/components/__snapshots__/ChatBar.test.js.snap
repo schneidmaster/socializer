@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChatBar renders correctly after created conversation 1`] = `
+<div>
+  <h4
+    class="d-flex justify-content-between align-items-center"
+  >
+    <span>
+      Chat
+    </span>
+    <button
+      class="btn btn-primary btn-sm"
+      type="button"
+    >
+      New chat
+    </button>
+  </h4>
+  <a
+    class="d-flex align-items-center p-2 chat"
+    href="/chat/2"
+  >
+    <div
+      class="d-flex chatAvatars"
+    >
+      <div
+        class="chatAvatarWrapper"
+      >
+        <img
+          alt="Gravatar for undefined"
+          class="react-gravatar rounded-circle"
+          height="30"
+          src="//www.gravatar.com/avatar/ghi?d=retro&r=g&s=30"
+          srcset="//www.gravatar.com/avatar/ghi?d=retro&r=g&s=60 2x"
+          width="30"
+        />
+      </div>
+    </div>
+    <div
+      class="chatTitle"
+    >
+      Jane Smith, Jeremy Peters
+    </div>
+  </a>
+  <a
+    class="d-flex align-items-center p-2 chat"
+    href="/chat/1"
+  >
+    <div
+      class="d-flex chatAvatars"
+    >
+      <div
+        class="chatAvatarWrapper"
+      >
+        <img
+          alt="Gravatar for undefined"
+          class="react-gravatar rounded-circle"
+          height="30"
+          src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+          srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+          width="30"
+        />
+      </div>
+    </div>
+    <div
+      class="chatTitle"
+    >
+      Jane Smith, John Doe
+    </div>
+  </a>
+  ,
+</div>
+`;
+
+exports[`ChatBar renders correctly for loaded state 1`] = `
+<div>
+  <h4
+    class="d-flex justify-content-between align-items-center"
+  >
+    <span>
+      Chat
+    </span>
+    <button
+      class="btn btn-primary btn-sm"
+      type="button"
+    >
+      New chat
+    </button>
+  </h4>
+  <a
+    class="d-flex align-items-center p-2 chat"
+    href="/chat/1"
+  >
+    <div
+      class="d-flex chatAvatars"
+    >
+      <div
+        class="chatAvatarWrapper"
+      >
+        <img
+          alt="Gravatar for undefined"
+          class="react-gravatar rounded-circle"
+          height="30"
+          src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+          srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+          width="30"
+        />
+      </div>
+    </div>
+    <div
+      class="chatTitle"
+    >
+      Jane Smith, John Doe
+    </div>
+  </a>
+  ,
+</div>
+`;
+
+exports[`ChatBar renders correctly for loading state 1`] = `
+<div>
+  <h4
+    class="d-flex justify-content-between align-items-center"
+  >
+    <span>
+      Chat
+    </span>
+    <button
+      class="btn btn-primary btn-sm"
+      type="button"
+    >
+      New chat
+    </button>
+  </h4>
+  <div
+    class="d-flex justify-content-center"
+  >
+    <div
+      class="spinner-border"
+      role="status"
+    >
+      <span
+        class="sr-only"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>
+  ,
+</div>
+`;
+
+exports[`ChatBar renders correctly for new chat state 1`] = `
+<div>
+  <h4
+    class="d-flex justify-content-between align-items-center"
+  >
+    <span>
+      New chat
+    </span>
+  </h4>
+  <div
+    class="d-flex justify-content-center"
+  >
+    <div
+      class="spinner-border"
+      role="status"
+    >
+      <span
+        class="sr-only"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>
+  ,
+</div>
+`;
+
+exports[`ChatBar renders correctly when unauthenticated 1`] = `
+<div>
+  <div
+    class="p-2 emptyState"
+  >
+    <h4>
+      Chat
+    </h4>
+    <p>
+      <a
+        href="/login"
+      >
+        Log in
+      </a>
+       to chat
+    </p>
+  </div>
+</div>
+`;

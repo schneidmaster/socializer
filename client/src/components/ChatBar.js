@@ -12,7 +12,7 @@ import { ErrorMessage, Loading, NewConversation, Subscriber } from "components";
 import { AuthContext, ChatContext } from "util/context";
 import classes from "./ChatBar.module.css";
 
-const GET_CONVERSATIONS = gql`
+export const GET_CONVERSATIONS = gql`
   {
     conversations {
       id
@@ -26,7 +26,7 @@ const GET_CONVERSATIONS = gql`
   }
 `;
 
-const CONVERSATIONS_SUBSCRIPTION = gql`
+export const CONVERSATIONS_SUBSCRIPTION = gql`
   subscription onConversationCreated($userId: String!) {
     conversationCreated(userId: $userId) {
       id
@@ -40,7 +40,7 @@ const CONVERSATIONS_SUBSCRIPTION = gql`
   }
 `;
 
-const CONVERSATIONS_UPDATE_SUBSCRIPTION = gql`
+export const CONVERSATIONS_UPDATE_SUBSCRIPTION = gql`
   subscription onConversationUpdated($userId: String!) {
     conversationUpdated(userId: $userId) {
       id
