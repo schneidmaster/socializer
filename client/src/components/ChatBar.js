@@ -173,7 +173,6 @@ const ChatBar = () => {
           );
         }}
       </Query>
-      ,
     </Fragment>
   );
 };

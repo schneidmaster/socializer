@@ -47,10 +47,15 @@ export const createClient = ({ ssr, req, fetch, tokenCookie } = {}) => {
     };
   });
 
+  const cache = new InMemoryCache();
+  if (!ssr) {
+    cache.restore(window.__APOLLO_STATE__);
+  }
+
   return new ApolloClient({
     connectToDevTools: !ssr,
     ssrMode: ssr,
     link: authLink.concat(link),
-    cache: new InMemoryCache(),
+    cache,
   });
 };

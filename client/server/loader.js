@@ -53,12 +53,14 @@ export default (req, res) => {
 
       const context = {};
       const modules = [];
-
       const ServerApp = (
         <Loadable.Capture report={(m) => modules.push(m)}>
           <ApolloProvider client={client}>
             <StaticRouter location={req.url} context={context}>
-              <App initialToken={req.cookies.token} />
+              <App
+                initialToken={req.cookies.token}
+                initialUserId={req.cookies.userId}
+              />
             </StaticRouter>
           </ApolloProvider>
         </Loadable.Capture>

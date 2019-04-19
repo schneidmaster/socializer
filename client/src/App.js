@@ -7,9 +7,9 @@ import { Nav } from "components";
 import { Chat, Home, Login, Post, Signup } from "pages";
 import { AuthContext, ChatContext } from "util/context";
 
-const App = ({ initialToken, client }) => {
+const App = ({ initialToken, initialUserId, client }) => {
   const [token, setToken] = useState(initialToken || Cookies.get("token"));
-  const [userId, setUserId] = useState(Cookies.get("userId"));
+  const [userId, setUserId] = useState(initialUserId || Cookies.get("userId"));
   const [chatState, setChatState] = useState("default");
 
   const setAuth = (data) => {
