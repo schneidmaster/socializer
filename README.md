@@ -52,10 +52,38 @@ See the [Phoenix docs](https://hexdocs.pm/phoenix/deployment.html) for guidance 
 
 For the demo, the backend Phoenix/GraphQL app is running on [Gigalixir](https://gigalixir.com).
 
+To deploy to your own Gigalixir account, follow these steps:
+
+1. Install the [Gigalixir CLI](https://gigalixir.readthedocs.io/en/latest/main.html#install-the-command-line-interface) (if you don't have it already)
+
+2. If you don't already have a Gigalixir app set up, create one: `gigalixir create`.
+
+3. Create a free Postgres instance linked to your app: `gigalixir pg:create --free`
+
+4. Deploy: `git push gigalixir master`
+
+5. Run the database migrations (if this is the first deploy): `gigalixir run mix ecto.migrate`.
+
 ### Client
 
 1. Create a production build: `yarn build`
 
 2. Start the SSR node server: `yarn serve`. This reads from the production build and serves fully hydrated HTML for each route.
 
-For the demo, the client express server is running on [Heroku](https://heroku.com).
+For the demo, the client express server is running on [Heroku](https://heroku.com). It is built and released as a Docker image.
+
+To deploy to your own Heroku account, follow these steps:
+
+1. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) (if you don't have it already)
+
+2. `cd client`
+
+3. Log into the Heroku container service: `heroku container:login`
+
+4. If you don't already have a Heroku app set up, create one: `heroku create`
+
+5. Build the image and push to the container registry: `heroku container:push web`
+
+6. Release the image: `heroku container:release web`
+
+You can also deploy the built Docker image to any other Docker hosting service of your choice.

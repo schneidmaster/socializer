@@ -73,12 +73,6 @@
     "test:ci": "JEST_JUNIT_OUTPUT=/tmp/test-results/jest/results.xml react-scripts test --env=jsdom --coverage --runInBand --reporters=\"jest-junit\"",
     "test:watch": "react-scripts test --env=jsdom"
   },
-  "engines": {
-    "node": ">=8.11.2"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",

@@ -42,11 +42,14 @@ const AppNav = () => {
               <Query query={GET_USER_INFO}>
                 {({ client, loading, error, data }) => {
                   if (
-                    (error &&
-                      error.graphQLErrors[0].message === "Unauthenticated") ||
-                    (data && !data.currentUser)
+                    error &&
+                    error.graphQLErrors[0].message === "Unauthenticated"
                   ) {
                     setAuth(null);
+                    return null;
+                  }
+
+                  if (data && !data.currentUser) {
                     return null;
                   }
 
