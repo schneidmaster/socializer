@@ -18,7 +18,7 @@ const App = ({ initialToken, initialUserId, client, socket }) => {
   // websocket connection.
   useEffect(() => {
     if (tokenWas.current !== token) {
-      client.clearStore();
+      if (!token) client.clearStore();
       if (socket) refreshSocket(socket);
       tokenWas.current = token;
     }
