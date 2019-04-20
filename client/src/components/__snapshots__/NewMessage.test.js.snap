@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewMessage renders correctly 1`] = `
+<div>
+  <div
+    class="mt-2 card"
+  >
+    <div
+      class="card-body"
+    >
+      <form
+        class=""
+        data-testid="new-message"
+      >
+        <div
+          class="form-group"
+        >
+          <input
+            class="form-control"
+            placeholder="What's on your mind?"
+            rows="3"
+            value=""
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

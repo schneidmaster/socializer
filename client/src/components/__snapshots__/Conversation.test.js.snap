@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Conversation renders correctly after created message 1`] = `
+<div>
+  <div
+    class="d-flex chat-layout"
+  >
+    <h5>
+      Jane Peters, Jack Smith
+    </h5>
+    <hr />
+    <div
+      class="chat-messages"
+    >
+      <div
+        class="d-flex chat-others"
+      >
+        <div
+          class="d-flex mb-1 chat-bubble-wrapper"
+        >
+          <img
+            alt="Gravatar for undefined"
+            class="react-gravatar rounded-circle mt-1"
+            height="30"
+            src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+            srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+            width="30"
+          />
+          <div
+            class="p-2 chat-bubble"
+          >
+            Hi there
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex chat-others"
+      >
+        <div
+          class="d-flex mb-1 chat-bubble-wrapper"
+        >
+          <img
+            alt="Gravatar for undefined"
+            class="react-gravatar rounded-circle mt-1"
+            height="30"
+            src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+            srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+            width="30"
+          />
+          <div
+            class="p-2 chat-bubble"
+          >
+            Hello
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex chat-others"
+      >
+        <div
+          class="d-flex mb-1 chat-bubble-wrapper"
+        >
+          <img
+            alt="Gravatar for undefined"
+            class="react-gravatar rounded-circle mt-1"
+            height="30"
+            src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+            srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+            width="30"
+          />
+          <div
+            class="p-2 chat-bubble"
+          >
+            How's it going?
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="mt-2 card"
+    >
+      <div
+        class="card-body"
+      >
+        <form
+          class=""
+          data-testid="new-message"
+        >
+          <div
+            class="form-group"
+          >
+            <input
+              class="form-control"
+              placeholder="What's on your mind?"
+              rows="3"
+              value=""
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Conversation renders correctly when loaded 1`] = `
+<div>
+  <div
+    class="d-flex chat-layout"
+  >
+    <h5>
+      Jane Peters, Jack Smith
+    </h5>
+    <hr />
+    <div
+      class="chat-messages"
+    >
+      <div
+        class="d-flex chat-others"
+      >
+        <div
+          class="d-flex mb-1 chat-bubble-wrapper"
+        >
+          <img
+            alt="Gravatar for undefined"
+            class="react-gravatar rounded-circle mt-1"
+            height="30"
+            src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+            srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+            width="30"
+          />
+          <div
+            class="p-2 chat-bubble"
+          >
+            Hi there
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex chat-others"
+      >
+        <div
+          class="d-flex mb-1 chat-bubble-wrapper"
+        >
+          <img
+            alt="Gravatar for undefined"
+            class="react-gravatar rounded-circle mt-1"
+            height="30"
+            src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+            srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+            width="30"
+          />
+          <div
+            class="p-2 chat-bubble"
+          >
+            Hello
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="mt-2 card"
+    >
+      <div
+        class="card-body"
+      >
+        <form
+          class=""
+          data-testid="new-message"
+        >
+          <div
+            class="form-group"
+          >
+            <input
+              class="form-control"
+              placeholder="What's on your mind?"
+              rows="3"
+              value=""
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Conversation renders correctly when loading 1`] = `
+<div>
+  <div
+    class="d-flex justify-content-center"
+  >
+    <div
+      class="spinner-border"
+      role="status"
+    >
+      <span
+        class="sr-only"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>
+</div>
+`;
