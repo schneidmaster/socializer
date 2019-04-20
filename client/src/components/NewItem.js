@@ -6,26 +6,30 @@ import { Link } from "react-router-dom";
 import renderIf from "render-if";
 import { AuthContext } from "util/context";
 
+export const CREATE_POST = gql`
+  mutation CreatePost($body: String!) {
+    createPost(body: $body) {
+      id
+    }
+  }
+`;
+
+export const CREATE_COMMENT = gql`
+  mutation CreateComment($postId: String!, $body: String!) {
+    createComment(postId: $postId, body: $body) {
+      id
+    }
+  }
+`;
+
 const NewItem = ({ feedType, params }) => {
   const { token } = useContext(AuthContext);
   const [body, setBody] = useState("");
 
-  const capFeedType =
-    feedType.charAt(0).toUpperCase() + feedType.slice(1).toLowerCase();
-  const CREATE_POST = gql`
-    mutation Create${capFeedType}($body: String!${
-    feedType === "comment" ? ", $postId: String!" : ""
-  }) {
-      create${capFeedType}(body: $body${
-    feedType === "comment" ? ", postId: $postId" : ""
-  }) {
-        id
-      }
-    }
-  `;
+  const mutation = feedType === "comment" ? CREATE_COMMENT : CREATE_POST;
 
   return (
-    <Mutation mutation={CREATE_POST} onCompleted={() => setBody("")}>
+    <Mutation mutation={mutation} onCompleted={() => setBody("")}>
       {(submit, { data, loading, error }) => {
         return (
           <Card className="mb-4">

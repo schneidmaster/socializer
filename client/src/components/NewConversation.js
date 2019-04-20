@@ -8,7 +8,7 @@ import { ErrorMessage } from "components";
 import { ChatContext } from "util/context";
 import "./NewConversation.css";
 
-const SEARCH_USERS = gql`
+export const SEARCH_USERS = gql`
   query SearchUsers($searchTerm: String!) {
     searchUsers(searchTerm: $searchTerm) {
       id
@@ -18,7 +18,7 @@ const SEARCH_USERS = gql`
   }
 `;
 
-const CREATE_CONVERSATION = gql`
+export const CREATE_CONVERSATION = gql`
   mutation CreateConversation($userIds: [String]!) {
     createConversation(userIds: $userIds) {
       id
@@ -32,7 +32,7 @@ const NewConversation = () => {
   const [users, setUsers] = useState([]);
 
   return (
-    <div className={"new-conversation p-2"}>
+    <div className="new-conversation p-2">
       <Query query={SEARCH_USERS} variables={{ searchTerm }}>
         {({ client, loading, error, data, subscribeToMore }) => {
           if (error) return <ErrorMessage message={error.message} />;

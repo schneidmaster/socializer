@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewItem renders correctly when not authenticated 1`] = `
+<div
+  class="mb-4 card"
+>
+  <div
+    class="card-body"
+  >
+    <div
+      class="text-muted h7"
+    >
+      <a
+        href="/login"
+      >
+        Log in
+      </a>
+       to submit a 
+      post
+      .
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NewItem when creating new comment renders correctly 1`] = `
+<div
+  class="mb-4 card"
+>
+  <div
+    class="card-body"
+  >
+    <form
+      class=""
+    >
+      <div
+        class="form-group"
+      >
+        <textarea
+          class="form-control"
+          placeholder="What's on your mind?"
+          rows="3"
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`NewItem when creating new post renders correctly 1`] = `
+<div
+  class="mb-4 card"
+>
+  <div
+    class="card-body"
+  >
+    <form
+      class=""
+    >
+      <div
+        class="form-group"
+      >
+        <textarea
+          class="form-control"
+          placeholder="What's on your mind?"
+          rows="3"
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;
