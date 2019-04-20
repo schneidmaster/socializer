@@ -2,10 +2,19 @@ import React from "react";
 import { render, wait } from "react-testing-library";
 import { MockedProvider } from "react-apollo/test-utils";
 import { MemoryRouter } from "react-router-dom";
+import tk from "timekeeper";
 import { AuthContext } from "util/context";
 import Posts, { GET_POSTS, POSTS_SUBSCRIPTION } from "./Posts";
 
 describe("Posts", () => {
+  beforeEach(() => {
+    tk.freeze("2019-04-20");
+  });
+
+  afterEach(() => {
+    tk.reset();
+  });
+
   it("renders correctly when loading", () => {
     const { container } = render(
       <MemoryRouter>

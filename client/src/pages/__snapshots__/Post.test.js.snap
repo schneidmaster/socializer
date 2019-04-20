@@ -1,0 +1,450 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Post renders correctly after created comment 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="d-none d-md-block col-md-4"
+      >
+        <h4
+          class="d-flex justify-content-between align-items-center"
+        >
+          <span>
+            Chat
+          </span>
+          <button
+            class="btn btn-primary btn-sm"
+            type="button"
+          >
+            New chat
+          </button>
+        </h4>
+        <div
+          class="d-flex justify-content-center"
+        >
+          <div
+            class="card"
+          >
+            <div
+              class="card-body"
+            >
+              <div
+                class="card-title h5"
+              >
+                Error
+              </div>
+              <p
+                class="card-text"
+              >
+                Something went wrong, sorry about that.
+              </p>
+              <a
+                href="/"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Go home
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-8 col-12"
+      >
+        <h4>
+          Discussion
+        </h4>
+        <div
+          class="mb-4 card"
+        >
+          <div
+            class="d-flex justify-content-between align-items-center card-header"
+          >
+            <div
+              class="d-flex align-items-center"
+            >
+              <img
+                alt="Gravatar for undefined"
+                class="react-gravatar rounded-circle"
+                height="30"
+                src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+                srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+                width="30"
+              />
+              <div
+                class="ml-2"
+              >
+                <div
+                  class="h6 mb-0"
+                >
+                  Steven Paul
+                </div>
+              </div>
+            </div>
+            <div
+              class="text-muted h7"
+            >
+              <time
+                datetime="2019-04-17T16:00:00.000Z"
+                title="2019-04-17T16:00:00Z"
+              >
+                2 days ago
+              </time>
+            </div>
+          </div>
+          <div
+            class="card-body"
+          >
+            <p
+              class="card-text"
+            >
+              Here are a few thoughts
+            </p>
+          </div>
+        </div>
+        <hr />
+        <h5>
+          Comments
+        </h5>
+        <div
+          class="mb-4 card"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="text-muted h7"
+            >
+              <a
+                href="/login"
+              >
+                Log in
+              </a>
+               to submit a 
+              comment
+              .
+            </div>
+          </div>
+        </div>
+        <div
+          class="mb-4 card"
+        >
+          <div
+            class="d-flex justify-content-between align-items-center card-header"
+          >
+            <div
+              class="d-flex align-items-center"
+            >
+              <img
+                alt="Gravatar for undefined"
+                class="react-gravatar rounded-circle"
+                height="30"
+                src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+                srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+                width="30"
+              />
+              <div
+                class="ml-2"
+              >
+                <div
+                  class="h6 mb-0"
+                >
+                  Steven Paul
+                </div>
+              </div>
+            </div>
+            <div
+              class="text-muted h7"
+            >
+              <time
+                datetime="2019-04-17T19:00:00.000Z"
+                title="2019-04-17T19:00:00Z"
+              >
+                2 days ago
+              </time>
+            </div>
+          </div>
+          <div
+            class="card-body"
+          >
+            <p
+              class="card-text"
+            >
+              Thanks for your support!
+            </p>
+          </div>
+        </div>
+        <div
+          class="mb-4 card"
+        >
+          <div
+            class="d-flex justify-content-between align-items-center card-header"
+          >
+            <div
+              class="d-flex align-items-center"
+            >
+              <img
+                alt="Gravatar for undefined"
+                class="react-gravatar rounded-circle"
+                height="30"
+                src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+                srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+                width="30"
+              />
+              <div
+                class="ml-2"
+              >
+                <div
+                  class="h6 mb-0"
+                >
+                  Patrick Lane
+                </div>
+              </div>
+            </div>
+            <div
+              class="text-muted h7"
+            >
+              <time
+                datetime="2019-04-17T18:00:00.000Z"
+                title="2019-04-17T18:00:00Z"
+              >
+                2 days ago
+              </time>
+            </div>
+          </div>
+          <div
+            class="card-body"
+          >
+            <p
+              class="card-text"
+            >
+              I agree!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Post renders correctly when loaded 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="d-none d-md-block col-md-4"
+      >
+        <h4
+          class="d-flex justify-content-between align-items-center"
+        >
+          <span>
+            Chat
+          </span>
+          <button
+            class="btn btn-primary btn-sm"
+            type="button"
+          >
+            New chat
+          </button>
+        </h4>
+        <div
+          class="d-flex justify-content-center"
+        >
+          <div
+            class="card"
+          >
+            <div
+              class="card-body"
+            >
+              <div
+                class="card-title h5"
+              >
+                Error
+              </div>
+              <p
+                class="card-text"
+              >
+                Something went wrong, sorry about that.
+              </p>
+              <a
+                href="/"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Go home
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-8 col-12"
+      >
+        <h4>
+          Discussion
+        </h4>
+        <div
+          class="mb-4 card"
+        >
+          <div
+            class="d-flex justify-content-between align-items-center card-header"
+          >
+            <div
+              class="d-flex align-items-center"
+            >
+              <img
+                alt="Gravatar for undefined"
+                class="react-gravatar rounded-circle"
+                height="30"
+                src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+                srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+                width="30"
+              />
+              <div
+                class="ml-2"
+              >
+                <div
+                  class="h6 mb-0"
+                >
+                  Steven Paul
+                </div>
+              </div>
+            </div>
+            <div
+              class="text-muted h7"
+            >
+              <time
+                datetime="2019-04-17T16:00:00.000Z"
+                title="2019-04-17T16:00:00Z"
+              >
+                2 days ago
+              </time>
+            </div>
+          </div>
+          <div
+            class="card-body"
+          >
+            <p
+              class="card-text"
+            >
+              Here are a few thoughts
+            </p>
+          </div>
+        </div>
+        <hr />
+        <h5>
+          Comments
+        </h5>
+        <div
+          class="mb-4 card"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="text-muted h7"
+            >
+              <a
+                href="/login"
+              >
+                Log in
+              </a>
+               to submit a 
+              comment
+              .
+            </div>
+          </div>
+        </div>
+        <div
+          class="mb-4 card"
+        >
+          <div
+            class="d-flex justify-content-between align-items-center card-header"
+          >
+            <div
+              class="d-flex align-items-center"
+            >
+              <img
+                alt="Gravatar for undefined"
+                class="react-gravatar rounded-circle"
+                height="30"
+                src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+                srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+                width="30"
+              />
+              <div
+                class="ml-2"
+              >
+                <div
+                  class="h6 mb-0"
+                >
+                  Patrick Lane
+                </div>
+              </div>
+            </div>
+            <div
+              class="text-muted h7"
+            >
+              <time
+                datetime="2019-04-17T18:00:00.000Z"
+                title="2019-04-17T18:00:00Z"
+              >
+                2 days ago
+              </time>
+            </div>
+          </div>
+          <div
+            class="card-body"
+          >
+            <p
+              class="card-text"
+            >
+              I agree!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Post renders correctly when loading 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="d-flex justify-content-center"
+    >
+      <div
+        class="spinner-border"
+        role="status"
+      >
+        <span
+          class="sr-only"
+        >
+          Loading...
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

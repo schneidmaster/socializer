@@ -59,7 +59,7 @@ exports[`Posts renders correctly after created post 1`] = `
           datetime="2019-04-19T00:00:00.000Z"
           title="2019-04-19T00:00:00Z"
         >
-          2 days ago
+          1 day ago
         </time>
       </div>
     </div>
@@ -117,7 +117,7 @@ exports[`Posts renders correctly after created post 1`] = `
           datetime="2019-04-18T00:00:00.000Z"
           title="2019-04-18T00:00:00Z"
         >
-          3 days ago
+          2 days ago
         </time>
       </div>
     </div>

@@ -6,9 +6,10 @@ import Helmet from "react-helmet";
 import produce from "immer";
 import { ChatBar, ErrorMessage, Feed, FeedItem, Loading } from "components";
 
-const GET_POST = gql`
+export const GET_POST = gql`
   query GetPost($id: String!) {
     post(id: $id) {
+      id
       body
       insertedAt
       user {
@@ -30,7 +31,7 @@ const GET_POST = gql`
   }
 `;
 
-const COMMENTS_SUBSCRIPTION = gql`
+export const COMMENTS_SUBSCRIPTION = gql`
   subscription onCommentCreated($postId: String!) {
     commentCreated(postId: $postId) {
       id
@@ -45,7 +46,11 @@ const COMMENTS_SUBSCRIPTION = gql`
   }
 `;
 
-const Post = ({ match: { params } }) => {
+const Post = ({
+  match: {
+    params: { id },
+  },
+}) => {
   return (
     <Fragment>
       <Helmet>
@@ -53,7 +58,7 @@ const Post = ({ match: { params } }) => {
         <meta property="og:title" content="Socializer | Discussion" />
       </Helmet>
       <Container>
-        <Query query={GET_POST} variables={{ id: params.id }}>
+        <Query query={GET_POST} variables={{ id }}>
           {({ client, loading, error, data, subscribeToMore }) => {
             if (loading) return <Loading />;
             if (error) return <ErrorMessage message={error.message} />;
@@ -70,11 +75,11 @@ const Post = ({ match: { params } }) => {
                   <Feed
                     feedType="comment"
                     items={data.post.comments}
-                    createParams={{ postId: params.id }}
+                    createParams={{ postId: id }}
                     subscribeToNew={() =>
                       subscribeToMore({
                         document: COMMENTS_SUBSCRIPTION,
-                        variables: { postId: params.id },
+                        variables: { postId: id },
                         updateQuery: (prev, { subscriptionData }) => {
                           if (!subscriptionData.data) return prev;
                           const newComment =
