@@ -21,6 +21,7 @@ exports[`Login renders correctly when unauthenticated 1`] = `
       >
         <form
           class=""
+          data-testid="login-form"
         >
           <div
             class="form-group"

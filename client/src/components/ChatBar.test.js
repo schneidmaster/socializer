@@ -56,6 +56,17 @@ const basicMocks = [
   },
 ];
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "network-only",
+    errorPolicy: "ignore",
+  },
+  query: {
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  },
+};
+
 const renderChatBar = ({ authContext, chatContext, mocks } = {}) => {
   return render(
     <MemoryRouter>
@@ -65,7 +76,11 @@ const renderChatBar = ({ authContext, chatContext, mocks } = {}) => {
             chatContext || { chatState: "default", setChatState: jest.fn() }
           }
         >
-          <MockedProvider mocks={mocks || basicMocks} addTypename={false}>
+          <MockedProvider
+            mocks={mocks || basicMocks}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <ChatBar />
           </MockedProvider>
         </ChatContext.Provider>

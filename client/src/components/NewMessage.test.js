@@ -3,10 +3,25 @@ import { render, fireEvent, wait } from "react-testing-library";
 import { MockedProvider } from "react-apollo/test-utils";
 import NewMessage, { CREATE_MESSAGE } from "./NewMessage";
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "network-only",
+    errorPolicy: "ignore",
+  },
+  query: {
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  },
+};
+
 describe("NewMessage", () => {
   it("renders correctly", () => {
     const { container } = render(
-      <MockedProvider mocks={[]} addTypename={false}>
+      <MockedProvider
+        mocks={[]}
+        addTypename={false}
+        defaultOptions={defaultOptions}
+      >
         <NewMessage conversationId={123} />
       </MockedProvider>,
     );
@@ -24,7 +39,11 @@ describe("NewMessage", () => {
       },
     ];
     const { getByPlaceholderText, getByTestId } = render(
-      <MockedProvider mocks={mocks} addTypename={false}>
+      <MockedProvider
+        mocks={mocks}
+        addTypename={false}
+        defaultOptions={defaultOptions}
+      >
         <NewMessage conversationId={123} />
       </MockedProvider>,
     );

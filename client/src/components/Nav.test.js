@@ -5,12 +5,27 @@ import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from "util/context";
 import Nav, { GET_USER_INFO } from "./Nav";
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "network-only",
+    errorPolicy: "ignore",
+  },
+  query: {
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  },
+};
+
 describe("Nav", () => {
   it("renders correctly when unauthenticated", () => {
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ token: null, setAuth: jest.fn() }}>
-          <MockedProvider mocks={[]} addTypename={false}>
+          <MockedProvider
+            mocks={[]}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <Nav />
           </MockedProvider>
         </AuthContext.Provider>
@@ -37,7 +52,11 @@ describe("Nav", () => {
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ token: "abc", setAuth: jest.fn() }}>
-          <MockedProvider mocks={mocks} addTypename={false}>
+          <MockedProvider
+            mocks={mocks}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <Nav />
           </MockedProvider>
         </AuthContext.Provider>
@@ -64,7 +83,11 @@ describe("Nav", () => {
     const { container, getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ token: "abc", setAuth: jest.fn() }}>
-          <MockedProvider mocks={mocks} addTypename={false}>
+          <MockedProvider
+            mocks={mocks}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <Nav />
           </MockedProvider>
         </AuthContext.Provider>

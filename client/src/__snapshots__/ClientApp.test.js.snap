@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ClientApp renders correctly 1`] = `
+<div>
+  <nav
+    class="mb-4 navbar navbar-expand navbar-dark bg-primary"
+  >
+    <div
+      class="container"
+    >
+      <a
+        class="navbar-brand"
+        href="/"
+      >
+        Socializer
+      </a>
+      <button
+        aria-label="Toggle navigation"
+        class="navbar-toggler"
+        type="button"
+      >
+        <span
+          class="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        class="justify-content-end navbar-collapse collapse"
+      >
+        <div
+          class="navbar-nav"
+        >
+          <a
+            class="nav-link"
+            href="/login"
+            role="button"
+          >
+            Log in
+          </a>
+          <a
+            class="nav-link"
+            href="/signup"
+            role="button"
+          >
+            Sign up
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div
+    class="container"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="d-none d-md-block col-md-4"
+      >
+        <div
+          class="p-2 empty-state"
+        >
+          <h4>
+            Chat
+          </h4>
+          <p>
+            <a
+              href="/login"
+            >
+              Log in
+            </a>
+             to chat
+          </p>
+        </div>
+      </div>
+      <div
+        class="col-md-8 col-12"
+      >
+        <h4>
+          Feed
+        </h4>
+        <div
+          class="d-flex justify-content-center"
+        >
+          <div
+            class="spinner-border"
+            role="status"
+          >
+            <span
+              class="sr-only"
+            >
+              Loading...
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

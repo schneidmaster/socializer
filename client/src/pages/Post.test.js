@@ -49,6 +49,17 @@ const noNewCommentsMock = {
   },
 };
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "network-only",
+    errorPolicy: "ignore",
+  },
+  query: {
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  },
+};
+
 describe("Post", () => {
   beforeEach(() => {
     tk.freeze("2019-04-20");
@@ -65,7 +76,11 @@ describe("Post", () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
           <ChatContext.Provider value={{ chatState: "default" }}>
-            <MockedProvider mocks={mocks} addTypename={false}>
+            <MockedProvider
+              mocks={mocks}
+              addTypename={false}
+              defaultOptions={defaultOptions}
+            >
               <Post match={{ params: { id: 1 } }} />
             </MockedProvider>
           </ChatContext.Provider>
@@ -82,7 +97,11 @@ describe("Post", () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
           <ChatContext.Provider value={{ chatState: "default" }}>
-            <MockedProvider mocks={mocks} addTypename={false}>
+            <MockedProvider
+              mocks={mocks}
+              addTypename={false}
+              defaultOptions={defaultOptions}
+            >
               <Post match={{ params: { id: 1 } }} />
             </MockedProvider>
           </ChatContext.Provider>
@@ -121,7 +140,11 @@ describe("Post", () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
           <ChatContext.Provider value={{ chatState: "default" }}>
-            <MockedProvider mocks={mocks} addTypename={false}>
+            <MockedProvider
+              mocks={mocks}
+              addTypename={false}
+              defaultOptions={defaultOptions}
+            >
               <Post match={{ params: { id: 1 } }} />
             </MockedProvider>
           </ChatContext.Provider>

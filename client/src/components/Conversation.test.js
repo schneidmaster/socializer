@@ -53,6 +53,17 @@ const noNewMessagesMock = {
   },
 };
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "network-only",
+    errorPolicy: "ignore",
+  },
+  query: {
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  },
+};
+
 describe("Conversation", () => {
   it("renders correctly when loading", () => {
     const mocks = [getMock, noNewMessagesMock];
@@ -60,7 +71,11 @@ describe("Conversation", () => {
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
-          <MockedProvider mocks={mocks} addTypename={false}>
+          <MockedProvider
+            mocks={mocks}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <Conversation match={{ params: { id: 1 } }} />
           </MockedProvider>
         </AuthContext.Provider>
@@ -75,7 +90,11 @@ describe("Conversation", () => {
     const { container, getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
-          <MockedProvider mocks={mocks} addTypename={false}>
+          <MockedProvider
+            mocks={mocks}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <Conversation match={{ params: { id: 1 } }} />
           </MockedProvider>
         </AuthContext.Provider>
@@ -111,7 +130,11 @@ describe("Conversation", () => {
     const { container, getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
-          <MockedProvider mocks={mocks} addTypename={false}>
+          <MockedProvider
+            mocks={mocks}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <Conversation match={{ params: { id: 1 } }} />
           </MockedProvider>
         </AuthContext.Provider>

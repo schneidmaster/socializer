@@ -46,6 +46,7 @@ const Login = () => {
               <Row>
                 <Col md={6} xs={12}>
                   <Form
+                    data-testid="login-form"
                     onSubmit={(e) => {
                       e.preventDefault();
                       login({ variables: { email, password } });

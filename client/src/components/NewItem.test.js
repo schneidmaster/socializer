@@ -5,12 +5,27 @@ import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from "util/context";
 import NewItem, { CREATE_POST, CREATE_COMMENT } from "./NewItem";
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "network-only",
+    errorPolicy: "ignore",
+  },
+  query: {
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  },
+};
+
 describe("NewItem", () => {
   it("renders correctly when not authenticated", () => {
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{}}>
-          <MockedProvider mocks={[]}>
+          <MockedProvider
+            mocks={[]}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <NewItem feedType="post" />
           </MockedProvider>
         </AuthContext.Provider>
@@ -24,7 +39,11 @@ describe("NewItem", () => {
       const { container } = render(
         <MemoryRouter>
           <AuthContext.Provider value={{ token: "abc" }}>
-            <MockedProvider mocks={[]}>
+            <MockedProvider
+              mocks={[]}
+              addTypename={false}
+              defaultOptions={defaultOptions}
+            >
               <NewItem feedType="post" />
             </MockedProvider>
           </AuthContext.Provider>
@@ -46,7 +65,11 @@ describe("NewItem", () => {
       const { getByPlaceholderText, getByText } = render(
         <MemoryRouter>
           <AuthContext.Provider value={{ token: "abc" }}>
-            <MockedProvider mocks={mocks} addTypename={false}>
+            <MockedProvider
+              mocks={mocks}
+              addTypename={false}
+              defaultOptions={defaultOptions}
+            >
               <NewItem feedType="post" />
             </MockedProvider>
           </AuthContext.Provider>
@@ -67,7 +90,11 @@ describe("NewItem", () => {
       const { container } = render(
         <MemoryRouter>
           <AuthContext.Provider value={{ token: "abc" }}>
-            <MockedProvider mocks={[]}>
+            <MockedProvider
+              mocks={[]}
+              addTypename={false}
+              defaultOptions={defaultOptions}
+            >
               <NewItem feedType="comment" params={{ postId: 123 }} />
             </MockedProvider>
           </AuthContext.Provider>
@@ -89,7 +116,11 @@ describe("NewItem", () => {
       const { getByPlaceholderText, getByText } = render(
         <MemoryRouter>
           <AuthContext.Provider value={{ token: "abc" }}>
-            <MockedProvider mocks={mocks} addTypename={false}>
+            <MockedProvider
+              mocks={mocks}
+              addTypename={false}
+              defaultOptions={defaultOptions}
+            >
               <NewItem feedType="comment" params={{ postId: 123 }} />
             </MockedProvider>
           </AuthContext.Provider>

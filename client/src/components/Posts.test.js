@@ -6,6 +6,17 @@ import tk from "timekeeper";
 import { AuthContext } from "util/context";
 import Posts, { GET_POSTS, POSTS_SUBSCRIPTION } from "./Posts";
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "network-only",
+    errorPolicy: "ignore",
+  },
+  query: {
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  },
+};
+
 describe("Posts", () => {
   beforeEach(() => {
     tk.freeze("2019-04-20");
@@ -19,7 +30,11 @@ describe("Posts", () => {
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{}}>
-          <MockedProvider mocks={[]} addTypename={false}>
+          <MockedProvider
+            mocks={[]}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <Posts />
           </MockedProvider>
         </AuthContext.Provider>
@@ -39,7 +54,7 @@ describe("Posts", () => {
             posts: [
               {
                 id: 1,
-                title: "Thoughts",
+                body: "Thoughts",
                 insertedAt: "2019-04-18T00:00:00",
                 user: {
                   id: 1,
@@ -63,7 +78,11 @@ describe("Posts", () => {
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{}}>
-          <MockedProvider mocks={mocks} addTypename={false}>
+          <MockedProvider
+            mocks={mocks}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <Posts />
           </MockedProvider>
         </AuthContext.Provider>
@@ -118,7 +137,11 @@ describe("Posts", () => {
     const { container, getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{}}>
-          <MockedProvider mocks={mocks} addTypename={false}>
+          <MockedProvider
+            mocks={mocks}
+            addTypename={false}
+            defaultOptions={defaultOptions}
+          >
             <Posts />
           </MockedProvider>
         </AuthContext.Provider>
