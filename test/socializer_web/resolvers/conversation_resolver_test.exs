@@ -93,6 +93,17 @@ defmodule SocializerWeb.ConversationResolverTest do
       assert created.title == "Joe, John, Jim"
     end
 
+    it "returns error for missing params" do
+      user = insert(:user)
+
+      {:error, error} =
+        ConversationResolver.create(nil, %{user_ids: [nil]}, %{
+          context: %{current_user: user}
+        })
+
+      assert error == [[field: :user_id, message: "Can't be blank"]]
+    end
+
     it "returns error for unauthenticated user" do
       user = insert(:user)
 

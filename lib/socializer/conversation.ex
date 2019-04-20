@@ -34,6 +34,7 @@ defmodule Socializer.Conversation do
   def find_for_users(user_ids) do
     query =
       user_ids
+      |> Enum.filter(&(!is_nil(&1)))
       |> Enum.reduce(__MODULE__, fn user_id, query ->
         from c in query,
           join: cu in ConversationUser,

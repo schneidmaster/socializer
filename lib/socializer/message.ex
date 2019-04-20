@@ -33,13 +33,13 @@ defmodule Socializer.Message do
     |> foreign_key_constraint(:user_id)
   end
 
-  def validate_user_in_conversation(changeset, field, options \\ []) do
+  def validate_user_in_conversation(changeset, field) do
     validate_change(changeset, field, fn _, user_id ->
       case ConversationUser.find_by(%{
              conversation_id: changeset.changes[:conversation_id],
              user_id: user_id
            }) do
-        nil -> [{field, options[:message] || "is not in conversation"}]
+        nil -> [{field, "is not in conversation"}]
         _ -> []
       end
     end)
