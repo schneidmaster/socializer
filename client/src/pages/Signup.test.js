@@ -10,27 +10,12 @@ jest.mock("react-router-dom", () => ({
   Redirect: () => <div className="redirect" />,
 }));
 
-const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: "network-only",
-    errorPolicy: "ignore",
-  },
-  query: {
-    fetchPolicy: "network-only",
-    errorPolicy: "all",
-  },
-};
-
 describe("Signup", () => {
   it("renders correctly when authenticated", () => {
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ token: "abc", setAuth: jest.fn() }}>
-          <MockedProvider
-            mocks={[]}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={[]} addTypename={false}>
             <Signup />
           </MockedProvider>
         </AuthContext.Provider>
@@ -43,11 +28,7 @@ describe("Signup", () => {
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ setAuth: jest.fn() }}>
-          <MockedProvider
-            mocks={[]}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={[]} addTypename={false}>
             <Signup />
           </MockedProvider>
         </AuthContext.Provider>
@@ -74,11 +55,7 @@ describe("Signup", () => {
     const { getByLabelText, getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ setAuth }}>
-          <MockedProvider
-            mocks={mocks}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={mocks} addTypename={false}>
             <Signup />
           </MockedProvider>
         </AuthContext.Provider>

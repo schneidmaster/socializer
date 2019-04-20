@@ -111,24 +111,9 @@ describe("App", () => {
       },
     ];
 
-    const defaultOptions = {
-      watchQuery: {
-        fetchPolicy: "network-only",
-        errorPolicy: "ignore",
-      },
-      query: {
-        fetchPolicy: "network-only",
-        errorPolicy: "all",
-      },
-    };
-
     const { container, getByLabelText, getByTestId, getByText } = render(
       <MemoryRouter>
-        <MockedProvider
-          mocks={mocks}
-          addTypename={false}
-          defaultOptions={defaultOptions}
-        >
+        <MockedProvider mocks={mocks} addTypename={false}>
           <App />
         </MockedProvider>
       </MemoryRouter>,

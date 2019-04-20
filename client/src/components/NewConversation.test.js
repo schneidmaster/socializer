@@ -13,17 +13,6 @@ jest.mock("react-router-dom", () => ({
   Redirect: ({ to }) => <div data-testid="redirect" data-to={to} />,
 }));
 
-const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: "network-only",
-    errorPolicy: "ignore",
-  },
-  query: {
-    fetchPolicy: "network-only",
-    errorPolicy: "all",
-  },
-};
-
 describe("NewConversation", () => {
   it("renders correctly", () => {
     const mocks = [
@@ -37,11 +26,7 @@ describe("NewConversation", () => {
     ];
     const { container } = render(
       <ChatContext.Provider value={{ setChatState: jest.fn() }}>
-        <MockedProvider
-          mocks={mocks}
-          addTypename={false}
-          defaultOptions={defaultOptions}
-        >
+        <MockedProvider mocks={mocks} addTypename={false}>
           <NewConversation />
         </MockedProvider>
       </ChatContext.Provider>,
@@ -62,11 +47,7 @@ describe("NewConversation", () => {
     const setChatState = jest.fn();
     const { getByText } = render(
       <ChatContext.Provider value={{ setChatState }}>
-        <MockedProvider
-          mocks={mocks}
-          addTypename={false}
-          defaultOptions={defaultOptions}
-        >
+        <MockedProvider mocks={mocks} addTypename={false}>
           <NewConversation />
         </MockedProvider>
       </ChatContext.Provider>,
@@ -131,11 +112,7 @@ describe("NewConversation", () => {
     const { container, getByTestId, getByText } = render(
       <MemoryRouter>
         <ChatContext.Provider value={{ setChatState: jest.fn() }}>
-          <MockedProvider
-            mocks={mocks}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={mocks} addTypename={false}>
             <NewConversation />
           </MockedProvider>
         </ChatContext.Provider>

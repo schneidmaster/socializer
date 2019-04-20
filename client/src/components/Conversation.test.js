@@ -2,11 +2,16 @@ import React from "react";
 import { render, wait } from "react-testing-library";
 import { MockedProvider } from "react-apollo/test-utils";
 import { MemoryRouter } from "react-router-dom";
+import { Subscriber } from "components";
 import { AuthContext } from "util/context";
 import Conversation, {
   GET_CONVERSATION,
   MESSAGES_SUBSCRIPTION,
 } from "./Conversation";
+
+jest.mock("components/Subscriber", () =>
+  jest.fn().mockImplementation(({ children }) => children),
+);
 
 const getMock = {
   request: {
@@ -43,39 +48,12 @@ const getMock = {
   },
 };
 
-const noNewMessagesMock = {
-  request: {
-    query: MESSAGES_SUBSCRIPTION,
-    variables: { conversationId: 1 },
-  },
-  result: {
-    data: null,
-  },
-};
-
-const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: "network-only",
-    errorPolicy: "ignore",
-  },
-  query: {
-    fetchPolicy: "network-only",
-    errorPolicy: "all",
-  },
-};
-
 describe("Conversation", () => {
   it("renders correctly when loading", () => {
-    const mocks = [getMock, noNewMessagesMock];
-
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
-          <MockedProvider
-            mocks={mocks}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={[getMock]} addTypename={false}>
             <Conversation match={{ params: { id: 1 } }} />
           </MockedProvider>
         </AuthContext.Provider>
@@ -85,16 +63,10 @@ describe("Conversation", () => {
   });
 
   it("renders correctly when loaded", async () => {
-    const mocks = [getMock, noNewMessagesMock];
-
     const { container, getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
-          <MockedProvider
-            mocks={mocks}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={[getMock]} addTypename={false}>
             <Conversation match={{ params: { id: 1 } }} />
           </MockedProvider>
         </AuthContext.Provider>
@@ -105,6 +77,13 @@ describe("Conversation", () => {
   });
 
   it("renders correctly after created message", async () => {
+    Subscriber.mockImplementation((props) => {
+      const { default: ActualSubscriber } = jest.requireActual(
+        "components/Subscriber",
+      );
+      return <ActualSubscriber {...props} />;
+    });
+
     const mocks = [
       getMock,
       {
@@ -127,14 +106,11 @@ describe("Conversation", () => {
         },
       },
     ];
+
     const { container, getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
-          <MockedProvider
-            mocks={mocks}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={mocks} addTypename={false}>
             <Conversation match={{ params: { id: 1 } }} />
           </MockedProvider>
         </AuthContext.Provider>

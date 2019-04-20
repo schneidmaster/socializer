@@ -2,6 +2,7 @@ import React from "react";
 import { render, fireEvent, wait } from "react-testing-library";
 import { MockedProvider } from "react-apollo/test-utils";
 import { MemoryRouter } from "react-router-dom";
+import { Subscriber } from "components";
 import { AuthContext, ChatContext } from "util/context";
 import ChatBar, {
   GET_CONVERSATIONS,
@@ -9,59 +10,34 @@ import ChatBar, {
   CONVERSATIONS_UPDATE_SUBSCRIPTION,
 } from "./ChatBar";
 
-const basicMocks = [
-  {
-    request: {
-      query: GET_CONVERSATIONS,
-    },
-    result: {
-      data: {
-        conversations: [
-          {
-            id: 1,
-            title: "Jane Smith, John Doe",
-            updatedAt: "2019-04-18T00:00:00",
-            users: [
-              {
-                id: 1,
-                gravatarMd5: "abc",
-              },
-              {
-                id: 2,
-                gravatarMd5: "def",
-              },
-            ],
-          },
-        ],
-      },
-    },
-  },
-  {
-    request: {
-      query: CONVERSATIONS_SUBSCRIPTION,
-    },
-    result: {
-      data: null,
-    },
-  },
-  {
-    request: {
-      query: CONVERSATIONS_UPDATE_SUBSCRIPTION,
-    },
-    result: {
-      data: null,
-    },
-  },
-];
+jest.mock("components/Subscriber", () =>
+  jest.fn().mockImplementation(({ children }) => children),
+);
 
-const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: "network-only",
-    errorPolicy: "ignore",
+const getMock = {
+  request: {
+    query: GET_CONVERSATIONS,
   },
-  query: {
-    fetchPolicy: "network-only",
-    errorPolicy: "all",
+  result: {
+    data: {
+      conversations: [
+        {
+          id: 1,
+          title: "Jane Smith, John Doe",
+          updatedAt: "2019-04-18T00:00:00",
+          users: [
+            {
+              id: 1,
+              gravatarMd5: "abc",
+            },
+            {
+              id: 2,
+              gravatarMd5: "def",
+            },
+          ],
+        },
+      ],
+    },
   },
 };
 
@@ -74,11 +50,7 @@ const renderChatBar = ({ authContext, chatContext, mocks } = {}) => {
             chatContext || { chatState: "default", setChatState: jest.fn() }
           }
         >
-          <MockedProvider
-            mocks={mocks || basicMocks}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={mocks || [getMock]} addTypename={false}>
             <ChatBar />
           </MockedProvider>
         </ChatContext.Provider>
@@ -105,8 +77,15 @@ describe("ChatBar", () => {
   });
 
   it("renders correctly after created conversation", async () => {
+    Subscriber.mockImplementation((props) => {
+      const { default: ActualSubscriber } = jest.requireActual(
+        "components/Subscriber",
+      );
+      return <ActualSubscriber {...props} />;
+    });
+
     const mocks = [
-      basicMocks[0],
+      getMock,
       {
         request: {
           query: CONVERSATIONS_SUBSCRIPTION,

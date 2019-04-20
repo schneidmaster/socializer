@@ -3,8 +3,13 @@ import { render, wait } from "react-testing-library";
 import { MockedProvider } from "react-apollo/test-utils";
 import { MemoryRouter } from "react-router-dom";
 import tk from "timekeeper";
+import { Subscriber } from "components";
 import { AuthContext, ChatContext } from "util/context";
 import Post, { GET_POST, COMMENTS_SUBSCRIPTION } from "./Post";
+
+jest.mock("components/Subscriber", () =>
+  jest.fn().mockImplementation(({ children }) => children),
+);
 
 const getMock = {
   request: {
@@ -39,27 +44,6 @@ const getMock = {
   },
 };
 
-const noNewCommentsMock = {
-  request: {
-    query: COMMENTS_SUBSCRIPTION,
-    variables: { postId: 1 },
-  },
-  result: {
-    data: null,
-  },
-};
-
-const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: "network-only",
-    errorPolicy: "ignore",
-  },
-  query: {
-    fetchPolicy: "network-only",
-    errorPolicy: "all",
-  },
-};
-
 describe("Post", () => {
   beforeEach(() => {
     tk.freeze("2019-04-20");
@@ -70,17 +54,11 @@ describe("Post", () => {
   });
 
   it("renders correctly when loading", () => {
-    const mocks = [getMock, noNewCommentsMock];
-
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
           <ChatContext.Provider value={{ chatState: "default" }}>
-            <MockedProvider
-              mocks={mocks}
-              addTypename={false}
-              defaultOptions={defaultOptions}
-            >
+            <MockedProvider mocks={[getMock]} addTypename={false}>
               <Post match={{ params: { id: 1 } }} />
             </MockedProvider>
           </ChatContext.Provider>
@@ -91,28 +69,30 @@ describe("Post", () => {
   });
 
   it("renders correctly when loaded", async () => {
-    const mocks = [getMock, noNewCommentsMock];
-
     const { container, getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
           <ChatContext.Provider value={{ chatState: "default" }}>
-            <MockedProvider
-              mocks={mocks}
-              addTypename={false}
-              defaultOptions={defaultOptions}
-            >
+            <MockedProvider mocks={[getMock]} addTypename={false}>
               <Post match={{ params: { id: 1 } }} />
             </MockedProvider>
           </ChatContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>,
     );
+
     await wait(() => getByText("Here are a few thoughts"));
     expect(container).toMatchSnapshot();
   });
 
   it("renders correctly after created comment", async () => {
+    Subscriber.mockImplementation((props) => {
+      const { default: ActualSubscriber } = jest.requireActual(
+        "components/Subscriber",
+      );
+      return <ActualSubscriber {...props} />;
+    });
+
     const mocks = [
       getMock,
       {
@@ -140,11 +120,7 @@ describe("Post", () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ userId: 1 }}>
           <ChatContext.Provider value={{ chatState: "default" }}>
-            <MockedProvider
-              mocks={mocks}
-              addTypename={false}
-              defaultOptions={defaultOptions}
-            >
+            <MockedProvider mocks={mocks} addTypename={false}>
               <Post match={{ params: { id: 1 } }} />
             </MockedProvider>
           </ChatContext.Provider>

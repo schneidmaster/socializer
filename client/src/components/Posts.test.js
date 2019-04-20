@@ -3,19 +3,13 @@ import { render, wait } from "react-testing-library";
 import { MockedProvider } from "react-apollo/test-utils";
 import { MemoryRouter } from "react-router-dom";
 import tk from "timekeeper";
+import { Subscriber } from "components";
 import { AuthContext } from "util/context";
 import Posts, { GET_POSTS, POSTS_SUBSCRIPTION } from "./Posts";
 
-const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: "network-only",
-    errorPolicy: "ignore",
-  },
-  query: {
-    fetchPolicy: "network-only",
-    errorPolicy: "all",
-  },
-};
+jest.mock("components/Subscriber", () =>
+  jest.fn().mockImplementation(({ children }) => children),
+);
 
 describe("Posts", () => {
   beforeEach(() => {
@@ -30,11 +24,7 @@ describe("Posts", () => {
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{}}>
-          <MockedProvider
-            mocks={[]}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={[]} addTypename={false}>
             <Posts />
           </MockedProvider>
         </AuthContext.Provider>
@@ -66,23 +56,11 @@ describe("Posts", () => {
           },
         },
       },
-      {
-        request: {
-          query: POSTS_SUBSCRIPTION,
-        },
-        result: {
-          data: null,
-        },
-      },
     ];
     const { container } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{}}>
-          <MockedProvider
-            mocks={mocks}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={mocks} addTypename={false}>
             <Posts />
           </MockedProvider>
         </AuthContext.Provider>
@@ -92,6 +70,13 @@ describe("Posts", () => {
   });
 
   it("renders correctly after created post", async () => {
+    Subscriber.mockImplementation((props) => {
+      const { default: ActualSubscriber } = jest.requireActual(
+        "components/Subscriber",
+      );
+      return <ActualSubscriber {...props} />;
+    });
+
     const mocks = [
       {
         request: {
@@ -137,11 +122,7 @@ describe("Posts", () => {
     const { container, getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{}}>
-          <MockedProvider
-            mocks={mocks}
-            addTypename={false}
-            defaultOptions={defaultOptions}
-          >
+          <MockedProvider mocks={mocks} addTypename={false}>
             <Posts />
           </MockedProvider>
         </AuthContext.Provider>
