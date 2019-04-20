@@ -1,0 +1,3 @@
+{
+  "skip_files": ["lib/socializer/demo_manager.ex", "test/"]
+}

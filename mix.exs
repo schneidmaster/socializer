@@ -10,7 +10,9 @@ defmodule Socializer.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test, "coveralls.html": :test]
     ]
   end
 
@@ -51,6 +53,7 @@ defmodule Socializer.MixProject do
       {:poison, "~> 2.1.0"},
       {:quantum, "~> 2.3"},
       {:timex, "~> 3.0"},
+      {:excoveralls, "~> 0.10", only: :test},
       {:ex_machina, "~> 2.3", only: :test},
       {:ex_spec, "~> 2.0", only: :test},
       {:faker, "~> 0.7", only: :test},

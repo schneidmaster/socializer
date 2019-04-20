@@ -1,5 +1,5 @@
 defmodule SocializerWeb.Router do
-  use SocializerWeb, :router
+  use Phoenix.Router
 
   pipeline :api do
     plug SocializerWeb.Context

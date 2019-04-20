@@ -90,7 +90,7 @@ jobs:
 
       - run:
           name: Run ExUnit tests
-          command: mix test
+          command: mix coveralls.html
 
       - run:
           name: Run jest tests
@@ -98,3 +98,13 @@ jobs:
 
       - store_test_results:
           path: /tmp/test-results
+
+      - run:
+          name: Move coverage files to top-level directory
+          command: sudo mv cover/excoveralls.html /exunit-coverage.html && sudo mv client/coverage/lcov-report /jest-coverage
+
+      - store_artifacts:
+          path: /exunit-coverage.html
+
+      - store_artifacts:
+          path: /jest-coverage
