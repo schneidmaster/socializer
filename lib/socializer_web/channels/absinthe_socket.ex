@@ -7,7 +7,7 @@ defmodule SocializerWeb.AbsintheSocket do
 
   def connect(%{"token" => token}, socket) do
     with {:ok, claim} <- Guardian.decode_and_verify(token),
-         user <- User.find(claim["sub"]) do
+         user when not is_nil(user) <- User.find(claim["sub"]) do
       socket = Socket.put_options(socket, context: %{current_user: user})
       {:ok, socket}
     else
