@@ -7,7 +7,7 @@ describe("ErrorMessage", () => {
   it("renders correctly for not found error", () => {
     const { container } = render(
       <MemoryRouter>
-        <ErrorMessage message="GraphQL error: Not found" />,
+        <ErrorMessage message="GraphQL error: Not found" />
       </MemoryRouter>,
     );
     expect(container.firstChild).toMatchSnapshot();
@@ -16,7 +16,7 @@ describe("ErrorMessage", () => {
   it("renders correctly for other error", () => {
     const { container } = render(
       <MemoryRouter>
-        <ErrorMessage message="GraphQL error: Something" />,
+        <ErrorMessage message="GraphQL error: Something" />
       </MemoryRouter>,
     );
     expect(container.firstChild).toMatchSnapshot();

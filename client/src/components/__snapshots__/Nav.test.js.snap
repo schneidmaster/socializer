@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav renders correctly when loaded 1`] = `
+<div>
+  <nav
+    class="mb-4 navbar navbar-expand navbar-dark bg-primary"
+  >
+    <div
+      class="container"
+    >
+      <a
+        class="navbar-brand"
+        href="/"
+      >
+        Socializer
+      </a>
+      <div
+        class="navbar-nav"
+      >
+        <a
+          class="nav-link"
+          href="/"
+          role="button"
+        >
+          Feed
+        </a>
+        <a
+          class="nav-link"
+          href="/chat"
+          role="button"
+        >
+          Chat
+        </a>
+      </div>
+      <button
+        aria-label="Toggle navigation"
+        class="navbar-toggler"
+        type="button"
+      >
+        <span
+          class="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        class="justify-content-end navbar-collapse collapse"
+      >
+        <div
+          class="navbar-nav"
+        >
+          <div
+            class="dropdown nav-item"
+          >
+            <a
+              aria-expanded="false"
+              aria-haspopup="true"
+              class="dropdown-toggle nav-link"
+              href="#"
+              role="button"
+            >
+              John Doe
+            </a>
+            <div
+              aria-labelledby=""
+              class="dropdown-menu"
+            >
+              <a
+                class="dropdown-item"
+                href="#"
+                role="button"
+              >
+                Log out
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+`;
+
+exports[`Nav renders correctly when loading 1`] = `
+<div>
+  <nav
+    class="mb-4 navbar navbar-expand navbar-dark bg-primary"
+  >
+    <div
+      class="container"
+    >
+      <a
+        class="navbar-brand"
+        href="/"
+      >
+        Socializer
+      </a>
+      <div
+        class="navbar-nav"
+      >
+        <a
+          class="nav-link"
+          href="/"
+          role="button"
+        >
+          Feed
+        </a>
+        <a
+          class="nav-link"
+          href="/chat"
+          role="button"
+        >
+          Chat
+        </a>
+      </div>
+      <button
+        aria-label="Toggle navigation"
+        class="navbar-toggler"
+        type="button"
+      >
+        <span
+          class="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        class="justify-content-end navbar-collapse collapse"
+      >
+        <div
+          class="navbar-nav"
+        />
+      </div>
+    </div>
+  </nav>
+</div>
+`;
+
+exports[`Nav renders correctly when unauthenticated 1`] = `
+<div>
+  <nav
+    class="mb-4 navbar navbar-expand navbar-dark bg-primary"
+  >
+    <div
+      class="container"
+    >
+      <a
+        class="navbar-brand"
+        href="/"
+      >
+        Socializer
+      </a>
+      <button
+        aria-label="Toggle navigation"
+        class="navbar-toggler"
+        type="button"
+      >
+        <span
+          class="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        class="justify-content-end navbar-collapse collapse"
+      >
+        <div
+          class="navbar-nav"
+        >
+          <a
+            class="nav-link"
+            href="/login"
+            role="button"
+          >
+            Log in
+          </a>
+          <a
+            class="nav-link"
+            href="/signup"
+            role="button"
+          >
+            Sign up
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+`;

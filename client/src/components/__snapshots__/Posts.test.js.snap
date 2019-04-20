@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Posts renders correctly after created post 1`] = `
+<div>
+  <h4>
+    Feed
+  </h4>
+  <div
+    class="mb-4 card"
+  >
+    <div
+      class="card-body"
+    >
+      <div
+        class="text-muted h7"
+      >
+        <a
+          href="/login"
+        >
+          Log in
+        </a>
+         to submit a 
+        post
+        .
+      </div>
+    </div>
+  </div>
+  <div
+    class="mb-4 card"
+  >
+    <div
+      class="d-flex justify-content-between align-items-center card-header"
+    >
+      <div
+        class="d-flex align-items-center"
+      >
+        <img
+          alt="Gravatar for undefined"
+          class="react-gravatar rounded-circle"
+          height="30"
+          src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+          srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+          width="30"
+        />
+        <div
+          class="ml-2"
+        >
+          <div
+            class="h6 mb-0"
+          >
+            Jane Thompson
+          </div>
+        </div>
+      </div>
+      <div
+        class="text-muted h7"
+      >
+        <time
+          datetime="2019-04-19T00:00:00.000Z"
+          title="2019-04-19T00:00:00Z"
+        >
+          2 days ago
+        </time>
+      </div>
+    </div>
+    <div
+      class="card-body"
+    >
+      <p
+        class="card-text"
+      >
+        Opinions
+      </p>
+    </div>
+    <div
+      class="d-flex card-footer"
+    >
+      <a
+        class="ml-auto"
+        href="/posts/2"
+      >
+        Discussion ≫
+      </a>
+    </div>
+  </div>
+  <div
+    class="mb-4 card"
+  >
+    <div
+      class="d-flex justify-content-between align-items-center card-header"
+    >
+      <div
+        class="d-flex align-items-center"
+      >
+        <img
+          alt="Gravatar for undefined"
+          class="react-gravatar rounded-circle"
+          height="30"
+          src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+          srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+          width="30"
+        />
+        <div
+          class="ml-2"
+        >
+          <div
+            class="h6 mb-0"
+          >
+            John Smith
+          </div>
+        </div>
+      </div>
+      <div
+        class="text-muted h7"
+      >
+        <time
+          datetime="2019-04-18T00:00:00.000Z"
+          title="2019-04-18T00:00:00Z"
+        >
+          3 days ago
+        </time>
+      </div>
+    </div>
+    <div
+      class="card-body"
+    >
+      <p
+        class="card-text"
+      >
+        Thoughts
+      </p>
+    </div>
+    <div
+      class="d-flex card-footer"
+    >
+      <a
+        class="ml-auto"
+        href="/posts/1"
+      >
+        Discussion ≫
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Posts renders correctly when loaded 1`] = `
+<div>
+  <h4>
+    Feed
+  </h4>
+  <div
+    class="d-flex justify-content-center"
+  >
+    <div
+      class="spinner-border"
+      role="status"
+    >
+      <span
+        class="sr-only"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Posts renders correctly when loading 1`] = `
+<div>
+  <h4>
+    Feed
+  </h4>
+  <div
+    class="d-flex justify-content-center"
+  >
+    <div
+      class="spinner-border"
+      role="status"
+    >
+      <span
+        class="sr-only"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>
+</div>
+`;

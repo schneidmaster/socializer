@@ -1,0 +1,121 @@
+import React from "react";
+import { render, wait } from "react-testing-library";
+import { MockedProvider } from "react-apollo/test-utils";
+import { MemoryRouter } from "react-router-dom";
+import { AuthContext } from "util/context";
+import Posts, { GET_POSTS, POSTS_SUBSCRIPTION } from "./Posts";
+
+describe("Posts", () => {
+  it("renders correctly when loading", () => {
+    const { container } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{}}>
+          <MockedProvider mocks={[]} addTypename={false}>
+            <Posts />
+          </MockedProvider>
+        </AuthContext.Provider>
+      </MemoryRouter>,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it("renders correctly when loaded", () => {
+    const mocks = [
+      {
+        request: {
+          query: GET_POSTS,
+        },
+        result: {
+          data: {
+            posts: [
+              {
+                id: 1,
+                title: "Thoughts",
+                insertedAt: "2019-04-18T00:00:00",
+                user: {
+                  id: 1,
+                  name: "John Smith",
+                  gravatarMd5: "abc",
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        request: {
+          query: POSTS_SUBSCRIPTION,
+        },
+        result: {
+          data: null,
+        },
+      },
+    ];
+    const { container } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{}}>
+          <MockedProvider mocks={mocks} addTypename={false}>
+            <Posts />
+          </MockedProvider>
+        </AuthContext.Provider>
+      </MemoryRouter>,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it("renders correctly after created post", async () => {
+    const mocks = [
+      {
+        request: {
+          query: GET_POSTS,
+        },
+        result: {
+          data: {
+            posts: [
+              {
+                id: 1,
+                body: "Thoughts",
+                insertedAt: "2019-04-18T00:00:00",
+                user: {
+                  id: 1,
+                  name: "John Smith",
+                  gravatarMd5: "abc",
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        request: {
+          query: POSTS_SUBSCRIPTION,
+        },
+        result: {
+          data: {
+            postCreated: {
+              id: 2,
+              body: "Opinions",
+              insertedAt: "2019-04-19T00:00:00",
+              user: {
+                id: 2,
+                name: "Jane Thompson",
+                gravatarMd5: "def",
+              },
+            },
+          },
+        },
+      },
+    ];
+    const { container, getByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{}}>
+          <MockedProvider mocks={mocks} addTypename={false}>
+            <Posts />
+          </MockedProvider>
+        </AuthContext.Provider>
+      </MemoryRouter>,
+    );
+    await wait(() => getByText("Opinions"));
+    expect(container).toMatchSnapshot();
+  });
+});

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import renderIf from "render-if";
 import { AuthContext } from "util/context";
 
-const GET_USER_INFO = gql`
+export const GET_USER_INFO = gql`
   {
     currentUser {
       name

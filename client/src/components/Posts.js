@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import produce from "immer";
 import { ErrorMessage, Feed, Loading } from "components";
 
-const GET_POSTS = gql`
+export const GET_POSTS = gql`
   {
     posts {
       id
@@ -19,7 +19,7 @@ const GET_POSTS = gql`
   }
 `;
 
-const POSTS_SUBSCRIPTION = gql`
+export const POSTS_SUBSCRIPTION = gql`
   subscription onPostCreated {
     postCreated {
       id
