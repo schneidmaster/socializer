@@ -7,7 +7,7 @@ import { Redirect } from "react-router-dom";
 import renderIf from "render-if";
 import { AuthContext } from "util/context";
 
-const LOGIN = gql`
+export const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
     authenticate(email: $email, password: $password) {
       id

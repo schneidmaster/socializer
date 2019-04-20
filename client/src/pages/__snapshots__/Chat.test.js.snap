@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chat renders correctly when chat is selected 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="chat-row row"
+    >
+      <div
+        class="d-none d-md-block col-md-4 col-0"
+      >
+        <div
+          class="chat-bar"
+        />
+      </div>
+      <div
+        class="chat-col col-md-8 col-12"
+      >
+        <div
+          class="conversation"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Chat renders correctly when no chat is selected 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="chat-row row"
+    >
+      <div
+        class="col-md-4 col-12"
+      >
+        <div
+          class="chat-bar"
+        />
+      </div>
+      <div
+        class="chat-col d-none d-md-block col-md-8 col-0"
+      >
+        <p>
+          Select a conversation from the sidebar to begin chatting
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -8,7 +8,7 @@ import renderIf from "render-if";
 import { AuthContext } from "util/context";
 import { errorHash } from "util/errors";
 
-const SIGNUP = gql`
+export const SIGNUP = gql`
   mutation Signup($name: String!, $email: String!, $password: String!) {
     signUp(name: $name, email: $email, password: $password) {
       id

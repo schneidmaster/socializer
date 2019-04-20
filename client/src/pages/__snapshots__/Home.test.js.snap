@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders correctly 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="d-none d-md-block col-md-4"
+      >
+        <div
+          class="chat-bar"
+        />
+      </div>
+      <div
+        class="col-md-8 col-12"
+      >
+        <div
+          class="posts"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
