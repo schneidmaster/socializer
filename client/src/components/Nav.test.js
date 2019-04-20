@@ -73,4 +73,28 @@ describe("Nav", () => {
     await wait(() => getByText("John Doe"));
     expect(container).toMatchSnapshot();
   });
+
+  it("clears auth when loaded but token was stale", async () => {
+    const mocks = [
+      {
+        request: {
+          query: GET_USER_INFO,
+        },
+        result: {
+          errors: [{ message: "Unauthenticated" }],
+        },
+      },
+    ];
+    const setAuth = jest.fn();
+    render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ token: "abc", setAuth }}>
+          <MockedProvider mocks={mocks} addTypename={false}>
+            <Nav />
+          </MockedProvider>
+        </AuthContext.Provider>
+      </MemoryRouter>,
+    );
+    await wait(() => expect(setAuth).toBeCalledWith(null));
+  });
 });
