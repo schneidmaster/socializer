@@ -1,6 +1,7 @@
 defmodule SocializerWeb.Schema.ConversationTypes do
   use Absinthe.Schema.Notation
   use Absinthe.Ecto, repo: Socializer.Repo
+  import Ecto.Query
 
   alias SocializerWeb.Resolvers
   alias Socializer.Conversation
@@ -11,7 +12,14 @@ defmodule SocializerWeb.Schema.ConversationTypes do
     field :title, :string
     field :updated_at, :naive_datetime
 
-    field :messages, list_of(:message), resolve: assoc(:messages)
+    field :messages, list_of(:message) do
+      resolve(
+        assoc(:messages, fn messages_query, _args, _context ->
+          messages_query |> order_by(asc: :id)
+        end)
+      )
+    end
+
     field :users, list_of(:user), resolve: assoc(:users)
   end
 
@@ -40,10 +48,11 @@ defmodule SocializerWeb.Schema.ConversationTypes do
 
   object :conversation_subscriptions do
     field :conversation_created, :conversation do
-      arg(:user_id, non_null(:id))
-
-      config(fn args, _ ->
-        {:ok, topic: args.user_id}
+      config(fn _, %{context: context} ->
+        case context[:current_user] do
+          nil -> {:error, "unauthorized"}
+          user -> {:ok, topic: user.id}
+        end
       end)
 
       trigger(:create_conversation,
@@ -54,10 +63,11 @@ defmodule SocializerWeb.Schema.ConversationTypes do
     end
 
     field :conversation_updated, :conversation do
-      arg(:user_id, non_null(:id))
-
-      config(fn args, _ ->
-        {:ok, topic: args.user_id}
+      config(fn _, %{context: context} ->
+        case context[:current_user] do
+          nil -> {:error, "unauthorized"}
+          user -> {:ok, topic: user.id}
+        end
       end)
 
       trigger(:create_message,

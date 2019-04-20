@@ -1,9 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Helmet from "react-helmet";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import cx from "classnames";
 import { ChatBar, Conversation } from "components";
+import { AuthContext } from "util/context";
 import "./Chat.css";
 
 const ChatEmptyMessage = () => (
@@ -15,6 +16,12 @@ const Chat = ({
     params: { id },
   },
 }) => {
+  const { token } = useContext(AuthContext);
+
+  if (!token) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <Fragment>
       <Helmet>

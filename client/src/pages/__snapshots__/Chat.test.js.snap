@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Chat redirects when unauthenticated 1`] = `
+<div>
+  <div
+    class="redirect"
+  />
+</div>
+`;
+
 exports[`Chat renders correctly when chat is selected 1`] = `
 <div>
   <div

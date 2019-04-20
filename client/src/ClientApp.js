@@ -8,9 +8,9 @@ const ClientApp = () => {
   const client = useRef(createClient());
 
   return (
-    <ApolloProvider client={client.current}>
+    <ApolloProvider client={client.current.client}>
       <BrowserRouter>
-        <App />
+        <App socket={client.current.absintheSocket} />
       </BrowserRouter>
     </ApolloProvider>
   );

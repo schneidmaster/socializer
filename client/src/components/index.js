@@ -5,6 +5,7 @@ export { default as Feed } from "./Feed";
 export { default as FeedItem } from "./FeedItem";
 export { default as Loading } from "./Loading";
 export { default as MessageThread } from "./MessageThread";
+export { default as Meta } from "./Meta";
 export { default as Nav } from "./Nav";
 export { default as NewConversation } from "./NewConversation";
 export { default as NewItem } from "./NewItem";

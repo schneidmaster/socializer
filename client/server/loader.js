@@ -44,7 +44,7 @@ export default (req, res) => {
       }
 
       // Create Apollo client
-      const client = createClient({
+      const { client } = createClient({
         req,
         fetch,
         ssr: true,

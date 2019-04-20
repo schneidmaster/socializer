@@ -1,18 +1,30 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { withApollo } from "react-apollo";
-import Helmet from "react-helmet";
 import { Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
-import { Nav } from "components";
+import { Meta, Nav } from "components";
 import { Chat, Home, Login, Post, Signup } from "pages";
+import { refreshSocket } from "util/apollo";
 import { AuthContext, ChatContext } from "util/context";
 
-const App = ({ initialToken, initialUserId, client }) => {
+const App = ({ initialToken, initialUserId, client, socket }) => {
   const [token, setToken] = useState(initialToken || Cookies.get("token"));
   const [userId, setUserId] = useState(initialUserId || Cookies.get("userId"));
   const [chatState, setChatState] = useState("default");
+  const tokenWas = useRef(token);
 
-  const setAuth = (data) => {
+  // If the token changed (i.e. the user logged in
+  // or out), clear the Apollo store and refresh the
+  // websocket connection.
+  useEffect(() => {
+    if (tokenWas.current !== token) {
+      client.clearStore();
+      if (socket) refreshSocket(socket);
+      tokenWas.current = token;
+    }
+  }, [token]);
+
+  const setAuth = async (data) => {
     if (data) {
       const { id, token } = data;
       Cookies.set("token", token);
@@ -20,7 +32,6 @@ const App = ({ initialToken, initialUserId, client }) => {
       setToken(token);
       setUserId(id);
     } else {
-      client.clearStore();
       Cookies.remove("token");
       Cookies.remove("userId");
       setToken(null);
@@ -29,66 +40,34 @@ const App = ({ initialToken, initialUserId, client }) => {
   };
 
   return (
+    <AuthContext.Provider value={{ token, userId, setAuth }}>
+      <ChatContext.Provider value={{ chatState, setChatState }}>
+        <Nav />
+
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/posts/:id" component={Post} />
+          <Route path="/chat/:id?" component={Chat} />
+          <Route component={Home} />
+        </Switch>
+      </ChatContext.Provider>
+    </AuthContext.Provider>
+  );
+};
+
+// This is hoisted to a separate component
+// because react-helmet has a bug that
+// causes it to go into an infinite loop
+// when rendered adjacent to useEffect.
+// https://github.com/nfl/react-helmet/issues/437
+const AppWithMeta = (props) => {
+  return (
     <Fragment>
-      <Helmet>
-        <meta charset="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#007bff" />
-        <meta name="msapplication-TileColor" content="#2b5797" />
-        <meta name="theme-color" content="#ffffff" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="628" />
-        <meta
-          property="og:description"
-          content="Socialization. Now on the Internet."
-        />
-        <meta property="og:title" content="Socializer" />
-        <meta
-          property="og:url"
-          content="https://socializer-demo.herokuapp.com"
-        />
-        <meta
-          property="og:image"
-          content="https://socializer-demo.herokuapp.com/og-image.jpg"
-        />
-      </Helmet>
-
-      <AuthContext.Provider value={{ token, userId, setAuth }}>
-        <ChatContext.Provider value={{ chatState, setChatState }}>
-          <Nav />
-
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/posts/:id" component={Post} />
-            <Route path="/chat/:id?" component={Chat} />
-            <Route component={Home} />
-          </Switch>
-        </ChatContext.Provider>
-      </AuthContext.Provider>
+      <Meta />
+      <App {...props} />
     </Fragment>
   );
 };
 
-export default withApollo(App);
+export default withApollo(AppWithMeta);

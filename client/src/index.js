@@ -4,4 +4,7 @@ import ClientApp from "./ClientApp";
 
 import "bootstrap/dist/css/bootstrap.css";
 
-ReactDOM.hydrate(<ClientApp />, document.getElementById("root"));
+const mount =
+  process.env.NODE_ENV === "production" ? ReactDOM.hydrate : ReactDOM.render;
+
+mount(<ClientApp />, document.getElementById("root"));

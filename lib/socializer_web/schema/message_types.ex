@@ -2,6 +2,7 @@ defmodule SocializerWeb.Schema.MessageTypes do
   use Absinthe.Schema.Notation
   use Absinthe.Ecto, repo: Socializer.Repo
 
+  alias Socializer.Conversation
   alias SocializerWeb.Resolvers
 
   @desc "A message on the site"
@@ -35,8 +36,14 @@ defmodule SocializerWeb.Schema.MessageTypes do
     field :message_created, :message do
       arg(:conversation_id, non_null(:id))
 
-      config(fn args, _ ->
-        {:ok, topic: args.conversation_id}
+      config(fn args, %{context: context} ->
+        with user when not is_nil(user) <- context[:current_user],
+             conversation when not is_nil(conversation) <-
+               Conversation.find_for_user(args[:conversation_id], user) do
+          {:ok, topic: conversation.id}
+        else
+          _ -> {:error, "unauthorized"}
+        end
       end)
 
       trigger(:create_message,

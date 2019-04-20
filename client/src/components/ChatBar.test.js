@@ -39,7 +39,6 @@ const basicMocks = [
   {
     request: {
       query: CONVERSATIONS_SUBSCRIPTION,
-      variables: { userId: 1 },
     },
     result: {
       data: null,
@@ -48,7 +47,6 @@ const basicMocks = [
   {
     request: {
       query: CONVERSATIONS_UPDATE_SUBSCRIPTION,
-      variables: { userId: 1 },
     },
     result: {
       data: null,
@@ -112,7 +110,6 @@ describe("ChatBar", () => {
       {
         request: {
           query: CONVERSATIONS_SUBSCRIPTION,
-          variables: { userId: 1 },
         },
         result: {
           data: {
@@ -137,7 +134,6 @@ describe("ChatBar", () => {
       {
         request: {
           query: CONVERSATIONS_UPDATE_SUBSCRIPTION,
-          variables: { userId: 1 },
         },
         result: {
           data: {

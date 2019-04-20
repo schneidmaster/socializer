@@ -41,11 +41,13 @@ const AppNav = () => {
             {renderIf(token)(
               <Query query={GET_USER_INFO}>
                 {({ client, loading, error, data }) => {
-                  if (
-                    error &&
-                    error.graphQLErrors[0].message === "Unauthenticated"
-                  ) {
-                    setAuth(null);
+                  if (error) {
+                    if (
+                      error.graphQLErrors[0] &&
+                      error.graphQLErrors[0].message === "Unauthenticated"
+                    ) {
+                      setAuth(null);
+                    }
                     return null;
                   }
 

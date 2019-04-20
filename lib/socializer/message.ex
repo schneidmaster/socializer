@@ -1,6 +1,7 @@
 defmodule Socializer.Message do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
 
   alias Socializer.{Repo, Conversation, ConversationUser, User}
 
@@ -11,6 +12,12 @@ defmodule Socializer.Message do
     belongs_to :user, User
 
     timestamps()
+  end
+
+  def all_for_conversation(conversation) do
+    Repo.all(
+      from m in __MODULE__, where: m.conversation_id == ^conversation.id, order_by: [asc: m.id]
+    )
   end
 
   def create(attrs) do

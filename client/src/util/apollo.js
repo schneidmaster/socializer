@@ -21,11 +21,21 @@ const WS_URI =
 
 export const createClient = ({ ssr, req, fetch, tokenCookie } = {}) => {
   let link = createHttpLink({ uri: HTTP_URI, fetch });
+  let absintheSocket;
 
   if (!ssr) {
-    const socketLink = createAbsintheSocketLink(
-      AbsintheSocket.create(new PhoenixSocket(WS_URI)),
+    absintheSocket = AbsintheSocket.create(
+      new PhoenixSocket(WS_URI, {
+        params: () => {
+          if (Cookies.get("token")) {
+            return { token: Cookies.get("token") };
+          } else {
+            return {};
+          }
+        },
+      }),
     );
+    const socketLink = createAbsintheSocketLink(absintheSocket);
 
     link = split(
       (operation) => hasSubscription(operation.query),
@@ -52,10 +62,19 @@ export const createClient = ({ ssr, req, fetch, tokenCookie } = {}) => {
     cache.restore(window.__APOLLO_STATE__);
   }
 
-  return new ApolloClient({
+  const client = new ApolloClient({
     connectToDevTools: !ssr,
     ssrMode: ssr,
     link: authLink.concat(link),
     cache,
   });
+  return { client, absintheSocket };
+};
+
+export const refreshSocket = (socket) => {
+  socket.phoenixSocket.disconnect();
+  socket.phoenixSocket.channels[0].leave();
+  socket.channel = socket.phoenixSocket.channel("__absinthe__:control");
+  socket.channelJoinCreated = false;
+  socket.phoenixSocket.connect();
 };

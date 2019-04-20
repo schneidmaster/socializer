@@ -26,8 +26,8 @@ export const GET_CONVERSATIONS = gql`
 `;
 
 export const CONVERSATIONS_SUBSCRIPTION = gql`
-  subscription onConversationCreated($userId: String!) {
-    conversationCreated(userId: $userId) {
+  subscription onConversationCreated {
+    conversationCreated {
       id
       title
       updatedAt
@@ -40,8 +40,8 @@ export const CONVERSATIONS_SUBSCRIPTION = gql`
 `;
 
 export const CONVERSATIONS_UPDATE_SUBSCRIPTION = gql`
-  subscription onConversationUpdated($userId: String!) {
-    conversationUpdated(userId: $userId) {
+  subscription onConversationUpdated {
+    conversationUpdated {
       id
       title
       updatedAt
@@ -94,7 +94,6 @@ const ChatBar = () => {
               subscribeToNew={() => {
                 subscribeToMore({
                   document: CONVERSATIONS_SUBSCRIPTION,
-                  variables: { userId },
                   updateQuery: (prev, { subscriptionData }) => {
                     if (!subscriptionData.data) return prev;
                     const newConversation =
@@ -112,9 +111,6 @@ const ChatBar = () => {
                 });
                 subscribeToMore({
                   document: CONVERSATIONS_UPDATE_SUBSCRIPTION,
-                  variables: {
-                    userId,
-                  },
                   updateQuery: (prev, { subscriptionData }) => {
                     if (!subscriptionData.data) return prev;
                     const updatedConversation =

@@ -2,10 +2,26 @@ defmodule SocializerWeb.AbsintheSocket do
   use Phoenix.Socket
   use Absinthe.Phoenix.Socket, schema: SocializerWeb.Schema
 
-  def connect(_params, socket, _connect_info) do
+  alias Absinthe.Phoenix.Socket
+  alias Socializer.{Guardian, User}
+
+  def connect(%{"token" => token}, socket) do
+    with {:ok, claim} <- Guardian.decode_and_verify(token),
+         user <- User.find(claim["sub"]) do
+      socket = Socket.put_options(socket, context: %{current_user: user})
+      {:ok, socket}
+    else
+      _ -> {:ok, socket}
+    end
+  end
+
+  def connect(_, socket) do
     {:ok, socket}
   end
 
-  # Returning `nil` makes this socket anonymous.
-  def id(_socket), do: nil
+  def id(%{assigns: %{absinthe: %{opts: [context: %{current_user: user}]}}}) do
+    "absinthe_socket:#{user.id}"
+  end
+
+  def id(_), do: nil
 end

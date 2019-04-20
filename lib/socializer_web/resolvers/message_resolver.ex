@@ -10,7 +10,7 @@ defmodule SocializerWeb.Resolvers.MessageResolver do
         {:error, "Not found"}
 
       conversation ->
-        {:ok, conversation |> Repo.preload(:messages) |> Map.get(:messages)}
+        {:ok, Message.all_for_conversation(conversation)}
     end
   end
 
