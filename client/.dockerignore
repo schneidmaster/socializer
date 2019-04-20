@@ -1,2 +1,4 @@
-node_modules
+build/
+coverage/
+node_modules/
 yarn-error.log
