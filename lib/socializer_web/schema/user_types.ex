@@ -17,7 +17,6 @@ defmodule SocializerWeb.Schema.UserTypes do
       end)
     end
 
-    field :conversations, list_of(:conversation), resolve: assoc(:conversations)
     field :posts, list_of(:post), resolve: assoc(:posts)
   end
 
