@@ -11,4 +11,3 @@ export { default as NewConversation } from "./NewConversation";
 export { default as NewItem } from "./NewItem";
 export { default as NewMessage } from "./NewMessage";
 export { default as Posts } from "./Posts";
-export { default as Subscriber } from "./Subscriber";

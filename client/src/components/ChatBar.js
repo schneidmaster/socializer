@@ -7,7 +7,8 @@ import Gravatar from "react-gravatar";
 import produce from "immer";
 import { reverse, sortBy } from "lodash";
 import renderIf from "render-if";
-import { ErrorMessage, Loading, NewConversation, Subscriber } from "components";
+import { ErrorMessage, Loading, NewConversation } from "components";
+import { Subscriber } from "containers";
 import { AuthContext, ChatContext } from "util/context";
 import "./ChatBar.css";
 

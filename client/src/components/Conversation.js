@@ -2,13 +2,8 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import produce from "immer";
-import {
-  ErrorMessage,
-  Loading,
-  MessageThread,
-  NewMessage,
-  Subscriber,
-} from "components";
+import { ErrorMessage, Loading, MessageThread, NewMessage } from "components";
+import { Subscriber } from "containers";
 import "./Conversation.css";
 
 export const GET_CONVERSATION = gql`

@@ -2,14 +2,14 @@ import React from "react";
 import { render, wait } from "react-testing-library";
 import { MockedProvider } from "react-apollo/test-utils";
 import { MemoryRouter } from "react-router-dom";
-import { Subscriber } from "components";
+import { Subscriber } from "containers";
 import { AuthContext } from "util/context";
 import Conversation, {
   GET_CONVERSATION,
   MESSAGES_SUBSCRIPTION,
 } from "./Conversation";
 
-jest.mock("components/Subscriber", () =>
+jest.mock("containers/Subscriber", () =>
   jest.fn().mockImplementation(({ children }) => children),
 );
 
@@ -79,7 +79,7 @@ describe("Conversation", () => {
   it("renders correctly after created message", async () => {
     Subscriber.mockImplementation((props) => {
       const { default: ActualSubscriber } = jest.requireActual(
-        "components/Subscriber",
+        "containers/Subscriber",
       );
       return <ActualSubscriber {...props} />;
     });

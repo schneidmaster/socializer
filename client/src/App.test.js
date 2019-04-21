@@ -9,7 +9,7 @@ import { GET_POSTS } from "components/Posts";
 import { LOGIN } from "pages/Login";
 import App from "./App";
 
-jest.mock("components/Subscriber", () => ({ children }) => children);
+jest.mock("containers/Subscriber", () => ({ children }) => children);
 
 describe("App", () => {
   beforeEach(() => {
@@ -127,7 +127,10 @@ describe("App", () => {
       target: { value: "password" },
     });
     fireEvent.submit(getByTestId("login-form"));
+
+    // Ensure all the queries have finished.
     await wait(() => getByText("John Doe"));
+    await wait(() => getByText("Thoughts"));
 
     // Check that the homepage renders correctly.
     expect(container).toMatchSnapshot();

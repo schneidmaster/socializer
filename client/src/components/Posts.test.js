@@ -3,11 +3,11 @@ import { render, wait } from "react-testing-library";
 import { MockedProvider } from "react-apollo/test-utils";
 import { MemoryRouter } from "react-router-dom";
 import tk from "timekeeper";
-import { Subscriber } from "components";
+import { Subscriber } from "containers";
 import { AuthContext } from "util/context";
 import Posts, { GET_POSTS, POSTS_SUBSCRIPTION } from "./Posts";
 
-jest.mock("components/Subscriber", () =>
+jest.mock("containers/Subscriber", () =>
   jest.fn().mockImplementation(({ children }) => children),
 );
 
@@ -72,7 +72,7 @@ describe("Posts", () => {
   it("renders correctly after created post", async () => {
     Subscriber.mockImplementation((props) => {
       const { default: ActualSubscriber } = jest.requireActual(
-        "components/Subscriber",
+        "containers/Subscriber",
       );
       return <ActualSubscriber {...props} />;
     });

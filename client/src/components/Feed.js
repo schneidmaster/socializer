@@ -1,5 +1,6 @@
 import React from "react";
-import { FeedItem, NewItem, Subscriber } from "components";
+import { FeedItem, NewItem } from "components";
+import { Subscriber } from "containers";
 
 const Feed = ({ feedType, items, createParams, subscribeToNew }) => {
   return (
