@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withApollo } from "react-apollo";
 import Cookies from "js-cookie";
 import { refreshSocket } from "util/apollo";
@@ -14,17 +14,13 @@ const StateProvider = ({
   const [token, setToken] = useState(initialToken || Cookies.get("token"));
   const [userId, setUserId] = useState(initialUserId || Cookies.get("userId"));
   const [chatState, setChatState] = useState("default");
-  const tokenWas = useRef(token);
 
   // If the token changed (i.e. the user logged in
   // or out), clear the Apollo store and refresh the
   // websocket connection.
   useEffect(() => {
-    if (tokenWas.current !== token) {
-      if (!token) client.clearStore();
-      if (socket) refreshSocket(socket);
-      tokenWas.current = token;
-    }
+    if (!token) client.clearStore();
+    if (socket) refreshSocket(socket);
   }, [token]);
 
   const setAuth = (data) => {
