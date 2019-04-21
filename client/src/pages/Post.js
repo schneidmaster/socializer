@@ -74,6 +74,7 @@ const Post = ({
                   <h5>Comments</h5>
                   <Feed
                     feedType="comment"
+                    newItemPosition="bottom"
                     items={data.post.comments}
                     createParams={{ postId: id }}
                     subscribeToNew={() =>
@@ -86,7 +87,7 @@ const Post = ({
                             subscriptionData.data.commentCreated;
 
                           return produce(prev, (next) => {
-                            next.post.comments.unshift(newComment);
+                            next.post.comments.push(newComment);
                           });
                         },
                       })

@@ -47,7 +47,12 @@ describe("Feed", () => {
     const subscribeToNew = jest.fn();
     const { container } = render(
       <MemoryRouter>
-        <Feed feedType="post" items={items} subscribeToNew={subscribeToNew} />
+        <Feed
+          feedType="comment"
+          newItemPosition="bottom"
+          items={items}
+          subscribeToNew={subscribeToNew}
+        />
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();

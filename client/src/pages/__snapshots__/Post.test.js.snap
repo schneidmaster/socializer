@@ -119,20 +119,48 @@ exports[`Post renders correctly after created comment 1`] = `
           class="mb-4 card"
         >
           <div
-            class="card-body"
+            class="d-flex justify-content-between align-items-center card-header"
           >
+            <div
+              class="d-flex align-items-center"
+            >
+              <img
+                alt="Gravatar for undefined"
+                class="react-gravatar rounded-circle"
+                height="30"
+                src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+                srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+                width="30"
+              />
+              <div
+                class="ml-2"
+              >
+                <div
+                  class="h6 mb-0"
+                >
+                  Patrick Lane
+                </div>
+              </div>
+            </div>
             <div
               class="text-muted h7"
             >
-              <a
-                href="/login"
+              <time
+                datetime="2019-04-17T18:00:00.000Z"
+                title="2019-04-17T18:00:00Z"
               >
-                Log in
-              </a>
-               to submit a 
-              comment
-              .
+                2 days ago
+              </time>
             </div>
+          </div>
+          <div
+            class="card-body"
+          >
+            <p
+              class="card-text"
+            >
+              I agree!
+            </p>
           </div>
         </div>
         <div
@@ -187,48 +215,20 @@ exports[`Post renders correctly after created comment 1`] = `
           class="mb-4 card"
         >
           <div
-            class="d-flex justify-content-between align-items-center card-header"
+            class="card-body"
           >
-            <div
-              class="d-flex align-items-center"
-            >
-              <img
-                alt="Gravatar for undefined"
-                class="react-gravatar rounded-circle"
-                height="30"
-                src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
-                srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
-                width="30"
-              />
-              <div
-                class="ml-2"
-              >
-                <div
-                  class="h6 mb-0"
-                >
-                  Patrick Lane
-                </div>
-              </div>
-            </div>
             <div
               class="text-muted h7"
             >
-              <time
-                datetime="2019-04-17T18:00:00.000Z"
-                title="2019-04-17T18:00:00Z"
+              <a
+                href="/login"
               >
-                2 days ago
-              </time>
+                Log in
+              </a>
+               to submit a 
+              comment
+              .
             </div>
-          </div>
-          <div
-            class="card-body"
-          >
-            <p
-              class="card-text"
-            >
-              I agree!
-            </p>
           </div>
         </div>
       </div>
@@ -356,26 +356,6 @@ exports[`Post renders correctly when loaded 1`] = `
           class="mb-4 card"
         >
           <div
-            class="card-body"
-          >
-            <div
-              class="text-muted h7"
-            >
-              <a
-                href="/login"
-              >
-                Log in
-              </a>
-               to submit a 
-              comment
-              .
-            </div>
-          </div>
-        </div>
-        <div
-          class="mb-4 card"
-        >
-          <div
             class="d-flex justify-content-between align-items-center card-header"
           >
             <div
@@ -418,6 +398,26 @@ exports[`Post renders correctly when loaded 1`] = `
             >
               I agree!
             </p>
+          </div>
+        </div>
+        <div
+          class="mb-4 card"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="text-muted h7"
+            >
+              <a
+                href="/login"
+              >
+                Log in
+              </a>
+               to submit a 
+              comment
+              .
+            </div>
           </div>
         </div>
       </div>
