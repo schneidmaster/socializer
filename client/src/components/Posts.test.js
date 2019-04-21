@@ -33,7 +33,7 @@ describe("Posts", () => {
     expect(container).toMatchSnapshot();
   });
 
-  it("renders correctly when loaded", () => {
+  it("renders correctly when loaded", async () => {
     const mocks = [
       {
         request: {
@@ -57,7 +57,7 @@ describe("Posts", () => {
         },
       },
     ];
-    const { container } = render(
+    const { container, getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{}}>
           <MockedProvider mocks={mocks} addTypename={false}>
@@ -66,6 +66,7 @@ describe("Posts", () => {
         </AuthContext.Provider>
       </MemoryRouter>,
     );
+    await wait(() => getByText("Thoughts"));
     expect(container).toMatchSnapshot();
   });
 
