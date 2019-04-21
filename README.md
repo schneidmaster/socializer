@@ -2,7 +2,7 @@
 
 # Socializer
 
-Socializer is a basic social media web application to demonstrate Elixir + Phoenix + GraphQL + React + Apollo.
+Socializer is a basic social media web application to demonstrate Elixir + Phoenix + GraphQL + React + Apollo. I also wrote an extensive blog post about building the application which you can read [here](https://schneider.dev/blog/elixir-phoenix-absinthe-graphql-react-apollo-absurdly-deep-dive).
 
 ## Architecture
 
