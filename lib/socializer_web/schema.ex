@@ -29,4 +29,8 @@ defmodule SocializerWeb.Schema do
     import_fields(:message_subscriptions)
     import_fields(:post_subscriptions)
   end
+
+  def middleware(middleware, _field, _object) do
+    [NewRelic.Absinthe.Middleware] ++ middleware
+  end
 end

@@ -36,3 +36,4 @@ socializer-*.tar
 /config/*.secret.exs
 
 .DS_Store
+/tmp

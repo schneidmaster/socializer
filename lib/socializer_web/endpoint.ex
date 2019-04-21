@@ -1,6 +1,7 @@
 defmodule SocializerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :socializer
   use Absinthe.Phoenix.Endpoint
+  use NewRelic.Transaction
 
   origin =
     case Mix.env() do
