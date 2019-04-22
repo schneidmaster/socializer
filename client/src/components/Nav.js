@@ -7,7 +7,7 @@ import renderIf from "render-if";
 import { AuthContext } from "util/context";
 
 export const GET_USER_INFO = gql`
-  {
+  query GetUserInfo {
     currentUser {
       name
     }

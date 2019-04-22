@@ -5,7 +5,7 @@ import produce from "immer";
 import { ErrorMessage, Feed, Loading } from "components";
 
 export const GET_POSTS = gql`
-  {
+  query GetPosts {
     posts {
       id
       body

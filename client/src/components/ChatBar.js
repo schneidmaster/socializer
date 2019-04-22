@@ -13,7 +13,7 @@ import { AuthContext, ChatContext } from "util/context";
 import "./ChatBar.css";
 
 export const GET_CONVERSATIONS = gql`
-  {
+  query GetConversations {
     conversations {
       id
       title
