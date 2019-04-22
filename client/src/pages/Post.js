@@ -86,6 +86,16 @@ const Post = ({
                           const newComment =
                             subscriptionData.data.commentCreated;
 
+                          // Check that we don't already have
+                          // the comment stored.
+                          if (
+                            prev.post.comments.find(
+                              (comment) => comment.id === newComment.id,
+                            )
+                          ) {
+                            return prev;
+                          }
+
                           return produce(prev, (next) => {
                             next.post.comments.push(newComment);
                           });

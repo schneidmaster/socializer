@@ -57,6 +57,17 @@ const Conversation = ({
                 updateQuery: (prev, { subscriptionData }) => {
                   if (!subscriptionData.data) return prev;
                   const newMessage = subscriptionData.data.messageCreated;
+
+                  // Check that we don't already have the
+                  // message stored.
+                  if (
+                    prev.conversation.messages.find(
+                      (message) => message.id === newMessage.id,
+                    )
+                  ) {
+                    return prev;
+                  }
+
                   return produce(prev, (next) => {
                     next.conversation.messages.push(newMessage);
                   });

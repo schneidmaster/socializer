@@ -99,12 +99,17 @@ const ChatBar = () => {
                     if (!subscriptionData.data) return prev;
                     const newConversation =
                       subscriptionData.data.conversationCreated;
+
+                    // Check that we don't already have the
+                    // conversation stored.
                     if (
                       prev.conversations.find(
                         (c) => c.id === newConversation.id,
                       )
-                    )
+                    ) {
                       return prev;
+                    }
+
                     return produce(prev, (next) => {
                       next.conversations.unshift(newConversation);
                     });

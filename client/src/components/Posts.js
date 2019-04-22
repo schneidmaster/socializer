@@ -53,6 +53,12 @@ const Posts = () => {
                     if (!subscriptionData.data) return prev;
                     const newPost = subscriptionData.data.postCreated;
 
+                    // Check that we don't already have the
+                    // post stored.
+                    if (prev.posts.find((post) => post.id === newPost.id)) {
+                      return prev;
+                    }
+
                     return produce(prev, (next) => {
                       next.posts.unshift(newPost);
                     });
