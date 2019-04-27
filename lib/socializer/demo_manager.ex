@@ -11,7 +11,7 @@ defmodule Socializer.DemoManager do
   }
 
   def reset_and_seed_database!(force \\ false) do
-    if force || System.get_env("CLEAR_DB_NIGHTLY") do
+    if force || System.get_env("CLEAR_DB_WEEKLY") do
       DemoManager.reset_database!()
       DemoManager.seed!()
     end
@@ -20,37 +20,44 @@ defmodule Socializer.DemoManager do
   def reset_database! do
     # Deletion order is to avoid violating foreign-key
     # constraints.
+    # Note: does not delete users.
     Repo.delete_all(Comment)
     Repo.delete_all(Post)
     Repo.delete_all(Message)
     Repo.delete_all(ConversationUser)
     Repo.delete_all(Conversation)
-    Repo.delete_all(User)
   end
 
   def seed! do
-    users = [
-      Repo.insert!(%User{
-        name: "Joe Smith",
-        email: "joesmith@lvh.me",
-        password: random_password()
-      }),
-      Repo.insert!(%User{
-        name: "Jane Doe",
-        email: "janedoe@lvh.me",
-        password: random_password()
-      }),
-      Repo.insert!(%User{
-        name: "Jeremy Peters",
-        email: "jeremypeters@lvh.me",
-        password: random_password()
-      }),
-      Repo.insert!(%User{
-        name: "Jack Hawk",
-        email: "jackhawk@lvh.me",
-        password: :crypto.strong_rand_bytes(32) |> Base.encode64() |> binary_part(0, 32)
-      })
-    ]
+    users =
+      case Repo.aggregate(User, :count, :id) > 0 do
+        true ->
+          Repo.all(User)
+
+        false ->
+          [
+            Repo.insert!(%User{
+              name: "Joe Smith",
+              email: "joesmith@lvh.me",
+              password: random_password()
+            }),
+            Repo.insert!(%User{
+              name: "Jane Doe",
+              email: "janedoe@lvh.me",
+              password: random_password()
+            }),
+            Repo.insert!(%User{
+              name: "Jeremy Peters",
+              email: "jeremypeters@lvh.me",
+              password: random_password()
+            }),
+            Repo.insert!(%User{
+              name: "Jack Hawk",
+              email: "jackhawk@lvh.me",
+              password: :crypto.strong_rand_bytes(32) |> Base.encode64() |> binary_part(0, 32)
+            })
+          ]
+      end
 
     posts =
       [

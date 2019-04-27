@@ -20,5 +20,5 @@ config :socializer, Socializer.Repo,
 config :socializer, Socializer.Scheduler,
   timezone: "America/New_York",
   jobs: [
-    {"@daily", {Socializer.DemoManager, :reset_and_seed_database!, []}}
+    {"@weekly", {Socializer.DemoManager, :reset_and_seed_database!, []}}
   ]
