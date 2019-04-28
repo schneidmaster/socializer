@@ -43,7 +43,7 @@
     "react-loadable": "^5.5.0",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "3.0.0",
     "react-select": "^2.4.2",
     "react-timeago": "^4.4.0",
     "render-if": "^0.1.1"
@@ -56,7 +56,6 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-react-hooks": "^1.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "jest-junit": "^6.3.0",
     "prettier": "^1.17.0",
@@ -69,7 +68,7 @@
     "serve": "NODE_PATH=src node ./server/index.js",
     "format": "prettier --write './*.js' '**/*.js'",
     "lint": "eslint '**/*.js'",
-    "test": "react-scripts test --env=jsdom --no-watch",
+    "test": "react-scripts test --env=jsdom --watchAll=false",
     "test:ci": "JEST_JUNIT_OUTPUT=/tmp/test-results/jest/results.xml react-scripts test --env=jsdom --coverage --runInBand --reporters=\"jest-junit\"",
     "test:watch": "react-scripts test --env=jsdom"
   },

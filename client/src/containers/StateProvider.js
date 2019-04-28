@@ -21,7 +21,7 @@ const StateProvider = ({
   useEffect(() => {
     if (!token) client.clearStore();
     if (socket) refreshSocket(socket);
-  }, [token]);
+  }, [client, socket, token]);
 
   const setAuth = (data) => {
     if (data) {
