@@ -17,7 +17,7 @@ exports[`Chat renders correctly when chat is selected 1`] = `
       class="chat-row row"
     >
       <div
-        class="d-none d-md-block col-md-4 col-0"
+        class="chat-col d-none d-md-block col-md-4 col-0"
       >
         <div
           class="chat-bar"
@@ -44,7 +44,7 @@ exports[`Chat renders correctly when no chat is selected 1`] = `
       class="chat-row row"
     >
       <div
-        class="col-md-4 col-12"
+        class="chat-col col-md-4 col-12"
       >
         <div
           class="chat-bar"

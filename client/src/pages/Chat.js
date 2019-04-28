@@ -34,7 +34,7 @@ const Chat = ({
           <Col
             xs={id ? 0 : 12}
             md={4}
-            className={cx({ "d-none d-md-block": id })}
+            className={cx("chat-col", { "d-none d-md-block": id })}
           >
             <ChatBar />
           </Col>
