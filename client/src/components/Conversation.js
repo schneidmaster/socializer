@@ -76,9 +76,11 @@ const Conversation = ({
             }
           >
             <div className="d-flex chat-layout">
-              <h5>{data.conversation.title}</h5>
-              <hr />
-              <MessageThread messages={data.conversation.messages} />
+              <div className="d-flex chat-content">
+                <h5>{data.conversation.title}</h5>
+                <hr />
+                <MessageThread messages={data.conversation.messages} />
+              </div>
 
               <NewMessage conversationId={id} />
             </div>

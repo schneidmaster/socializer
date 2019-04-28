@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { Card, Form } from "react-bootstrap";
+import "./NewMessage.css";
 
 export const CREATE_MESSAGE = gql`
   mutation CreateMessage($conversationId: String!, $body: String!) {
@@ -18,7 +19,7 @@ const NewMessage = ({ conversationId }) => {
     <Mutation mutation={CREATE_MESSAGE} onCompleted={() => setBody("")}>
       {(submit, { data, loading, error }) => {
         return (
-          <Card className="mt-2">
+          <Card className="new-message mt-2">
             <Card.Body>
               <Form
                 data-testid="new-message"

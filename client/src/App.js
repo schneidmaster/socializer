@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import { Meta, Nav } from "components";
 import { StateProvider } from "containers";
 import { Chat, Home, Login, Post, Signup } from "pages";
+import "./App.css";
 
 const App = (props) => {
   return (

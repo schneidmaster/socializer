@@ -5,79 +5,83 @@ exports[`Conversation renders correctly after created message 1`] = `
   <div
     class="d-flex chat-layout"
   >
-    <h5>
-      Jane Peters, Jack Smith
-    </h5>
-    <hr />
     <div
-      class="chat-messages"
+      class="d-flex chat-content"
     >
+      <h5>
+        Jane Peters, Jack Smith
+      </h5>
+      <hr />
       <div
-        class="d-flex chat-others"
+        class="chat-messages"
       >
         <div
-          class="d-flex mb-1 chat-bubble-wrapper"
+          class="d-flex chat-others"
         >
-          <img
-            alt="Gravatar for undefined"
-            class="react-gravatar rounded-circle mt-1"
-            height="30"
-            src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
-            srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
-            width="30"
-          />
           <div
-            class="p-2 chat-bubble"
+            class="d-flex mb-1 chat-bubble-wrapper"
           >
-            Hi there
+            <img
+              alt="Gravatar for undefined"
+              class="react-gravatar rounded-circle mt-1"
+              height="30"
+              src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+              srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+              width="30"
+            />
+            <div
+              class="p-2 chat-bubble"
+            >
+              Hi there
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="d-flex chat-others"
-      >
         <div
-          class="d-flex mb-1 chat-bubble-wrapper"
+          class="d-flex chat-others"
         >
-          <img
-            alt="Gravatar for undefined"
-            class="react-gravatar rounded-circle mt-1"
-            height="30"
-            src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
-            srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
-            width="30"
-          />
           <div
-            class="p-2 chat-bubble"
+            class="d-flex mb-1 chat-bubble-wrapper"
           >
-            Hello
+            <img
+              alt="Gravatar for undefined"
+              class="react-gravatar rounded-circle mt-1"
+              height="30"
+              src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+              srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+              width="30"
+            />
+            <div
+              class="p-2 chat-bubble"
+            >
+              Hello
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="d-flex chat-others"
-      >
         <div
-          class="d-flex mb-1 chat-bubble-wrapper"
+          class="d-flex chat-others"
         >
-          <img
-            alt="Gravatar for undefined"
-            class="react-gravatar rounded-circle mt-1"
-            height="30"
-            src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
-            srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
-            width="30"
-          />
           <div
-            class="p-2 chat-bubble"
+            class="d-flex mb-1 chat-bubble-wrapper"
           >
-            How's it going?
+            <img
+              alt="Gravatar for undefined"
+              class="react-gravatar rounded-circle mt-1"
+              height="30"
+              src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+              srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+              width="30"
+            />
+            <div
+              class="p-2 chat-bubble"
+            >
+              How's it going?
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div
-      class="mt-2 card"
+      class="new-message mt-2 card"
     >
       <div
         class="card-body"
@@ -108,58 +112,62 @@ exports[`Conversation renders correctly when loaded 1`] = `
   <div
     class="d-flex chat-layout"
   >
-    <h5>
-      Jane Peters, Jack Smith
-    </h5>
-    <hr />
     <div
-      class="chat-messages"
+      class="d-flex chat-content"
     >
+      <h5>
+        Jane Peters, Jack Smith
+      </h5>
+      <hr />
       <div
-        class="d-flex chat-others"
+        class="chat-messages"
       >
         <div
-          class="d-flex mb-1 chat-bubble-wrapper"
+          class="d-flex chat-others"
         >
-          <img
-            alt="Gravatar for undefined"
-            class="react-gravatar rounded-circle mt-1"
-            height="30"
-            src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
-            srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
-            width="30"
-          />
           <div
-            class="p-2 chat-bubble"
+            class="d-flex mb-1 chat-bubble-wrapper"
           >
-            Hi there
+            <img
+              alt="Gravatar for undefined"
+              class="react-gravatar rounded-circle mt-1"
+              height="30"
+              src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+              srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+              width="30"
+            />
+            <div
+              class="p-2 chat-bubble"
+            >
+              Hi there
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="d-flex chat-others"
-      >
         <div
-          class="d-flex mb-1 chat-bubble-wrapper"
+          class="d-flex chat-others"
         >
-          <img
-            alt="Gravatar for undefined"
-            class="react-gravatar rounded-circle mt-1"
-            height="30"
-            src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
-            srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
-            width="30"
-          />
           <div
-            class="p-2 chat-bubble"
+            class="d-flex mb-1 chat-bubble-wrapper"
           >
-            Hello
+            <img
+              alt="Gravatar for undefined"
+              class="react-gravatar rounded-circle mt-1"
+              height="30"
+              src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+              srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+              width="30"
+            />
+            <div
+              class="p-2 chat-bubble"
+            >
+              Hello
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div
-      class="mt-2 card"
+      class="new-message mt-2 card"
     >
       <div
         class="card-body"

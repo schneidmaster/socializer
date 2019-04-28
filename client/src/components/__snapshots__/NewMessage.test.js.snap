@@ -3,7 +3,7 @@
 exports[`NewMessage renders correctly 1`] = `
 <div>
   <div
-    class="mt-2 card"
+    class="new-message mt-2 card"
   >
     <div
       class="card-body"
