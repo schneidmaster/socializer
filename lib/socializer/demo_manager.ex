@@ -1,4 +1,6 @@
 defmodule Socializer.DemoManager do
+  import Ecto.Query
+
   alias Socializer.{
     DemoManager,
     Repo,
@@ -32,7 +34,16 @@ defmodule Socializer.DemoManager do
     users =
       case Repo.aggregate(User, :count, :id) > 0 do
         true ->
-          Repo.all(User)
+          Repo.all(
+            from u in User,
+              where:
+                u.email in [
+                  "joesmith@lvh.me",
+                  "janedoe@lvh.me",
+                  "jeremypeters@lvh.me",
+                  "jackhawk@lvh.me"
+                ]
+          )
 
         false ->
           [
