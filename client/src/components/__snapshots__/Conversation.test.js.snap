@@ -3,10 +3,10 @@
 exports[`Conversation renders correctly after created message 1`] = `
 <div>
   <div
-    class="d-flex chat-layout"
+    class="chat-layout d-flex flex-column pb-4"
   >
     <div
-      class="d-flex chat-content"
+      class="chat-content d-flex flex-column"
     >
       <h5>
         Jane Peters, Jack Smith
@@ -110,10 +110,10 @@ exports[`Conversation renders correctly after created message 1`] = `
 exports[`Conversation renders correctly when loaded 1`] = `
 <div>
   <div
-    class="d-flex chat-layout"
+    class="chat-layout d-flex flex-column pb-4"
   >
     <div
-      class="d-flex chat-content"
+      class="chat-content d-flex flex-column"
     >
       <h5>
         Jane Peters, Jack Smith

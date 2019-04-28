@@ -1,15 +1,17 @@
 .chat-layout {
   flex: 1;
-  flex-direction: column;
   height: 100%;
 }
 
 .chat-content {
   flex: 1;
-  flex-direction: column;
 }
 
 @media (max-device-width: 768px) {
+  .chat-layout.pb-4 {
+    padding-bottom: 0px !important;
+  }
+
   .chat-content {
     padding-left: 15px;
     padding-right: 15px;

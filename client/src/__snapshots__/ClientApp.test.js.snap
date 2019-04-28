@@ -3,7 +3,7 @@
 exports[`ClientApp renders correctly 1`] = `
 <div>
   <nav
-    class="mb-4 navbar navbar-expand navbar-dark bg-primary"
+    class="mb-4 navbar navbar-expand navbar-dark bg-primary fixed-top"
   >
     <div
       class="container"

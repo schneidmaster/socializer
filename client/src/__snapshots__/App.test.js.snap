@@ -3,7 +3,7 @@
 exports[`App successfully proceeds through user flow logging in and out 1`] = `
 <div>
   <nav
-    class="mb-4 navbar navbar-expand navbar-dark bg-primary"
+    class="mb-4 navbar navbar-expand navbar-dark bg-primary fixed-top"
   >
     <div
       class="container"
@@ -85,57 +85,65 @@ exports[`App successfully proceeds through user flow logging in and out 1`] = `
       <div
         class="d-none d-md-block col-md-4"
       >
-        <h4
-          class="d-flex justify-content-between align-items-center"
+        <div
+          class="chat-bar sticky-top d-flex flex-column pb-4"
         >
-          <span>
-            Chat
-          </span>
-          <button
-            class="btn btn-primary btn-sm"
-            type="button"
+          <h4
+            class="d-flex justify-content-between align-items-center"
           >
-            New chat
-          </button>
-        </h4>
-        <a
-          class="d-flex align-items-center p-2 chat"
-          href="/chat/1"
-        >
-          <div
-            class="d-flex chat-avatars"
-          >
-            <div
-              class="chat-avatar-wrapper"
+            <span>
+              Chat
+            </span>
+            <button
+              class="btn btn-primary btn-sm"
+              type="button"
             >
-              <img
-                alt="Gravatar for undefined"
-                class="react-gravatar rounded-circle"
-                height="30"
-                src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
-                srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
-                width="30"
-              />
-            </div>
-            <div
-              class="chat-avatar-wrapper"
-            >
-              <img
-                alt="Gravatar for undefined"
-                class="react-gravatar rounded-circle"
-                height="30"
-                src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
-                srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
-                width="30"
-              />
-            </div>
-          </div>
+              New chat
+            </button>
+          </h4>
           <div
-            class="chat-title"
+            class="chat-conversations d-flex flex-column"
           >
-            Jane Smith, John Doe
+            <a
+              class="d-flex align-items-center p-2 chat"
+              href="/chat/1"
+            >
+              <div
+                class="d-flex chat-avatars"
+              >
+                <div
+                  class="chat-avatar-wrapper"
+                >
+                  <img
+                    alt="Gravatar for undefined"
+                    class="react-gravatar rounded-circle"
+                    height="30"
+                    src="//www.gravatar.com/avatar/abc?d=retro&r=g&s=30"
+                    srcset="//www.gravatar.com/avatar/abc?d=retro&r=g&s=60 2x"
+                    width="30"
+                  />
+                </div>
+                <div
+                  class="chat-avatar-wrapper"
+                >
+                  <img
+                    alt="Gravatar for undefined"
+                    class="react-gravatar rounded-circle"
+                    height="30"
+                    src="//www.gravatar.com/avatar/def?d=retro&r=g&s=30"
+                    srcset="//www.gravatar.com/avatar/def?d=retro&r=g&s=60 2x"
+                    width="30"
+                  />
+                </div>
+              </div>
+              <div
+                class="chat-title"
+              >
+                Jane Smith, John Doe
+              </div>
+            </a>
           </div>
-        </a>
+        </div>
       </div>
       <div
         class="col-md-8 col-12"
@@ -237,7 +245,7 @@ exports[`App successfully proceeds through user flow logging in and out 1`] = `
 exports[`App successfully proceeds through user flow logging in and out 2`] = `
 <div>
   <nav
-    class="mb-4 navbar navbar-expand navbar-dark bg-primary"
+    class="mb-4 navbar navbar-expand navbar-dark bg-primary fixed-top"
   >
     <div
       class="container"

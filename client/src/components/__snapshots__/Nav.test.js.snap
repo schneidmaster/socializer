@@ -3,7 +3,7 @@
 exports[`Nav renders correctly when loaded 1`] = `
 <div>
   <nav
-    class="mb-4 navbar navbar-expand navbar-dark bg-primary"
+    class="mb-4 navbar navbar-expand navbar-dark bg-primary fixed-top"
   >
     <div
       class="container"
@@ -82,7 +82,7 @@ exports[`Nav renders correctly when loaded 1`] = `
 exports[`Nav renders correctly when loading 1`] = `
 <div>
   <nav
-    class="mb-4 navbar navbar-expand navbar-dark bg-primary"
+    class="mb-4 navbar navbar-expand navbar-dark bg-primary fixed-top"
   >
     <div
       class="container"
@@ -135,7 +135,7 @@ exports[`Nav renders correctly when loading 1`] = `
 exports[`Nav renders correctly when unauthenticated 1`] = `
 <div>
   <nav
-    class="mb-4 navbar navbar-expand navbar-dark bg-primary"
+    class="mb-4 navbar navbar-expand navbar-dark bg-primary fixed-top"
   >
     <div
       class="container"

@@ -18,7 +18,7 @@ const AppNav = () => {
   const { token, setAuth } = useContext(AuthContext);
 
   return (
-    <Navbar bg="primary" variant="dark" className="mb-4">
+    <Navbar bg="primary" variant="dark" className="mb-4" fixed="top">
       <Container>
         <Link to="/" className="navbar-brand">
           Socializer

@@ -1,3 +1,7 @@
+.new-message .form-group {
+  margin-bottom: 0px;
+}
+
 @media (max-device-width: 767px) {
   .card.new-message {
     border-radius: 0px;

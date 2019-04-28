@@ -1,6 +1,25 @@
+.chat-bar.sticky-top {
+  height: calc(100vh - 80px);
+  top: 80px;
+}
+
+.chat-conversations {
+  overflow-y: scroll;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
 .chat,
 .empty-state {
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.chat:first-child {
+  border-top: none;
+}
+
+.chat:last-child {
+  border-bottom: none;
 }
 
 .chat:hover {

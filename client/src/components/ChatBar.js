@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
@@ -70,7 +70,7 @@ const ChatBar = () => {
   }
 
   return (
-    <Fragment>
+    <div className="chat-bar sticky-top d-flex flex-column pb-4">
       <h4 className="d-flex justify-content-between align-items-center">
         <span>{chatState === "creating" ? "New chat" : "Chat"}</span>
         {renderIf(chatState === "default")(
@@ -83,88 +83,91 @@ const ChatBar = () => {
           </Button>,
         )}
       </h4>
-      <Query query={GET_CONVERSATIONS}>
-        {({ client, loading, error, data, subscribeToMore }) => {
-          if (loading) return <Loading />;
-          if (error) return <ErrorMessage message={error.message} />;
-          const conversations = reverse(
-            sortBy(data.conversations, "updatedAt"),
-          );
-          return (
-            <Subscriber
-              subscribeToNew={() => {
-                subscribeToMore({
-                  document: CONVERSATIONS_SUBSCRIPTION,
-                  updateQuery: (prev, { subscriptionData }) => {
-                    if (!subscriptionData.data) return prev;
-                    const newConversation =
-                      subscriptionData.data.conversationCreated;
 
-                    // Check that we don't already have the
-                    // conversation stored.
-                    if (
-                      prev.conversations.find(
-                        (c) => c.id === newConversation.id,
-                      )
-                    ) {
-                      return prev;
-                    }
+      <div className="chat-conversations d-flex flex-column">
+        <Query query={GET_CONVERSATIONS}>
+          {({ client, loading, error, data, subscribeToMore }) => {
+            if (loading) return <Loading />;
+            if (error) return <ErrorMessage message={error.message} />;
+            const conversations = reverse(
+              sortBy(data.conversations, "updatedAt"),
+            );
+            return (
+              <Subscriber
+                subscribeToNew={() => {
+                  subscribeToMore({
+                    document: CONVERSATIONS_SUBSCRIPTION,
+                    updateQuery: (prev, { subscriptionData }) => {
+                      if (!subscriptionData.data) return prev;
+                      const newConversation =
+                        subscriptionData.data.conversationCreated;
 
-                    return produce(prev, (next) => {
-                      next.conversations.unshift(newConversation);
-                    });
-                  },
-                });
-                subscribeToMore({
-                  document: CONVERSATIONS_UPDATE_SUBSCRIPTION,
-                  updateQuery: (prev, { subscriptionData }) => {
-                    if (!subscriptionData.data) return prev;
-                    const updatedConversation =
-                      subscriptionData.data.conversationUpdated;
-                    return produce(prev, (next) => {
-                      const match = prev.conversations.findIndex(
-                        (c) => c.id === updatedConversation.id,
-                      );
-                      if (match !== -1) {
-                        next.conversations[match] = updatedConversation;
+                      // Check that we don't already have the
+                      // conversation stored.
+                      if (
+                        prev.conversations.find(
+                          (c) => c.id === newConversation.id,
+                        )
+                      ) {
+                        return prev;
                       }
-                    });
-                  },
-                });
-              }}
-            >
-              {renderIf(chatState === "creating")(<NewConversation />)}
 
-              {renderIf(chatState === "default")(
-                conversations.map((conversation) => (
-                  <Link
-                    key={conversation.id}
-                    to={`/chat/${conversation.id}`}
-                    className="d-flex align-items-center p-2 chat"
-                  >
-                    <div className="d-flex chat-avatars">
-                      {conversation.users
-                        .filter((user) => user.id !== userId)
-                        .slice(0, 3)
-                        .map((user) => (
-                          <div key={user.id} className="chat-avatar-wrapper">
-                            <Gravatar
-                              md5={user.gravatarMd5}
-                              className="rounded-circle"
-                              size={30}
-                            />
-                          </div>
-                        ))}
-                    </div>
-                    <div className="chat-title">{conversation.title}</div>
-                  </Link>
-                )),
-              )}
-            </Subscriber>
-          );
-        }}
-      </Query>
-    </Fragment>
+                      return produce(prev, (next) => {
+                        next.conversations.unshift(newConversation);
+                      });
+                    },
+                  });
+                  subscribeToMore({
+                    document: CONVERSATIONS_UPDATE_SUBSCRIPTION,
+                    updateQuery: (prev, { subscriptionData }) => {
+                      if (!subscriptionData.data) return prev;
+                      const updatedConversation =
+                        subscriptionData.data.conversationUpdated;
+                      return produce(prev, (next) => {
+                        const match = prev.conversations.findIndex(
+                          (c) => c.id === updatedConversation.id,
+                        );
+                        if (match !== -1) {
+                          next.conversations[match] = updatedConversation;
+                        }
+                      });
+                    },
+                  });
+                }}
+              >
+                {renderIf(chatState === "creating")(<NewConversation />)}
+
+                {renderIf(chatState === "default")(
+                  conversations.map((conversation) => (
+                    <Link
+                      key={conversation.id}
+                      to={`/chat/${conversation.id}`}
+                      className="d-flex align-items-center p-2 chat"
+                    >
+                      <div className="d-flex chat-avatars">
+                        {conversation.users
+                          .filter((user) => user.id !== userId)
+                          .slice(0, 3)
+                          .map((user) => (
+                            <div key={user.id} className="chat-avatar-wrapper">
+                              <Gravatar
+                                md5={user.gravatarMd5}
+                                className="rounded-circle"
+                                size={30}
+                              />
+                            </div>
+                          ))}
+                      </div>
+                      <div className="chat-title">{conversation.title}</div>
+                    </Link>
+                  )),
+                )}
+              </Subscriber>
+            );
+          }}
+        </Query>
+      </div>
+    </div>
   );
 };
 

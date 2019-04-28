@@ -75,8 +75,8 @@ const Conversation = ({
               })
             }
           >
-            <div className="d-flex chat-layout">
-              <div className="d-flex chat-content">
+            <div className="chat-layout d-flex flex-column pb-4">
+              <div className="chat-content d-flex flex-column">
                 <h5>{data.conversation.title}</h5>
                 <hr />
                 <MessageThread messages={data.conversation.messages} />
