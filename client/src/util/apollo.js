@@ -72,9 +72,7 @@ export const createClient = ({ ssr, req, fetch, tokenCookie } = {}) => {
 };
 
 export const refreshSocket = (socket) => {
-  socket.phoenixSocket.disconnect();
-  socket.phoenixSocket.channels[0].leave();
-  socket.channel = socket.phoenixSocket.channel("__absinthe__:control");
-  socket.channelJoinCreated = false;
-  socket.phoenixSocket.connect();
+  // Close the connection to force a reconnection with the
+  // new token parameter.
+  socket.phoenixSocket.conn && socket.phoenixSocket.conn.close();
 };
