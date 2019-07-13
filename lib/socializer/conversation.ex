@@ -1,7 +1,5 @@
 defmodule Socializer.Conversation do
-  use Ecto.Schema
-  import Ecto.Changeset
-  import Ecto.Query
+  use Socializer.Model
 
   alias Socializer.{Repo, ConversationUser, Message, User}
 
@@ -58,15 +56,6 @@ defmodule Socializer.Conversation do
         where: cu.conversation_id == ^conversation.id,
         select: cu.user_id
     )
-  end
-
-  def find(id) do
-    Repo.get(__MODULE__, id)
-  end
-
-  def changeset(attrs) do
-    %__MODULE__{}
-    |> changeset(attrs)
   end
 
   def changeset(conversation, attrs) do

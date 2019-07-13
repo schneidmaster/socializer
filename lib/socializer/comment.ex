@@ -1,8 +1,7 @@
 defmodule Socializer.Comment do
-  use Ecto.Schema
-  import Ecto.Changeset
+  use Socializer.Model
 
-  alias Socializer.{Repo, Post, User}
+  alias Socializer.{Post, User}
 
   schema "comments" do
     field :body, :string
@@ -11,17 +10,6 @@ defmodule Socializer.Comment do
     belongs_to :user, User
 
     timestamps()
-  end
-
-  def create(attrs) do
-    attrs
-    |> changeset()
-    |> Repo.insert()
-  end
-
-  def changeset(attrs) do
-    %__MODULE__{}
-    |> changeset(attrs)
   end
 
   def changeset(comment, attrs) do

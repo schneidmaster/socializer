@@ -1,7 +1,5 @@
 defmodule Socializer.Message do
-  use Ecto.Schema
-  import Ecto.Changeset
-  import Ecto.Query
+  use Socializer.Model
 
   alias Socializer.{Repo, Conversation, ConversationUser, User}
 
@@ -20,17 +18,6 @@ defmodule Socializer.Message do
     )
   end
 
-  def create(attrs) do
-    attrs
-    |> changeset()
-    |> Repo.insert()
-  end
-
-  def changeset(attrs) do
-    %__MODULE__{}
-    |> changeset(attrs)
-  end
-
   def changeset(message, attrs) do
     message
     |> cast(attrs, [:body, :conversation_id, :user_id])
@@ -40,7 +27,7 @@ defmodule Socializer.Message do
     |> foreign_key_constraint(:user_id)
   end
 
-  def validate_user_in_conversation(changeset, field) do
+  defp validate_user_in_conversation(changeset, field) do
     validate_change(changeset, field, fn _, user_id ->
       case ConversationUser.find_by(%{
              conversation_id: changeset.changes[:conversation_id],

@@ -1,7 +1,5 @@
 defmodule Socializer.Post do
-  use Ecto.Schema
-  import Ecto.Changeset
-  import Ecto.Query
+  use Socializer.Model
 
   alias Socializer.{Repo, Comment, User}
 
@@ -15,22 +13,7 @@ defmodule Socializer.Post do
   end
 
   def all do
-    Repo.all(from p in __MODULE__, order_by: [desc: p.id])
-  end
-
-  def find(id) do
-    Repo.get(__MODULE__, id)
-  end
-
-  def create(attrs) do
-    attrs
-    |> changeset()
-    |> Repo.insert()
-  end
-
-  def changeset(attrs) do
-    %__MODULE__{}
-    |> changeset(attrs)
+    Repo.all(from row in __MODULE__, order_by: [desc: row.id])
   end
 
   def changeset(post, attrs) do

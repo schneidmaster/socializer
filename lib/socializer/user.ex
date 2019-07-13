@@ -1,7 +1,5 @@
 defmodule Socializer.User do
-  use Ecto.Schema
-  import Ecto.Changeset
-  import Ecto.Query
+  use Socializer.Model
 
   alias Socializer.{Repo, Conversation, Post}
 
@@ -24,25 +22,6 @@ defmodule Socializer.User do
         where: ilike(u.name, ^("%" <> search_term <> "%")) and u.id != ^current_user.id,
         limit: 25
     )
-  end
-
-  def find(id) do
-    Repo.get(__MODULE__, id)
-  end
-
-  def find_by(conds) do
-    Repo.get_by(__MODULE__, conds)
-  end
-
-  def create(attrs) do
-    attrs
-    |> changeset()
-    |> Repo.insert()
-  end
-
-  def changeset(attrs) do
-    %__MODULE__{}
-    |> changeset(attrs)
   end
 
   def changeset(%__MODULE__{} = user, attrs) do
