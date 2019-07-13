@@ -54,7 +54,7 @@ defmodule Socializer.MixProject do
       {:quantum, "~> 2.3"},
       {:timex, "~> 3.0"},
       {:new_relic_agent, "~> 1.0"},
-      {:new_relic_absinthe, "~> 0.0.1"},
+      {:new_relic_absinthe, "~> 0.0.2"},
       {:excoveralls, "~> 0.10", only: :test},
       {:ex_machina, "~> 2.3", only: :test},
       {:ex_spec, "~> 2.0", only: :test},
