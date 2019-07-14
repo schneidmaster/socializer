@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import { Col, Container, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import produce from "immer";
-import { ChatBar, ErrorMessage, Feed, FeedItem, Loading } from "components";
+import { ChatBar, Feed, FeedItem, QueryResult } from "components";
 
 export const GET_POST = gql`
   query GetPost($id: String!) {
@@ -51,7 +51,7 @@ const Post = ({
     params: { id },
   },
 }) => {
-  const { loading, error, data, subscribeToMore } = useQuery(GET_POST, {
+  const { subscribeToMore, ...queryResult } = useQuery(GET_POST, {
     variables: { id },
   });
 
@@ -80,41 +80,36 @@ const Post = ({
     [id, subscribeToMore],
   );
 
-  let content;
-  if (loading) {
-    content = <Loading />;
-  } else if (error) {
-    content = <ErrorMessage message={error.message} />;
-  } else {
-    content = (
-      <Row>
-        <Col md={4} className="d-none d-md-block">
-          <ChatBar />
-        </Col>
-        <Col xs={12} md={8}>
-          <h4>Discussion</h4>
-          <FeedItem item={data.post} />
-          <hr />
-          <h5>Comments</h5>
-          <Feed
-            feedType="comment"
-            newItemPosition="bottom"
-            items={data.post.comments}
-            createParams={{ postId: id }}
-            subscribeToNew={subscribeToNew}
-          />
-        </Col>
-      </Row>
-    );
-  }
-
   return (
     <Fragment>
       <Helmet>
         <title>Socializer | Discussion</title>
         <meta property="og:title" content="Socializer | Discussion" />
       </Helmet>
-      <Container>{content}</Container>
+      <Container>
+        <QueryResult {...queryResult}>
+          {({ data }) => (
+            <Row>
+              <Col md={4} className="d-none d-md-block">
+                <ChatBar />
+              </Col>
+              <Col xs={12} md={8}>
+                <h4>Discussion</h4>
+                <FeedItem item={data.post} />
+                <hr />
+                <h5>Comments</h5>
+                <Feed
+                  feedType="comment"
+                  newItemPosition="bottom"
+                  items={data.post.comments}
+                  createParams={{ postId: id }}
+                  subscribeToNew={subscribeToNew}
+                />
+              </Col>
+            </Row>
+          )}
+        </QueryResult>
+      </Container>
     </Fragment>
   );
 };

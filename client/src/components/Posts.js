@@ -2,7 +2,7 @@ import React, { Fragment, useCallback } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import produce from "immer";
-import { ErrorMessage, Feed, Loading } from "components";
+import { Feed, QueryResult } from "components";
 
 export const GET_POSTS = gql`
   query GetPosts {
@@ -35,7 +35,7 @@ export const POSTS_SUBSCRIPTION = gql`
 `;
 
 const Posts = () => {
-  const { loading, error, data, subscribeToMore } = useQuery(GET_POSTS);
+  const { subscribeToMore, ...queryResult } = useQuery(GET_POSTS);
   const subscribeToNew = useCallback(
     () =>
       subscribeToMore({
@@ -58,25 +58,18 @@ const Posts = () => {
     [subscribeToMore],
   );
 
-  let content;
-  if (loading) {
-    content = <Loading />;
-  } else if (error) {
-    content = <ErrorMessage message={error.message} />;
-  } else {
-    content = (
-      <Feed
-        feedType="post"
-        items={data.posts}
-        subscribeToNew={subscribeToNew}
-      />
-    );
-  }
-
   return (
     <Fragment>
       <h4>Feed</h4>
-      {content}
+      <QueryResult {...queryResult}>
+        {({ data }) => (
+          <Feed
+            feedType="post"
+            items={data.posts}
+            subscribeToNew={subscribeToNew}
+          />
+        )}
+      </QueryResult>
     </Fragment>
   );
 };

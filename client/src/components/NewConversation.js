@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import Select from "react-select";
+import renderIf from "render-if";
 import { ErrorMessage } from "components";
 import { ChatContext } from "util/context";
 import "./NewConversation.css";
@@ -43,33 +44,29 @@ const NewConversation = () => {
     return <Redirect to={`/chat/${data.createConversation.id}`} />;
   }
 
-  let content;
-  if (searchError) {
-    content = <ErrorMessage message={searchError.message} />;
-  } else {
-    content = (
-      <Select
-        isLoading={searchLoading}
-        isMulti
-        inputValue={searchTerm}
-        placeholder="Select users..."
-        value={users}
-        onChange={(value) => setUsers(value)}
-        onInputChange={(value) => setSearchTerm(value)}
-        options={
-          searchData.searchUsers &&
-          searchData.searchUsers.map((user) => ({
-            label: user.name,
-            value: user.id,
-          }))
-        }
-      />
-    );
-  }
-
   return (
     <div className="new-conversation p-2">
-      {content}
+      {renderIf(searchError)(() => (
+        <ErrorMessage message={searchError.message} />
+      ))}
+      {renderIf(!searchError)(
+        <Select
+          isLoading={searchLoading}
+          isMulti
+          inputValue={searchTerm}
+          placeholder="Select users..."
+          value={users}
+          onChange={(value) => setUsers(value)}
+          onInputChange={(value) => setSearchTerm(value)}
+          options={
+            searchData.searchUsers &&
+            searchData.searchUsers.map((user) => ({
+              label: user.name,
+              value: user.id,
+            }))
+          }
+        />,
+      )}
       <div className="d-flex justify-content-between mt-2">
         <Button variant="danger" onClick={() => setChatState("default")}>
           Cancel

@@ -7,7 +7,7 @@ import Gravatar from "react-gravatar";
 import produce from "immer";
 import { reverse, sortBy } from "lodash";
 import renderIf from "render-if";
-import { ErrorMessage, Loading, NewConversation } from "components";
+import { NewConversation, QueryResult } from "components";
 import { Subscriber } from "containers";
 import { AuthContext, ChatContext } from "util/context";
 import "./ChatBar.css";
@@ -78,7 +78,7 @@ const UnauthChatBar = () => {
 const AuthChatBar = () => {
   const { userId } = useContext(AuthContext);
   const { chatState, setChatState } = useContext(ChatContext);
-  const { loading, error, data, subscribeToMore } = useQuery(GET_CONVERSATIONS);
+  const { subscribeToMore, ...queryResult } = useQuery(GET_CONVERSATIONS);
   const subscribeToNew = useCallback(() => {
     subscribeToMore({
       document: CONVERSATIONS_SUBSCRIPTION,
@@ -114,46 +114,6 @@ const AuthChatBar = () => {
     });
   }, [subscribeToMore]);
 
-  let content;
-  if (loading) {
-    content = <Loading />;
-  } else if (error) {
-    content = <ErrorMessage message={error.message} />;
-  } else {
-    const conversations = reverse(sortBy(data.conversations, "updatedAt"));
-    content = (
-      <Subscriber subscribeToNew={subscribeToNew}>
-        {renderIf(chatState === "creating")(<NewConversation />)}
-
-        {renderIf(chatState === "default")(
-          conversations.map((conversation) => (
-            <Link
-              key={conversation.id}
-              to={`/chat/${conversation.id}`}
-              className="d-flex align-items-center p-2 chat"
-            >
-              <div className="d-flex chat-avatars">
-                {conversation.users
-                  .filter((user) => user.id !== userId)
-                  .slice(0, 3)
-                  .map((user) => (
-                    <div key={user.id} className="chat-avatar-wrapper">
-                      <Gravatar
-                        md5={user.gravatarMd5}
-                        className="rounded-circle"
-                        size={30}
-                      />
-                    </div>
-                  ))}
-              </div>
-              <div className="chat-title">{conversation.title}</div>
-            </Link>
-          )),
-        )}
-      </Subscriber>
-    );
-  }
-
   return (
     <div className="chat-bar sticky-top d-flex flex-column pb-4">
       <h4 className="d-flex justify-content-between align-items-center">
@@ -169,7 +129,43 @@ const AuthChatBar = () => {
         )}
       </h4>
 
-      <div className="chat-conversations d-flex flex-column">{content}</div>
+      <div className="chat-conversations d-flex flex-column">
+        <QueryResult {...queryResult}>
+          {({ data }) => (
+            <Subscriber subscribeToNew={subscribeToNew}>
+              {renderIf(chatState === "creating")(<NewConversation />)}
+
+              {renderIf(chatState === "default")(
+                reverse(sortBy(data.conversations, "updatedAt")).map(
+                  (conversation) => (
+                    <Link
+                      key={conversation.id}
+                      to={`/chat/${conversation.id}`}
+                      className="d-flex align-items-center p-2 chat"
+                    >
+                      <div className="d-flex chat-avatars">
+                        {conversation.users
+                          .filter((user) => user.id !== userId)
+                          .slice(0, 3)
+                          .map((user) => (
+                            <div key={user.id} className="chat-avatar-wrapper">
+                              <Gravatar
+                                md5={user.gravatarMd5}
+                                className="rounded-circle"
+                                size={30}
+                              />
+                            </div>
+                          ))}
+                      </div>
+                      <div className="chat-title">{conversation.title}</div>
+                    </Link>
+                  ),
+                ),
+              )}
+            </Subscriber>
+          )}
+        </QueryResult>
+      </div>
     </div>
   );
 };

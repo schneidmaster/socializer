@@ -10,4 +10,5 @@ export { default as Nav } from "./Nav";
 export { default as NewConversation } from "./NewConversation";
 export { default as NewItem } from "./NewItem";
 export { default as NewMessage } from "./NewMessage";
+export { default as QueryResult } from "./QueryResult";
 export { default as Posts } from "./Posts";

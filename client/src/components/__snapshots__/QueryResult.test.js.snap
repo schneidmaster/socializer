@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QueryResult renders correctly when data is ready 1`] = `
+<div>
+  Sam
+</div>
+`;
+
+exports[`QueryResult renders correctly when error 1`] = `
+<div
+  class="d-flex justify-content-center"
+>
+  <div
+    class="card"
+  >
+    <div
+      class="card-body"
+    >
+      <div
+        class="card-title h5"
+      >
+        Error
+      </div>
+      <p
+        class="card-text"
+      >
+        Something went wrong, sorry about that.
+      </p>
+      <a
+        href="/"
+      >
+        <button
+          class="btn btn-primary"
+          type="button"
+        >
+          Go home
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`QueryResult renders correctly when loading 1`] = `
+<div
+  class="d-flex justify-content-center"
+>
+  <div
+    class="spinner-border"
+    role="status"
+  >
+    <span
+      class="sr-only"
+    >
+      Loading...
+    </span>
+  </div>
+</div>
+`;
