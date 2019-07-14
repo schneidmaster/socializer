@@ -1,4 +1,4 @@
-defmodule SocializerWeb.Integration.UserResolverTest do
+defmodule SocializerWeb.Integration.UserIntegrationTest do
   use SocializerWeb.ConnCase
   alias Socializer.AbsintheHelpers
 

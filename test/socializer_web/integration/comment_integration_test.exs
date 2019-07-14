@@ -1,4 +1,4 @@
-defmodule SocializerWeb.Integration.CommentResolverTest do
+defmodule SocializerWeb.Integration.CommentIntegrationTest do
   use SocializerWeb.ConnCase
   alias Socializer.AbsintheHelpers
 
