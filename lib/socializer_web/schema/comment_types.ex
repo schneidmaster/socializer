@@ -1,8 +1,9 @@
 defmodule SocializerWeb.Schema.CommentTypes do
   use Absinthe.Schema.Notation
-  use Absinthe.Ecto, repo: Socializer.Repo
 
-  alias SocializerWeb.Resolvers
+  import Absinthe.Resolution.Helpers, only: [dataloader: 1]
+
+  alias SocializerWeb.{Data, Resolvers}
 
   @desc "A comment on the site"
   object :comment do
@@ -10,8 +11,8 @@ defmodule SocializerWeb.Schema.CommentTypes do
     field :body, :string
     field :inserted_at, :naive_datetime
 
-    field :post, :post, resolve: assoc(:post)
-    field :user, :user, resolve: assoc(:user)
+    field :post, :post, resolve: dataloader(Data)
+    field :user, :user, resolve: dataloader(Data)
   end
 
   object :comment_queries do

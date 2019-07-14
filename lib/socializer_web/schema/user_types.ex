@@ -1,8 +1,9 @@
 defmodule SocializerWeb.Schema.UserTypes do
   use Absinthe.Schema.Notation
-  use Absinthe.Ecto, repo: Socializer.Repo
 
-  alias SocializerWeb.Resolvers
+  import Absinthe.Resolution.Helpers, only: [dataloader: 1]
+
+  alias SocializerWeb.{Data, Resolvers}
 
   @desc "A user of the site"
   object :user do
@@ -17,7 +18,7 @@ defmodule SocializerWeb.Schema.UserTypes do
       end)
     end
 
-    field :posts, list_of(:post), resolve: assoc(:posts)
+    field :posts, list_of(:post), resolve: dataloader(Data)
   end
 
   object :user_queries do

@@ -1,17 +1,18 @@
 defmodule SocializerWeb.Schema.MessageTypes do
   use Absinthe.Schema.Notation
-  use Absinthe.Ecto, repo: Socializer.Repo
+
+  import Absinthe.Resolution.Helpers, only: [dataloader: 1]
 
   alias Socializer.Conversation
-  alias SocializerWeb.Resolvers
+  alias SocializerWeb.{Data, Resolvers}
 
   @desc "A message on the site"
   object :message do
     field :id, :id
     field :body, :string
 
-    field :conversation, :conversation, resolve: assoc(:conversation)
-    field :user, :user, resolve: assoc(:user)
+    field :conversation, :conversation, resolve: dataloader(Data)
+    field :user, :user, resolve: dataloader(Data)
   end
 
   object :message_queries do

@@ -1,9 +1,9 @@
 defmodule SocializerWeb.Schema.ConversationTypes do
   use Absinthe.Schema.Notation
-  use Absinthe.Ecto, repo: Socializer.Repo
-  import Ecto.Query
 
-  alias SocializerWeb.Resolvers
+  import Absinthe.Resolution.Helpers, only: [dataloader: 1, dataloader: 3]
+
+  alias SocializerWeb.{Data, Resolvers}
   alias Socializer.Conversation
 
   @desc "A conversation on the site"
@@ -12,15 +12,10 @@ defmodule SocializerWeb.Schema.ConversationTypes do
     field :title, :string
     field :updated_at, :naive_datetime
 
-    field :messages, list_of(:message) do
-      resolve(
-        assoc(:messages, fn messages_query, _args, _context ->
-          messages_query |> order_by(asc: :id)
-        end)
-      )
-    end
+    field :messages, list_of(:message),
+      resolve: dataloader(Data, :messages, args: %{order_by: :id})
 
-    field :users, list_of(:user), resolve: assoc(:users)
+    field :users, list_of(:user), resolve: dataloader(Data)
   end
 
   object :conversation_queries do
