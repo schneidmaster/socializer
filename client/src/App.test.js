@@ -1,7 +1,7 @@
 import React from "react";
-import { render, fireEvent, wait } from "react-testing-library";
+import { render, fireEvent, wait } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { MockedProvider } from "react-apollo/test-utils";
+import { MockedProvider } from "@apollo/react-testing";
 import tk from "timekeeper";
 import { GET_CONVERSATIONS } from "components/ChatBar";
 import { GET_USER_INFO } from "components/Nav";
@@ -111,7 +111,13 @@ describe("App", () => {
       },
     ];
 
-    const { container, getByLabelText, getByTestId, getByText } = render(
+    const {
+      container,
+      getByLabelText,
+      getByTestId,
+      getAllByText,
+      getByText,
+    } = render(
       <MemoryRouter>
         <MockedProvider mocks={mocks} addTypename={false}>
           <App />
@@ -119,7 +125,7 @@ describe("App", () => {
       </MemoryRouter>,
     );
     // Log in the user.
-    fireEvent.click(getByText("Log in"));
+    fireEvent.click(getAllByText("Log in")[0]);
     fireEvent.change(getByLabelText("Email address"), {
       target: { value: "john@lvh.me" },
     });
@@ -138,7 +144,7 @@ describe("App", () => {
     // Log back out.
     fireEvent.click(getByText("John Doe"));
     fireEvent.click(getByText("Log out"));
-    await wait(() => getByText("Log in"));
+    await wait(() => getAllByText("Log in")[0]);
 
     // Check that the homepage renders correctly.
     expect(container).toMatchSnapshot();

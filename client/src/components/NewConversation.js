@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Query, Mutation } from "react-apollo";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
@@ -30,58 +30,62 @@ const NewConversation = () => {
   const { setChatState } = useContext(ChatContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
+  const {
+    loading: searchLoading,
+    error: searchError,
+    data: searchData,
+  } = useQuery(SEARCH_USERS, {
+    variables: { searchTerm },
+  });
+  const [create, { data, loading }] = useMutation(CREATE_CONVERSATION);
+  if (data) {
+    setChatState("default");
+    return <Redirect to={`/chat/${data.createConversation.id}`} />;
+  }
+
+  let content;
+  if (searchError) {
+    content = <ErrorMessage message={searchError.message} />;
+  } else {
+    content = (
+      <Select
+        isLoading={searchLoading}
+        isMulti
+        inputValue={searchTerm}
+        placeholder="Select users..."
+        value={users}
+        onChange={(value) => setUsers(value)}
+        onInputChange={(value) => setSearchTerm(value)}
+        options={
+          searchData.searchUsers &&
+          searchData.searchUsers.map((user) => ({
+            label: user.name,
+            value: user.id,
+          }))
+        }
+      />
+    );
+  }
 
   return (
     <div className="new-conversation p-2">
-      <Query query={SEARCH_USERS} variables={{ searchTerm }}>
-        {({ client, loading, error, data, subscribeToMore }) => {
-          if (error) return <ErrorMessage message={error.message} />;
-          return (
-            <Select
-              isLoading={loading}
-              isMulti
-              inputValue={searchTerm}
-              placeholder="Select users..."
-              value={users}
-              onChange={(value) => setUsers(value)}
-              onInputChange={(value) => setSearchTerm(value)}
-              options={
-                data.searchUsers &&
-                data.searchUsers.map((user) => ({
-                  label: user.name,
-                  value: user.id,
-                }))
-              }
-            />
-          );
-        }}
-      </Query>
+      {content}
       <div className="d-flex justify-content-between mt-2">
         <Button variant="danger" onClick={() => setChatState("default")}>
           Cancel
         </Button>
 
-        <Mutation mutation={CREATE_CONVERSATION}>
-          {(create, { data, loading, error }) => {
-            if (data) {
-              setChatState("default");
-              return <Redirect to={`/chat/${data.createConversation.id}`} />;
-            }
-            return (
-              <Button
-                variant="primary"
-                disabled={loading}
-                onClick={() =>
-                  create({
-                    variables: { userIds: users.map((user) => user.value) },
-                  })
-                }
-              >
-                {loading ? "Creating..." : "Create"}
-              </Button>
-            );
-          }}
-        </Mutation>
+        <Button
+          variant="primary"
+          disabled={loading}
+          onClick={() =>
+            create({
+              variables: { userIds: users.map((user) => user.value) },
+            })
+          }
+        >
+          {loading ? "Creating..." : "Create"}
+        </Button>
       </div>
     </div>
   );

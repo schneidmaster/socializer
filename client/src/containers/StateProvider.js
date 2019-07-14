@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { withApollo } from "react-apollo";
+import { useApolloClient } from "@apollo/react-hooks";
 import Cookies from "js-cookie";
 import { refreshSocket } from "util/apollo";
 import { AuthContext, ChatContext } from "util/context";
 
-const StateProvider = ({
-  initialToken,
-  initialUserId,
-  client,
-  socket,
-  children,
-}) => {
+const StateProvider = ({ initialToken, initialUserId, socket, children }) => {
+  const client = useApolloClient();
   const [token, setToken] = useState(initialToken || Cookies.get("token"));
   const [userId, setUserId] = useState(initialUserId || Cookies.get("userId"));
   const [chatState, setChatState] = useState("default");
@@ -47,4 +42,4 @@ const StateProvider = ({
   );
 };
 
-export default withApollo(StateProvider);
+export default StateProvider;

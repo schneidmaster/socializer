@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet";
 import { Redirect, Route, Switch } from "react-router-dom";
 import cx from "classnames";
 import { ChatBar, Conversation } from "components";

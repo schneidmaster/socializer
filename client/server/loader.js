@@ -5,9 +5,9 @@ import fs from "fs";
 // React requirements
 import React from "react";
 import { renderToString } from "react-dom/server";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet";
 import { StaticRouter } from "react-router";
-import { ApolloProvider, getDataFromTree } from "react-apollo";
+import { ApolloProvider, getDataFromTree } from "@apollo/react-hooks";
 import Loadable from "react-loadable";
 import fetch from "node-fetch";
 

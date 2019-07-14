@@ -1,6 +1,6 @@
 import React from "react";
-import { render, fireEvent, wait } from "react-testing-library";
-import { MockedProvider } from "react-apollo/test-utils";
+import { render, fireEvent, wait } from "@testing-library/react";
+import { MockedProvider } from "@apollo/react-testing";
 import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from "util/context";
 import Login, { LOGIN } from "./Login";

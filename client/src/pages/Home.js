@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet";
 import { ChatBar, Posts } from "components";
 
 const Home = () => {

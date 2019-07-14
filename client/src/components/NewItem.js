@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Mutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Button, Card, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -28,44 +28,42 @@ const NewItem = ({ feedType, params }) => {
 
   const mutation = feedType === "comment" ? CREATE_COMMENT : CREATE_POST;
 
-  return (
-    <Mutation mutation={mutation} onCompleted={() => setBody("")}>
-      {(submit, { data, loading, error }) => {
-        return (
-          <Card className="mb-4">
-            <Card.Body>
-              {renderIf(token)(
-                <Form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    submit({ variables: { body, ...params } });
-                  }}
-                >
-                  <Form.Group>
-                    <Form.Control
-                      as="textarea"
-                      rows="3"
-                      placeholder="What's on your mind?"
-                      value={body}
-                      onChange={(e) => setBody(e.target.value)}
-                    />
-                  </Form.Group>
+  const [submit, { loading }] = useMutation(mutation, {
+    onCompleted: () => setBody(""),
+  });
 
-                  <Button variant="primary" type="submit" disabled={loading}>
-                    {loading ? "Submitting..." : "Submit"}
-                  </Button>
-                </Form>,
-              )}
-              {renderIf(!token)(
-                <div className="text-muted h7">
-                  <Link to="/login">Log in</Link> to submit a {feedType}.
-                </div>,
-              )}
-            </Card.Body>
-          </Card>
-        );
-      }}
-    </Mutation>
+  return (
+    <Card className="mb-4">
+      <Card.Body>
+        {renderIf(token)(
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              submit({ variables: { body, ...params } });
+            }}
+          >
+            <Form.Group>
+              <Form.Control
+                as="textarea"
+                rows="3"
+                placeholder="What's on your mind?"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+              />
+            </Form.Group>
+
+            <Button variant="primary" type="submit" disabled={loading}>
+              {loading ? "Submitting..." : "Submit"}
+            </Button>
+          </Form>,
+        )}
+        {renderIf(!token)(
+          <div className="text-muted h7">
+            <Link to="/login">Log in</Link> to submit a {feedType}.
+          </div>,
+        )}
+      </Card.Body>
+    </Card>
   );
 };
 

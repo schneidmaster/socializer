@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import { Query } from "react-apollo";
+import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -14,8 +14,36 @@ export const GET_USER_INFO = gql`
   }
 `;
 
+const AuthNav = () => {
+  const { loading, error, data } = useQuery(GET_USER_INFO);
+  const { setAuth } = useContext(AuthContext);
+
+  if (error) {
+    if (
+      error.graphQLErrors[0] &&
+      error.graphQLErrors[0].message === "Unauthenticated"
+    ) {
+      setAuth(null);
+    }
+    return null;
+  }
+
+  if (data && !data.currentUser) {
+    return null;
+  }
+
+  return (
+    <NavDropdown
+      title={loading ? "User" : data.currentUser.name}
+      id="profile-dropdown"
+    >
+      <NavDropdown.Item onClick={() => setAuth(null)}>Log out</NavDropdown.Item>
+    </NavDropdown>
+  );
+};
+
 const AppNav = () => {
-  const { token, setAuth } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   return (
     <Navbar bg="primary" variant="dark" className="mb-4" fixed="top">
@@ -38,36 +66,7 @@ const AppNav = () => {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav>
-            {renderIf(token)(
-              <Query query={GET_USER_INFO}>
-                {({ client, loading, error, data }) => {
-                  if (error) {
-                    if (
-                      error.graphQLErrors[0] &&
-                      error.graphQLErrors[0].message === "Unauthenticated"
-                    ) {
-                      setAuth(null);
-                    }
-                    return null;
-                  }
-
-                  if (data && !data.currentUser) {
-                    return null;
-                  }
-
-                  return (
-                    <NavDropdown
-                      title={loading ? "User" : data.currentUser.name}
-                      id="profile-dropdown"
-                    >
-                      <NavDropdown.Item onClick={() => setAuth(null)}>
-                        Log out
-                      </NavDropdown.Item>
-                    </NavDropdown>
-                  );
-                }}
-              </Query>,
-            )}
+            {renderIf(token)(<AuthNav />)}
 
             {renderIf(!token)(
               <Fragment>

@@ -1,5 +1,5 @@
-import React from "react";
-import { Query } from "react-apollo";
+import React, { useCallback } from "react";
+import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import produce from "immer";
 import { ErrorMessage, Loading, MessageThread, NewMessage } from "components";
@@ -43,52 +43,55 @@ const Conversation = ({
     params: { id },
   },
 }) => {
-  return (
-    <Query query={GET_CONVERSATION} variables={{ id }}>
-      {({ client, loading, error, data, subscribeToMore }) => {
-        if (loading) return <Loading />;
-        if (error) return <ErrorMessage message={error.message} />;
-        return (
-          <Subscriber
-            subscribeToNew={() =>
-              subscribeToMore({
-                document: MESSAGES_SUBSCRIPTION,
-                variables: { conversationId: id },
-                updateQuery: (prev, { subscriptionData }) => {
-                  if (!subscriptionData.data) return prev;
-                  const newMessage = subscriptionData.data.messageCreated;
+  const { loading, error, data, subscribeToMore } = useQuery(GET_CONVERSATION, {
+    variables: { id },
+  });
+  const subscribeToNew = useCallback(
+    () =>
+      subscribeToMore({
+        document: MESSAGES_SUBSCRIPTION,
+        variables: { conversationId: id },
+        updateQuery: (prev, { subscriptionData }) => {
+          if (!subscriptionData.data) return prev;
+          const newMessage = subscriptionData.data.messageCreated;
 
-                  // Check that we don't already have the
-                  // message stored.
-                  if (
-                    prev.conversation.messages.find(
-                      (message) => message.id === newMessage.id,
-                    )
-                  ) {
-                    return prev;
-                  }
+          // Check that we don't already have the
+          // message stored.
+          if (
+            prev.conversation.messages.find(
+              (message) => message.id === newMessage.id,
+            )
+          ) {
+            return prev;
+          }
 
-                  return produce(prev, (next) => {
-                    next.conversation.messages.push(newMessage);
-                  });
-                },
-              })
-            }
-          >
-            <div className="chat-layout d-flex flex-column pb-4">
-              <div className="chat-content d-flex flex-column">
-                <h5>{data.conversation.title}</h5>
-                <hr />
-                <MessageThread messages={data.conversation.messages} />
-              </div>
-
-              <NewMessage conversationId={id} />
-            </div>
-          </Subscriber>
-        );
-      }}
-    </Query>
+          return produce(prev, (next) => {
+            next.conversation.messages.push(newMessage);
+          });
+        },
+      }),
+    [id, subscribeToMore],
   );
+
+  if (loading) {
+    return <Loading />;
+  } else if (error) {
+    return <ErrorMessage message={error.message} />;
+  } else {
+    return (
+      <Subscriber subscribeToNew={subscribeToNew}>
+        <div className="chat-layout d-flex flex-column pb-4">
+          <div className="chat-content d-flex flex-column">
+            <h5>{data.conversation.title}</h5>
+            <hr />
+            <MessageThread messages={data.conversation.messages} />
+          </div>
+
+          <NewMessage conversationId={id} />
+        </div>
+      </Subscriber>
+    );
+  }
 };
 
 export default Conversation;
