@@ -77,7 +77,7 @@ const Post = ({
           });
         },
       }),
-    [id, subscribeToMore],
+    [id],
   );
 
   return (

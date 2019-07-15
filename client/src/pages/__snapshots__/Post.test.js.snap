@@ -12,58 +12,8 @@ exports[`Post renders correctly after created comment 1`] = `
         class="d-none d-md-block col-md-4"
       >
         <div
-          class="chat-bar sticky-top d-flex flex-column pb-4"
-        >
-          <h4
-            class="d-flex justify-content-between align-items-center"
-          >
-            <span>
-              Chat
-            </span>
-            <button
-              class="btn btn-primary btn-sm"
-              type="button"
-            >
-              New chat
-            </button>
-          </h4>
-          <div
-            class="chat-conversations d-flex flex-column"
-          >
-            <div
-              class="d-flex justify-content-center"
-            >
-              <div
-                class="card"
-              >
-                <div
-                  class="card-body"
-                >
-                  <div
-                    class="card-title h5"
-                  >
-                    Error
-                  </div>
-                  <p
-                    class="card-text"
-                  >
-                    Something went wrong, sorry about that.
-                  </p>
-                  <a
-                    href="/"
-                  >
-                    <button
-                      class="btn btn-primary"
-                      type="button"
-                    >
-                      Go home
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          class="chat-bar"
+        />
       </div>
       <div
         class="col-md-8 col-12"
@@ -257,58 +207,8 @@ exports[`Post renders correctly when loaded 1`] = `
         class="d-none d-md-block col-md-4"
       >
         <div
-          class="chat-bar sticky-top d-flex flex-column pb-4"
-        >
-          <h4
-            class="d-flex justify-content-between align-items-center"
-          >
-            <span>
-              Chat
-            </span>
-            <button
-              class="btn btn-primary btn-sm"
-              type="button"
-            >
-              New chat
-            </button>
-          </h4>
-          <div
-            class="chat-conversations d-flex flex-column"
-          >
-            <div
-              class="d-flex justify-content-center"
-            >
-              <div
-                class="card"
-              >
-                <div
-                  class="card-body"
-                >
-                  <div
-                    class="card-title h5"
-                  >
-                    Error
-                  </div>
-                  <p
-                    class="card-text"
-                  >
-                    Something went wrong, sorry about that.
-                  </p>
-                  <a
-                    href="/"
-                  >
-                    <button
-                      class="btn btn-primary"
-                      type="button"
-                    >
-                      Go home
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          class="chat-bar"
+        />
       </div>
       <div
         class="col-md-8 col-12"

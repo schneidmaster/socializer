@@ -112,7 +112,7 @@ const AuthChatBar = () => {
         });
       },
     });
-  }, [subscribeToMore]);
+  }, []);
 
   return (
     <div className="chat-bar sticky-top d-flex flex-column pb-4">

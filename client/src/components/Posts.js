@@ -55,7 +55,7 @@ const Posts = () => {
           });
         },
       }),
-    [subscribeToMore],
+    [],
   );
 
   return (

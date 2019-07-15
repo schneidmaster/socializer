@@ -7,6 +7,8 @@ import { Subscriber } from "containers";
 import { AuthContext, ChatContext } from "util/context";
 import Post, { GET_POST, COMMENTS_SUBSCRIPTION } from "./Post";
 
+jest.mock("components/ChatBar", () => () => <div className="chat-bar" />);
+
 jest.mock("containers/Subscriber", () =>
   jest.fn().mockImplementation(({ children }) => children),
 );

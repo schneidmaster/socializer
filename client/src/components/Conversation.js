@@ -70,7 +70,7 @@ const Conversation = ({
           });
         },
       }),
-    [id, subscribeToMore],
+    [id],
   );
 
   if (loading) {
