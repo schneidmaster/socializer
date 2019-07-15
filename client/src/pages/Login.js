@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
@@ -37,7 +37,7 @@ const Login = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>Socializer | Log in</title>
         <meta property="og:title" content="Socializer | Log in" />
@@ -92,7 +92,7 @@ const Login = () => {
           </Col>
         </Row>
       </Container>
-    </Fragment>
+    </>
   );
 };
 

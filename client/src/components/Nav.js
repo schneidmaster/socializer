@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
@@ -69,14 +69,14 @@ const AppNav = () => {
             {renderIf(token)(<AuthNav />)}
 
             {renderIf(!token)(
-              <Fragment>
+              <>
                 <Link to="/login" className="nav-link" role="button">
                   Log in
                 </Link>
                 <Link to="/signup" className="nav-link" role="button">
                   Sign up
                 </Link>
-              </Fragment>,
+              </>,
             )}
           </Nav>
         </Navbar.Collapse>

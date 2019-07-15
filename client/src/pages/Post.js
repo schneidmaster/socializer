@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Col, Container, Row } from "react-bootstrap";
@@ -81,7 +81,7 @@ const Post = ({
   );
 
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>Socializer | Discussion</title>
         <meta property="og:title" content="Socializer | Discussion" />
@@ -110,7 +110,7 @@ const Post = ({
           )}
         </QueryResult>
       </Container>
-    </Fragment>
+    </>
   );
 };
 

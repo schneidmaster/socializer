@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import { Redirect, Route, Switch } from "react-router-dom";
@@ -23,7 +23,7 @@ const Chat = ({
   }
 
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>Socializer | Chat</title>
         <meta property="og:title" content="Socializer | Chat" />
@@ -50,7 +50,7 @@ const Chat = ({
           </Col>
         </Row>
       </Container>
-    </Fragment>
+    </>
   );
 };
 

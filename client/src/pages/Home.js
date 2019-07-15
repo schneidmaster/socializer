@@ -1,11 +1,11 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import { ChatBar, Posts } from "components";
 
 const Home = () => {
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>Socializer</title>
       </Helmet>
@@ -19,7 +19,7 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-    </Fragment>
+    </>
   );
 };
 

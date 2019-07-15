@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import produce from "immer";
@@ -59,7 +59,7 @@ const Posts = () => {
   );
 
   return (
-    <Fragment>
+    <>
       <h4>Feed</h4>
       <QueryResult {...queryResult}>
         {({ data }) => (
@@ -70,7 +70,7 @@ const Posts = () => {
           />
         )}
       </QueryResult>
-    </Fragment>
+    </>
   );
 };
 
