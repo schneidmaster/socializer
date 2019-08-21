@@ -5,13 +5,13 @@
   "dependencies": {
     "@absinthe/socket": "^0.2.1",
     "@absinthe/socket-apollo-link": "^0.2.1",
-    "@apollo/react-hooks": "^0.1.0-beta.10",
+    "@apollo/react-hooks": "^3.0.1",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/polyfill": "^7.4.3",
     "@babel/register": "^7.4.0",
     "@jumpn/utils-graphql": "^0.6.0",
-    "apollo-cache-inmemory": "^1.6.2",
-    "apollo-client": "^2.6.3",
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
     "apollo-link": "^1.2.12",
     "apollo-link-context": "^1.0.18",
     "apollo-link-http": "^1.5.15",
@@ -49,7 +49,7 @@
     "render-if": "^0.1.1"
   },
   "devDependencies": {
-    "@apollo/react-testing": "^0.1.0-beta.5",
+    "@apollo/react-testing": "^3.0.1",
     "@testing-library/react": "^8.0.5",
     "eslint-config-prettier": "^4.1.0",
     "eslint-config-standard": "^12.0.0",
