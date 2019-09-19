@@ -33,7 +33,7 @@ function createPhoenixSocket() {
   });
   socket.onError(() => {
     if (navigator.onLine) {
-      const isWebSocket = socket.transport == window.WebSocket;
+      const isWebSocket = socket.transport === window.WebSocket;
       console.error(
         `Error connecting using ${isWebSocket ? "WebSocket" : "LongPoll"}`,
       );
