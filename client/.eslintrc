@@ -24,6 +24,7 @@
   "rules": {
     "camelcase": ["off"],
     "import/first": ["off"],
+    "react/jsx-curly-newline": ["off"],
     "react/jsx-indent": ["off"],
     "react/jsx-no-bind": ["off"],
     "react/no-did-update-set-state": ["off"],

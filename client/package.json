@@ -21,7 +21,6 @@
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "dynamic-import": "^0.1.1",
-    "eslint-plugin-import": "^2.16.0",
     "express": "^4.16.4",
     "express-sslify": "^1.2.0",
     "graphql": "^14.4.2",
@@ -43,7 +42,7 @@
     "react-loadable": "^5.5.0",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.0",
+    "react-scripts": "^3.4.1",
     "react-select": "^2.4.2",
     "react-timeago": "^4.4.0",
     "render-if": "^0.1.1"
@@ -51,17 +50,21 @@
   "devDependencies": {
     "@apollo/react-testing": "^3.0.1",
     "@testing-library/react": "^8.0.5",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-config-standard-react": "^7.0.2",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-standard": "^4.0.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-config-standard-react": "^9.2.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-standard": "^4.0.1",
     "jest-junit": "^6.3.0",
     "prettier": "^1.17.0",
     "timekeeper": "^2.2.0"
+  },
+  "resolutions": {
+    "acorn": "^6.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
