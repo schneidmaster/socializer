@@ -29,7 +29,7 @@
     "ignore-styles": "^5.0.1",
     "immer": "^2.1.5",
     "js-cookie": "^2.2.0",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.19",
     "md5-file": "^4.0.0",
     "morgan": "^1.9.1",
     "node-fetch": "^2.3.0",
