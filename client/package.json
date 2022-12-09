@@ -21,7 +21,7 @@
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "dynamic-import": "^0.1.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-sslify": "^1.2.0",
     "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",
